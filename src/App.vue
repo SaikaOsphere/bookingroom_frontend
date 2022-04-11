@@ -1,10 +1,44 @@
 <template>
   <div id="app">
-    <router-view/>
+    <div class="bottom" v-if="dev">
+      <div>Router</div>
+      <div>
+        <router-link to="/">Login</router-link> |
+        <router-link to="/home">Home</router-link> |
+        <router-link to="/about">About</router-link>
+      </div>
+    </div>
+    <router-view />
   </div>
 </template>
 
+<script>
+export default {
+  data () {
+    return {
+      dev: true
+    }
+  }
+}
+</script>
+
 <style>
+.bottom {
+  border: black;
+  border-radius: 1px;
+  align-content: center;
+  padding-left: 50px;
+  padding-right: 50px;
+  padding-top: 15px;
+  padding-bottom: 15px;
+  bottom: 0%;
+  z-index: 1000;
+  position: absolute;
+  background-color: rgba(255, 255, 255, 0.5);
+  left: 50%;
+  transform: translate(-50%, 0%);
+}
+
 #app {
   font-family: Avenir, Helvetica, Arial, sans-serif;
   -webkit-font-smoothing: antialiased;
