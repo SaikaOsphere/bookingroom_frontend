@@ -4,11 +4,14 @@ import HomeView from '../views/HomeView.vue'
 import About from '../views/AboutView.vue'
 import LoginView from '../views/LoginView.vue'
 import BookingRoom from '../views/BookingRoom.vue'
-import Agency from '../views/AgencyView.vue'
+import Instutution from '../views/InstututionView.vue'
 import Petition from '../views/PetitionView.vue'
 import RoomManagement from '../views/RoomManagement.vue'
 import Building from '../views/BuildingView.vue'
 import BookingRoomDetail from '../views/BookingRoomDetail.vue'
+import AddInstututionSuccess from '../views/AddInstututionSuccessView.vue'
+import DeleteInstutution from '../views/DeleteInstututionView.vue'
+import AddInstutution from '../views/AddInstututionView.vue'
 
 Vue.use(VueRouter)
 
@@ -34,9 +37,9 @@ const routes = [
     component: BookingRoom
   },
   {
-    path: '/agency',
-    name: 'agency',
-    component: Agency
+    path: '/instutution',
+    name: 'instutution',
+    component: Instutution
   },
   {
     path: '/petition',
@@ -57,6 +60,21 @@ const routes = [
     path: '/bookingDetail',
     name: 'bookingDetail',
     component: BookingRoomDetail
+  },
+  {
+    path: '/addInstutution',
+    name: 'addInstutution',
+    component: AddInstutution
+  },
+  {
+    path: '/addInstututionSuccess',
+    name: 'addInstututionSuccess',
+    component: AddInstututionSuccess
+  },
+  {
+    path: '/deleteInstutution',
+    name: 'deleteInstutution',
+    component: DeleteInstutution
   }
 ]
 

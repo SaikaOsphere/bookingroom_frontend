@@ -21,10 +21,13 @@
         <router-link to="/about">About</router-link> |
         <router-link to="/booking">Booking</router-link> |
         <router-link to="/bookingDetail">Booking Detail</router-link> |
-        <router-link to="/agency">Agency</router-link> |
+        <router-link to="/instutution">Instutution</router-link> |
         <router-link to="/petition">Petition</router-link> |
         <router-link to="/manageRoom">RoomManagement</router-link> |
         <router-link to="/building">Building</router-link> |
+        <router-link to="/addInstutution">AddInstutution</router-link> |
+        <router-link to="/addInstututionSuccess">AddInstututionSuccess</router-link> |
+        <router-link to="/deleteInstutution">DeleteInstutution</router-link> |
       </div>
     </div>
   </div>
