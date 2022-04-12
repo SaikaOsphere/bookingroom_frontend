@@ -4,6 +4,7 @@ import HomeView from '../views/HomeView.vue'
 import About from '../views/AboutView.vue'
 import LoginView from '../views/LoginView.vue'
 import BookingRoom from '../views/BookingRoom.vue'
+import Agency from '../views/AgencyView.vue'
 
 Vue.use(VueRouter)
 
@@ -27,6 +28,11 @@ const routes = [
     path: '/booking',
     name: 'booking',
     component: BookingRoom
+  },
+  {
+    path: '/agency',
+    name: 'agency',
+    component: Agency
   }
 ]
 
