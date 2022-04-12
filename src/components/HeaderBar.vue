@@ -40,7 +40,7 @@
 export default {
   data () {
     return {
-      userName: 'Dev Develop',
+      userName: 'Dev',
       userRole: 'Admin',
       currentUser: '',
       logo: { width: 60, height: 60 }
@@ -57,6 +57,8 @@ export default {
 }
 
 .bar {
+  width: 100%;
+  max-width: 100%;
   padding-left: 10%;
   padding-right: 10%;
 }
