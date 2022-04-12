@@ -27,7 +27,7 @@
         <b-nav-item-dropdown right>
           <!-- Using 'button-content' slot -->
           <template #button-content>
-            <em>User</em>
+            <em>{{ currentUser }}</em>
           </template>
           <b-dropdown-item href="#">Profile</b-dropdown-item>
           <b-dropdown-item href="#">Sign Out</b-dropdown-item>
@@ -40,9 +40,14 @@
 export default {
   data () {
     return {
-      user: '',
+      userName: 'Dev Develop',
+      userRole: 'Admin',
+      currentUser: '',
       logo: { width: 60, height: 60 }
     }
+  },
+  mounted () {
+    this.currentUser = this.userName + '\n' + this.userRole
   }
 }
 </script>

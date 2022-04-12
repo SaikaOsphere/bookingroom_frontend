@@ -1,11 +1,5 @@
 <template>
-  <div class="app-menu min-vh-100">
-    <b-img
-      src="../assets/buu.png"
-      width="115%"
-      class="pt-2 pb-2"
-      center
-    ></b-img>
+  <div class="app-menu">
     <b-nav vertical>
       <b-nav-item to="/">Active</b-nav-item>
       <b-nav-item to="/about">Link</b-nav-item>
@@ -97,6 +91,7 @@ export default {
 .app-menu {
   background-color: gray;
   font-size: 10pt;
+  padding-top: 50px;
 }
 .sub-menu {
   padding-left: 10pt;
