@@ -6,8 +6,12 @@ import LoginView from '../views/LoginView.vue'
 import BookingRoom from '../views/BookingRoom.vue'
 import Agency from '../views/AgencyView.vue'
 import Petition from '../views/PetitionView.vue'
+<<<<<<< HEAD
 import RoomManagement from '../views/RoomManagement.vue'
 
+=======
+import Building from '../views/BuildingView.vue'
+>>>>>>> refs/remotes/origin/master
 Vue.use(VueRouter)
 
 const routes = [
@@ -45,6 +49,11 @@ const routes = [
     path: '/manageRoom',
     name: 'manageRoom',
     component: RoomManagement
+  },
+  {
+    path: '/building',
+    name: 'building',
+    component: Building
   }
 ]
 
