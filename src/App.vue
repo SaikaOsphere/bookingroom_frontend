@@ -1,7 +1,7 @@
 <template>
   <div id="app">
     <div class="bottom" v-if="dev">
-      <div>Router</div>
+      <div>Router For Dev</div>
       <div>
         <router-link to="/">Login</router-link> |
         <router-link to="/home">Home</router-link> |
@@ -33,7 +33,7 @@ export default {
   padding-bottom: 15px;
   bottom: 0%;
   z-index: 1000;
-  position: absolute;
+  position: fixed;
   background-color: rgba(255, 255, 255, 0.5);
   left: 50%;
   transform: translate(-50%, 0%);

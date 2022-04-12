@@ -1,9 +1,17 @@
 <template>
   <div>
-    <b-navbar>
-      <b-navbar-brand href="#">My App</b-navbar-brand>
+    <b-navbar class="bar">
+      <b-img
+        v-bind="logo"
+        src="@/assets/buu.png"
+        rounded
+        alt="Rounded image"
+        class="logo"
+      ></b-img>
+      <b-navbar-brand href="https://www.buu.ac.th/"
+        >มหาวิทยาลัยบูรพา</b-navbar-brand
+      >
 
-      <!-- Right aligned nav items -->
       <b-navbar-nav class="ml-auto">
         <b-nav-form>
           <b-form-input
@@ -29,6 +37,22 @@
   </div>
 </template>
 <script>
-export default {}
+export default {
+  data () {
+    return {
+      user: '',
+      logo: { width: 60, height: 60 }
+    }
+  }
+}
 </script>
-<style></style>
+<style>
+.logo {
+  margin-right: 20px;
+}
+
+.bar {
+  padding-left: 10%;
+  padding-right: 10%;
+}
+</style>
