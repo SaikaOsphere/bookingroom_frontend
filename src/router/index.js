@@ -6,6 +6,7 @@ import LoginView from '../views/LoginView.vue'
 import BookingRoom from '../views/BookingRoom.vue'
 import Agency from '../views/AgencyView.vue'
 import Petition from '../views/PetitionView.vue'
+import RoomManagement from '../views/RoomManagement.vue'
 
 Vue.use(VueRouter)
 
@@ -39,6 +40,11 @@ const routes = [
     path: '/petition',
     name: 'petition',
     component: Petition
+  },
+  {
+    path: '/manageRoom',
+    name: 'manageRoom',
+    component: RoomManagement
   }
 ]
 
