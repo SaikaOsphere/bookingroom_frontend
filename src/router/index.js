@@ -9,9 +9,12 @@ import Petition from '../views/PetitionView.vue'
 import RoomManagement from '../views/RoomManagement.vue'
 import Building from '../views/BuildingView.vue'
 import BookingRoomDetail from '../views/BookingRoomDetail.vue'
-import AddInstututionSuccess from '../views/AddInstututionSuccessView.vue'
-import DeleteInstutution from '../views/DeleteInstututionView.vue'
-import AddInstutution from '../views/AddInstututionView.vue'
+// import AddInstututionSuccess from '../views/AddInstututionSuccessView.vue'
+// import DeleteInstutution from '../views/DeleteInstututionView.vue'
+// import AddInstutution from '../views/AddInstututionView.vue'
+// import DeleteInstututionSuccess from '../views/DeleteInstututionSuccessView.vue'
+// import EditInstutution from '../views/EditInstututionView.vue'
+// import EditInstututionSuccess from '../views/EditInstututionSuccessView.vue'
 
 Vue.use(VueRouter)
 
@@ -60,22 +63,37 @@ const routes = [
     path: '/bookingDetail',
     name: 'bookingDetail',
     component: BookingRoomDetail
-  },
-  {
-    path: '/addInstutution',
-    name: 'addInstutution',
-    component: AddInstutution
-  },
-  {
-    path: '/addInstututionSuccess',
-    name: 'addInstututionSuccess',
-    component: AddInstututionSuccess
-  },
-  {
-    path: '/deleteInstutution',
-    name: 'deleteInstutution',
-    component: DeleteInstutution
   }
+  // {
+  //   path: '/editInstututionSuccess',
+  //   name: 'editInstututionSuccess',
+  //   component: EditInstututionSuccess
+  // }
+  // {
+  //   path: '/editInstutution',
+  //   name: 'editInstutution',
+  //   component: EditInstutution
+  // }
+  // {
+  //   path: '/addInstutution',
+  //   name: 'addInstutution',
+  //   component: AddInstutution
+  // },
+  // {
+  //   path: '/addInstututionSuccess',
+  //   name: 'addInstututionSuccess',
+  //   component: AddInstututionSuccess
+  // },
+  // {
+  //   path: '/deleteInstutution',
+  //   name: 'deleteInstutution',
+  //   component: DeleteInstutution
+  // },
+  // {
+  //   path: '/deleteInstututionSuccess',
+  //   name: 'deleteInstututionSuccess',
+  //   component: DeleteInstututionSuccess
+  // }
 ]
 
 const router = new VueRouter({
