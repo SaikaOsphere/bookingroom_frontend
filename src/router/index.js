@@ -5,6 +5,7 @@ import About from '../views/AboutView.vue'
 import LoginView from '../views/LoginView.vue'
 import BookingRoom from '../views/BookingRoom.vue'
 import Agency from '../views/AgencyView.vue'
+import Petition from '../views/PetitionView.vue'
 
 Vue.use(VueRouter)
 
@@ -33,6 +34,11 @@ const routes = [
     path: '/agency',
     name: 'agency',
     component: Agency
+  },
+  {
+    path: '/petition',
+    name: 'petition',
+    component: Petition
   }
 ]
 

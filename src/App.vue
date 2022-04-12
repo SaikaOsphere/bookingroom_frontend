@@ -20,7 +20,8 @@
         <router-link to="/home">Home</router-link> |
         <router-link to="/about">About</router-link> |
         <router-link to="/booking">Booking</router-link> |
-        <router-link to="/agency">Agency</router-link>
+        <router-link to="/agency">Agency</router-link> |
+        <router-link to="/petition">Petition</router-link>
       </div>
     </div>
   </div>

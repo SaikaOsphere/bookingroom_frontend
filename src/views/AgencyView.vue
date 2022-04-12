@@ -1,6 +1,6 @@
 <template>
   <div>
-    <b-button size="sm" class="mr-2">เพิ่ม</b-button>
+    <b-button size="sm" class="mr-2" style="float:right;">เพิ่ม</b-button>
     <b-table :items="items" :fields="fields" striped responsive="sm">
       <template #cell(ดำเนินการ)>
         <b-button size="sm" class="mr-2">เเก้ไข</b-button>
