@@ -6,7 +6,7 @@ import LoginView from '../views/LoginView.vue'
 import BookingRoom from '../views/BookingRoom.vue'
 import Agency from '../views/AgencyView.vue'
 import Petition from '../views/PetitionView.vue'
-
+import Building from '../views/BuildingView.vue'
 Vue.use(VueRouter)
 
 const routes = [
@@ -39,6 +39,11 @@ const routes = [
     path: '/petition',
     name: 'petition',
     component: Petition
+  },
+  {
+    path: '/building',
+    name: 'building',
+    component: Building
   }
 ]
 
