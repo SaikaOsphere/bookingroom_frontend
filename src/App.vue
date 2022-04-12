@@ -1,23 +1,42 @@
 <template>
   <div id="app">
+    <NavBar />
+    <b-container fluid>
+      <b-row>
+        <b-col cols="2" class="app-menu min-vh-100"><MenuBar /></b-col>
+        <b-col cols="10">
+          <b-container>
+            <b-row class="text-justify">
+              <b-col><router-view /></b-col>
+            </b-row>
+          </b-container>
+        </b-col>
+      </b-row>
+    </b-container>
     <div class="bottom" v-if="dev">
       <div>Router For Dev</div>
       <div>
         <router-link to="/">Login</router-link> |
         <router-link to="/home">Home</router-link> |
-        <router-link to="/about">About</router-link>
+        <router-link to="/about">About</router-link> |
+        <router-link to="/booking">Booking</router-link>
       </div>
     </div>
-    <router-view />
   </div>
 </template>
 
 <script>
+import NavBar from '@/components/HeaderBar.vue'
+import MenuBar from '@/components/MenuBar.vue'
 export default {
   data () {
     return {
       dev: true
     }
+  },
+  components: {
+    NavBar,
+    MenuBar
   }
 }
 </script>
