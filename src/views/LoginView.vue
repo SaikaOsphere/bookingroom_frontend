@@ -9,7 +9,7 @@
     >
       <b-card-text>
         <div style="text-align: justify">
-          <b-form @submit="onSubmit" @reset="onReset" v-if="show">
+          <b-form @submit="onSubmit" @reset="onReset" v-if="!loggedIn">
             <b-form-group
               id="input-group-1"
               label="Username"
@@ -43,8 +43,11 @@
               >Login</b-button
             >
           </b-form>
-          <b-form v-else>
+          <b-form v-else @submit="logout">
             You are logged in
+            <b-button type="submit" variant="primary" class="m-2">
+              Logout
+            </b-button>
           </b-form>
         </div>
       </b-card-text>
@@ -71,28 +74,29 @@ export default {
   data () {
     return {
       form: {
-        email: '',
+        username: '',
         password: ''
       },
-
-      show: true
+      loggedIn: true
     }
   },
   methods: {
+    logout (event) {
+      event.preventDefault()
+      this.loggedIn = false
+    },
     onSubmit (event) {
       event.preventDefault()
-      // alert(JSON.stringify(this.form))
-      this.$store.dispatch('#', this.form)
+      // this.$store.dispatch('#', this.form)
+      this.loggedIn = true
     },
     onReset (event) {
       event.preventDefault()
-      // Reset our form values
       this.form.username = ''
       this.form.password = ''
-      // Trick to reset/clear native browser form validation state
-      this.show = false
+      this.loggedIn = false
       this.$nextTick(() => {
-        this.show = true
+        this.loggedIn = true
       })
     }
   }

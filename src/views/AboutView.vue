@@ -1,17 +1,19 @@
 <template>
   <div class="about">
     <NavBar />
-    <b-row>
-      <b-col cols="2" md="2">
-        <MenuBar />
-      </b-col>
-      <b-col>
-        <b-container>
-          <h1>Booking Room</h1>
-          <h3>Under development</h3>
-        </b-container>
-      </b-col>
-    </b-row>
+    <b-container fluid>
+      <b-row>
+        <b-col cols="2" class="app-menu min-vh-100">
+          <MenuBar />
+        </b-col>
+        <b-col>
+          <b-container>
+            <h1>Booking Room</h1>
+            <h3>Under development</h3>
+          </b-container>
+        </b-col>
+      </b-row>
+    </b-container>
   </div>
 </template>
 

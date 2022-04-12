@@ -9,9 +9,9 @@
         <b-col cols="2" class="app-menu min-vh-100"><MenuBar /></b-col>
         <b-col cols="10">
           <b-container>
-            <b-row>
+            <!-- <b-row>
               <b-col> </b-col>
-            </b-row>
+            </b-row> -->
             <b-row class="text-justify">
               <b-col
                 ><img alt="Vue logo" src="../assets/logo.png" />
