@@ -8,6 +8,8 @@ import Agency from '../views/AgencyView.vue'
 import Petition from '../views/PetitionView.vue'
 import RoomManagement from '../views/RoomManagement.vue'
 import Building from '../views/BuildingView.vue'
+import BookingRoomDetail from '../views/BookingRoomDetail.vue'
+
 Vue.use(VueRouter)
 
 const routes = [
@@ -50,6 +52,11 @@ const routes = [
     path: '/building',
     name: 'building',
     component: Building
+  },
+  {
+    path: '/bookingDetail',
+    name: 'bookingDetail',
+    component: BookingRoomDetail
   }
 ]
 

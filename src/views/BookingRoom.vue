@@ -69,7 +69,7 @@
       <b-col><b-button variant="primary" type="submit">ค้นหา</b-button></b-col>
     </b-row>
     <b-row align-v="stretch">
-      <b-table :items="items" :fields="fields" striped responsive="sm">
+      <b-table :items="items" :fields="fields">
         <template #cell(ดำเนินการ)>
           <b-button size="sm" class="mr-2">เเก้ไข</b-button>
           <b-button size="sm" class="mr-2">ลบ</b-button>
@@ -102,9 +102,9 @@ export default {
       items: [
         {
           isActive: true,
-          ลำดับ: 40,
-          โค้ดห้อง: 'Dickerson',
-          อุปกรณ์: 'Macdonald',
+          ลำดับ: 1,
+          โค้ดห้อง: 'IL-3L03',
+          อุปกรณ์: ['โปรเจคเตอร์', 'กระดาน'],
           ตึก: '',
           จำนวนคนที่รองรับ: 5,
           ดำเนินการ: ''
