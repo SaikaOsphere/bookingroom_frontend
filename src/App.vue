@@ -46,7 +46,9 @@
           <router-link to="/addBuilding">Add Building</router-link> |
           <router-link to="/editBuilding">Edit Building</router-link>|
           <router-link to="/deleteBuilding">Delete Building</router-link>|
-          <router-link to="/addBuildingSuccess">Add Building Success</router-link>
+          <router-link to="/addBuildingSuccess">Add Building Success</router-link>  |
+          <router-link to="/editBuildingSuccess">Edit Building Success</router-link>|
+          <router-link to="/deleteBuildingSuccess">Delete Building Success</router-link>
           <!-- <router-link to="/editInstututionSuccess">EditInstututionSuccess</router-link> | -->
           <!-- <router-link to="/editInstutution">EditInstutution</router-link> | -->
           <!-- <router-link to="/addInstutution">AddInstutution</router-link> |
