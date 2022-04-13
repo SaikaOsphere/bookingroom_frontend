@@ -3,7 +3,7 @@
     <b-container fluid style="padding: 0px 0px 0px 0px">
       <NavBar v-if="showHeader"
     /></b-container>
-    <b-container fluid style="height: 100%;">
+    <b-container fluid style="height: 100%; padding: 0px 0px 100px 0px;">
       <b-row>
         <div
           style="padding: 0px 0px 0px 0px; position: fixed; z-index: 1000;"
