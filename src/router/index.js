@@ -30,7 +30,12 @@ import AddInstutution from '../views/Instutution/AddInstututionView.vue'
 import DeleteInstututionSuccess from '../views/Instutution/DeleteInstututionSuccessView.vue'
 import EditInstutution from '../views/Instutution/EditInstututionView.vue'
 import EditInstututionSuccess from '../views/Instutution/EditInstututionSuccessView.vue'
-
+import AddApprover from '../views/Approver/AddApproverView.vue'
+import ApproverSuccess from '../views/Approver/AddApproverSuccessView.vue'
+import DeleteApprover from '../views/Approver/DeleteApproverView.vue'
+import DeleteApproverSuccess from '../views/Approver/DeleteApproverSuccessView.vue'
+import EditApprover from '../views/Approver/EditApproverView.vue'
+import EditApproverSuccess from '../views/Approver/EditApproverSuccessView.vue'
 Vue.use(VueRouter)
 
 const routes = [
@@ -183,6 +188,36 @@ const routes = [
     path: '/deleteInstututionSuccess',
     name: 'deleteInstututionSuccess',
     component: DeleteInstututionSuccess
+  },
+  {
+    path: '/addApprover',
+    name: 'addApprover',
+    component: AddApprover
+  },
+  {
+    path: '/ApproverSuccess',
+    name: 'ApproverSuccess',
+    component: ApproverSuccess
+  },
+  {
+    path: '/deleteApprover',
+    name: 'deleteApprover',
+    component: DeleteApprover
+  },
+  {
+    path: '/deleteApproverSuccess',
+    name: 'deleteApproverSuccess',
+    component: DeleteApproverSuccess
+  },
+  {
+    path: '/editApprover',
+    name: 'editApprover',
+    component: EditApprover
+  },
+  {
+    path: '/editApproverSuccess',
+    name: 'editApproverSuccess',
+    component: EditApproverSuccess
   }
 ]
 

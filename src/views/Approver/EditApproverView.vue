@@ -32,10 +32,11 @@
             variant="primary"
             class="float-xl-right"
             style="margin-left: 10px"
-            >Submit</b-button
+            to="/editApproverSuccess"
+            >ยืนยัน</b-button
           >
-          <b-button type="reset" variant="danger" class="float-xl-right"
-            >Reset</b-button
+          <b-button type="reset" variant="danger" class="float-xl-right" to="/approver"
+            >ยกเลิก</b-button
           >
         </b-col>
       </b-row>

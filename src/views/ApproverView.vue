@@ -1,11 +1,11 @@
 <template>
   <div>
     <h1>จัดการผู้อนุมัติ</h1>
-    <b-button size="sm" class="mr-2" style="float:right;">เพิ่ม</b-button>
+    <b-button size="sm" class="mr-2" style="float:right;" to="/addApprover">เพิ่ม</b-button>
     <b-table :items="items" :fields="fields" striped responsive="sm">
       <template #cell(การดำเนินการ)>
-        <b-button size="sm" class="mr-2">เเก้ไข</b-button>
-        <b-button size="sm" class="mr-2">ลบ</b-button>
+        <b-button size="sm" class="mr-2" to="/editApprover">เเก้ไข</b-button>
+        <b-button size="sm" class="mr-2" to="/deleteApprover">ลบ</b-button>
       </template>
 
     </b-table>
