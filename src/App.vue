@@ -43,6 +43,8 @@
           <router-link to="/building">Building</router-link> |
           <router-link to="/bookingDetail">Booking Detail</router-link> |
           <router-link to="/bookingRoomConfirm">Booking Room Confirm</router-link> |
+          <router-link to="/addBuilding">Add Building</router-link> |
+          <router-link to="/editBuilding">Edit Building</router-link>
           <!-- <router-link to="/editInstututionSuccess">EditInstututionSuccess</router-link> | -->
           <!-- <router-link to="/editInstutution">EditInstutution</router-link> | -->
           <!-- <router-link to="/addInstutution">AddInstutution</router-link> |
