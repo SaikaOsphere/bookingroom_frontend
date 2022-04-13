@@ -1,13 +1,17 @@
 <template>
   <div id="app">
-    <b-container fluid  style="padding-left: 0px; padding-right: 0px">
-    <NavBar v-if="showHeader" /></b-container>
-    <b-container fluid>
+    <b-container fluid style="padding: 0px 0px 0px 0px">
+      <NavBar v-if="showHeader"
+    /></b-container>
+    <b-container fluid style="height: 100%">
       <b-row>
-        <b-col cols="2" style="padding-left: 0px;" v-if="showSidetab">
+        <div
+          style="padding: 0px 0px 0px 0px; position: fixed;"
+          v-if="showSidetab"
+        >
           <div><MenuBar /></div
-        ></b-col>
-        <b-col>
+        ></div>
+        <b-col style="padding: 0px 0px 0px 0px">
           <b-container>
             <b-row class="text-justify">
               <b-col><router-view /></b-col>

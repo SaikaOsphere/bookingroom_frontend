@@ -2,7 +2,7 @@
   <div>
     <div class="navsidebar">
     <b-nav vertical>
-      <b-nav-item to="/">Login</b-nav-item>
+      <b-nav-item to="/">เข้าสู่ระบบ</b-nav-item>
       <b-nav-item to="/home">Home</b-nav-item>
       <b-nav-item to="/about">About</b-nav-item>
       <b-nav-item @click="showGroupBooking = !showGroupBooking">
@@ -104,10 +104,11 @@ export default {
 <style scope>
 .sub-menu {
   padding-left: 10pt;
+  font-size: 14px;
 }
 
 .nav-link {
-  color: white;
+  color: black;
   text-align: left;
 }
 .nav-link:hover {
@@ -115,11 +116,11 @@ export default {
 }
 
 .navsidebar{
-  border: 1px solid black;
-  background-color: gray;
-  font-size: 10pt;
-  padding-top: 50px;
-  padding-left: 25px;
-  height: 100%;
+  /* border: 1px solid black; */
+  background-color: rgba(129, 129, 129, 0.199);
+  font-size: 15pt;
+  padding: 50px 25px 50px 25px;
+  width: 25vh;
+  min-height: 100%;
 }
 </style>

@@ -7,7 +7,7 @@
       style="max-width: 20rem"
       class="mb-2 center"
     >
-      <iframe
+      <!-- <iframe
         width="275"
         height="200"
         src="https://www.youtube.com/embed/dQw4w9WgXcQ?autoplay=1"
@@ -15,7 +15,7 @@
         frameborder="0"
         allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
         allowfullscreen
-      >
+      > -->
         <b-card-text>
           <div style="text-align: justify">
             <b-form @submit="onSubmit" @reset="onReset" v-if="!loggedIn">
@@ -60,7 +60,7 @@
             </b-form>
           </div>
         </b-card-text>
-      </iframe>
+      <!-- </iframe> -->
     </b-card>
     <!-- <b-card no-body class="overflow-hidden center" style="max-width: 540px;">
     <b-row no-gutters>
