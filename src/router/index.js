@@ -6,7 +6,7 @@ import LoginView from '../views/LoginView.vue'
 import BookingRoom from '../views/BookingRoom.vue'
 import Instutution from '../views/InstututionView.vue'
 import Petition from '../views/PetitionView.vue'
-import RoomManagement from '../views/RoomManagement.vue'
+import RoomManagement from '../views/RoomManagement/RoomManagement.vue'
 import Building from '../views/BuildingView.vue'
 import BookingRoomDetail from '../views/booking/BookingRoomDetail.vue'
 import BookingDetail from '../views/booking/BookingDetail.vue'
@@ -20,6 +20,12 @@ import DeleteBuilding from '../views/DeleteBuilding.vue'
 // import DeleteInstututionSuccess from '../views/DeleteInstututionSuccessView.vue'
 // import EditInstutution from '../views/EditInstututionView.vue'
 // import EditInstututionSuccess from '../views/EditInstututionSuccessView.vue'
+// import AddInstututionSuccess from '../views/Instutution/AddInstututionSuccessView.vue'
+// import DeleteInstutution from '../views/Instutution/DeleteInstututionView.vue'
+// import AddInstutution from '../views/Instutution/AddInstututionView.vue'
+// import DeleteInstututionSuccess from '../views/Instutution/DeleteInstututionSuccessView.vue'
+// import EditInstutution from '../views/Instutution/EditInstututionView.vue'
+// import EditInstututionSuccess from '../views/Instutution/EditInstututionSuccessView.vue'
 
 Vue.use(VueRouter)
 
@@ -98,12 +104,12 @@ const routes = [
   //   path: '/editInstututionSuccess',
   //   name: 'editInstututionSuccess',
   //   component: EditInstututionSuccess
-  // }
+  // },
   // {
   //   path: '/editInstutution',
   //   name: 'editInstutution',
   //   component: EditInstutution
-  // }
+  // },
   // {
   //   path: '/addInstutution',
   //   name: 'addInstutution',

@@ -71,8 +71,7 @@
     <b-row align-v="stretch">
       <b-table :items="items" :fields="fields">
         <template #cell(ดำเนินการ)>
-          <b-button size="sm" class="mr-2">เเก้ไข</b-button>
-          <b-button size="sm" class="mr-2">ลบ</b-button>
+          <b-button size="sm" class="mr-2" to="/bookingRoomDetail">รายละเอียด</b-button>
         </template>
       </b-table>
     </b-row>
