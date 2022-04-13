@@ -15,11 +15,11 @@
               </b-form-group>
             </b-form>
             <b-form>
-              <b-button type="submit" variant="primary" class="m-2">
-                  ยืนยัน
-              </b-button>
               <b-button type="submit" variant="danger" class="m-2">
                   ยกเลิก
+              </b-button>
+              <b-button type="submit" variant="primary" class="m-2" >
+                  ยืนยัน
               </b-button>
             </b-form>
           </div>
