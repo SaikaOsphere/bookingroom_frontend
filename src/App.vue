@@ -1,12 +1,13 @@
 <template>
   <div id="app">
-    <NavBar v-if="showHeader" />
+    <b-container fluid  style="padding-left: 0px; padding-right: 0px">
+    <NavBar v-if="showHeader" /></b-container>
     <b-container fluid>
       <b-row>
-        <b-col cols="2" class="app-menu min-vh-100"
-          ><MenuBar v-if="showSidetab"
-        /></b-col>
-        <b-col cols="10">
+        <b-col cols="2" style="padding-left: 0px;" v-if="showSidetab">
+          <div><MenuBar /></div
+        ></b-col>
+        <b-col>
           <b-container>
             <b-row class="text-justify">
               <b-col><router-view /></b-col>
@@ -46,7 +47,10 @@
       </div>
     </div>
     <div v-else>
-      <a href="#"><div @click="toggleRouter()" class="bottom-hidden">Show</div></a></div>
+      <a href="#"
+        ><div @click="toggleRouter()" class="bottom-hidden">Show</div></a
+      >
+    </div>
   </div>
 </template>
 

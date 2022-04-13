@@ -1,12 +1,15 @@
 <template>
-  <div class="app-menu">
+  <div>
+    <div class="navsidebar">
     <b-nav vertical>
       <b-nav-item to="/">Login</b-nav-item>
       <b-nav-item to="/home">Home</b-nav-item>
       <b-nav-item to="/about">About</b-nav-item>
       <b-nav-item @click="showGroupBooking = !showGroupBooking">
         Booking
-        <b-icon :icon="showGroupBooking ? 'caret-down-fill' : 'caret-right-fill'">
+        <b-icon
+          :icon="showGroupBooking ? 'caret-down-fill' : 'caret-right-fill'"
+        >
         </b-icon>
       </b-nav-item>
       <b-nav-item class="sub-menu" v-if="showGroupBooking" to="/booking">
@@ -83,6 +86,7 @@
         >Product Table</b-nav-item
       > -->
     </b-nav>
+    </div>
   </div>
 </template>
 <script>
@@ -97,12 +101,7 @@ export default {
   }
 }
 </script>
-<style>
-.app-menu {
-  background-color: gray;
-  font-size: 10pt;
-  padding-top: 50px;
-}
+<style scope>
 .sub-menu {
   padding-left: 10pt;
 }
@@ -113,5 +112,14 @@ export default {
 }
 .nav-link:hover {
   color: gold;
+}
+
+.navsidebar{
+  border: 1px solid black;
+  background-color: gray;
+  font-size: 10pt;
+  padding-top: 50px;
+  padding-left: 25px;
+  height: 100%;
 }
 </style>
