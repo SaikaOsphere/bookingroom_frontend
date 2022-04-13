@@ -10,7 +10,7 @@
               <b-form-select
                 id="input-3"
                 v-model="test"
-                :options="foods"
+                :options="filterBuilding"
                 required
               ></b-form-select>
             </b-form-group> </b-col
@@ -22,7 +22,7 @@
               <b-form-select
                 id="input-3"
                 v-model="test"
-                :options="foods"
+                :options="filterBuilding"
                 required
               ></b-form-select>
             </b-form-group> </b-col
@@ -36,7 +36,7 @@
               <b-form-select
                 id="input-3"
                 v-model="test"
-                :options="foods"
+                :options="filterBuilding"
                 required
               ></b-form-select>
             </b-form-group> </b-col
@@ -48,7 +48,7 @@
               <b-form-select
                 id="input-3"
                 v-model="test"
-                :options="foods"
+                :options="filterBuilding"
                 required
               ></b-form-select>
             </b-form-group> </b-col
@@ -61,7 +61,7 @@
             <b-form-select
               id="input-3"
               v-model="test"
-              :options="foods"
+              :options="filterBuilding"
               required
             ></b-form-select>
           </b-form-group> </b-col
@@ -84,12 +84,8 @@ export default {
   data () {
     return {
       test: '',
-      foods: [
-        { text: 'Select One', value: null },
-        'Carrots',
-        'Beans',
-        'Tomatoes',
-        'Corn'
+      filterBuilding: [
+        { text: 'กรุณาเลือก', value: '' }
       ],
       fields: [
         'ลำดับ',

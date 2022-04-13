@@ -2,16 +2,52 @@
   <div>
     <b-row>
       <b-col>
-        <b-row> typeRoom</b-row>
-        <b-row> sizeRoom</b-row>
+        <b-row>
+          <b-col cols="4">ประเภทห้อง</b-col>
+          <b-col>
+            <b-form-input v-model="detailRoom.typeRoom" disabled>
+            </b-form-input>
+          </b-col>
+        </b-row>
+        <b-row>
+          <b-col cols="4">ขนาดห้อง</b-col>
+          <b-col>
+            <b-form-input v-model="detailRoom.sizeRoom" disabled>
+            </b-form-input>
+          </b-col>
+        </b-row>
       </b-col>
       <b-col>
-        <b-row>capacity </b-row>
-        <b-row> floor </b-row>
+        <b-row>
+          <b-col cols="4">จำนวนคนที่รองรับ (คน)</b-col>
+          <b-col>
+            <b-form-input v-model="detailRoom.capacity" disabled>
+            </b-form-input>
+          </b-col>
+        </b-row>
+        <b-row>
+          <b-col cols="4">ชั้น</b-col>
+          <b-col>
+            <b-form-input v-model="detailRoom.floor" disabled>
+            </b-form-input>
+          </b-col>
+        </b-row>
       </b-col>
       <b-col>
-        <b-row>building </b-row>
-        <b-row> dateTime </b-row>
+        <b-row>
+          <b-col cols="4">ตึก</b-col>
+          <b-col>
+            <b-form-input v-model="detailRoom.building" disabled>
+            </b-form-input>
+          </b-col>
+        </b-row>
+        <b-row>
+          <b-col cols="4">เวลา</b-col>
+          <b-col>
+            <b-form-input v-model="detailRoom.dateTime" disabled>
+            </b-form-input>
+          </b-col>
+        </b-row>
       </b-col>
     </b-row>
   </div>
@@ -20,12 +56,34 @@
 export default {
   data () {
     return {
-      typeRoom: '',
-      sizeRoom: 0,
-      capacity: 0,
-      floor: 0,
-      building: '',
-      dateTime: ''
+      detailRoom: {
+        typeRoom: 'TestType',
+        sizeRoom: 0,
+        capacity: 0,
+        floor: 0,
+        building: '',
+        dateTime: ''
+      },
+      fields: [
+        'ประเภทห้อง',
+        'ขนาดห้อง',
+        'จำนวนคนที่รองรับ',
+        'ชั้น',
+        'ตึก',
+        'เวลา'
+      ],
+      items: [
+        {
+          isActive: true,
+          ลำดับ: 1,
+          ประเภทห้อง: 'ห้องประชุม',
+          ขนาดห้อง: 'ใหญ่',
+          จำนวนคนที่รองรับ: 200,
+          ชั้น: 5,
+          ตึก: 'ดูไบทาวเวอร์',
+          เวลา: '00:00'
+        }
+      ]
     }
   }
 }
