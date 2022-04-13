@@ -1,9 +1,18 @@
 <template>
   <div class="app-menu">
     <b-nav vertical>
-      <b-nav-item to="/">Active</b-nav-item>
-      <b-nav-item to="/about">Link</b-nav-item>
-      <b-nav-item @click="showFormInput = !showFormInput"
+      <b-nav-item to="/">Login</b-nav-item>
+      <b-nav-item to="/home">Home</b-nav-item>
+      <b-nav-item to="/about">About</b-nav-item>
+      <b-nav-item @click="showGroupBooking = !showGroupBooking">
+        Booking
+        <b-icon :icon="showGroupBooking ? 'caret-down-fill' : 'caret-right-fill'">
+        </b-icon>
+      </b-nav-item>
+      <b-nav-item class="sub-menu" v-if="showGroupBooking" to="/booking">
+        Booking
+      </b-nav-item>
+      <!-- <b-nav-item @click="showFormInput = !showFormInput"
         >Form input
         <b-icon
           :icon="showFormInput ? 'caret-down-fill' : 'caret-right-fill'"
@@ -72,7 +81,7 @@
       >
       <b-nav-item class="sub-menu" v-if="showCRUDExample" to="./productTable"
         >Product Table</b-nav-item
-      >
+      > -->
     </b-nav>
   </div>
 </template>
@@ -80,6 +89,7 @@
 export default {
   data () {
     return {
+      showGroupBooking: false,
       showFormInput: false,
       showForm: false,
       showCRUDExample: false
