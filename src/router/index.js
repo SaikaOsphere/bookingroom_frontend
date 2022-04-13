@@ -9,12 +9,13 @@ import Petition from '../views/PetitionView.vue'
 import RoomManagement from '../views/RoomManagement/RoomManagement.vue'
 import Building from '../views/BuildingView.vue'
 import BookingRoomDetail from '../views/booking/BookingRoomDetail.vue'
-import DeleteRoomManagement from '../views/RoomManagement/DeleteRoomManagement.vue'
+import BookingDetail from '../views/booking/BookingDetail.vue'
+import BookingRoomConfirm from '../views/booking/BookingRoomConfirm.vue'
 // import AddInstututionSuccess from '../views/AddInstututionSuccessView.vue'
 // import DeleteInstutution from '../views/DeleteInstututionView.vue'
 // import AddInstutution from '../views/AddInstututionView.vue'
 // import DeleteInstututionSuccess from '../views/DeleteInstututionSuccessView.vue'
-import EditInstutution from '../views/EditInstututionView.vue'
+// import EditInstutution from '../views/EditInstututionView.vue'
 // import EditInstututionSuccess from '../views/EditInstututionSuccessView.vue'
 
 Vue.use(VueRouter)
@@ -61,25 +62,31 @@ const routes = [
     component: Building
   },
   {
-    path: '/bookingDetail',
-    name: 'bookingDetail',
+    path: '/bookingRoomDetail',
+    name: 'bookingRoomDetail',
     component: BookingRoomDetail
   },
   {
-    path: '/deleteRoomManagement',
-    name: 'deleteRoomManagement',
-    component: DeleteRoomManagement
+    path: '/bookingDetail',
+    name: 'bookingDetail',
+    component: BookingDetail
   },
+  {
+    path: '/bookingRoomConfirm',
+    name: 'bookingRoomConfirm',
+    component: BookingRoomConfirm
+  }
+
   // {
   //   path: '/editInstututionSuccess',
   //   name: 'editInstututionSuccess',
   //   component: EditInstututionSuccess
   // }
-  {
-    path: '/editInstutution',
-    name: 'editInstutution',
-    component: EditInstutution
-  }
+  // {
+  //   path: '/editInstutution',
+  //   name: 'editInstutution',
+  //   component: EditInstutution
+  // }
   // {
   //   path: '/addInstutution',
   //   name: 'addInstutution',
