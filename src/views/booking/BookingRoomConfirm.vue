@@ -1,79 +1,78 @@
 <template>
   <div>
     <b-row>
-      <b-col>
-        <b-row>
-          <b-col cols="4">รหัสผู้จอง</b-col>
-          <b-col>
-            <b-form-input v-model="detailRoom.idPerson" disabled>
-            </b-form-input>
-          </b-col>
-        </b-row>
+      <b-col class="data">
+        <b-col cols="4">รหัสผู้จอง</b-col>
+        <b-col>
+          <b-form-input v-model="bookingDetail.idPerson" disabled>
+          </b-form-input>
+        </b-col>
       </b-col>
-      <b-col>
-        <b-row>
-          <b-col cols="4">ชื่อ-นามสกุล</b-col>
-          <b-col>
-            <b-form-input v-model="detailRoom.name" disabled> </b-form-input>
-          </b-col>
-        </b-row>
-        <b-row>
-          <b-col cols="4">เบอร์โทร</b-col>
-          <b-col>
-            <b-form-input v-model="detailRoom.phoneNumber" disabled>
-            </b-form-input>
-          </b-col>
-        </b-row>
+      <b-col class="data">
+        <b-col cols="5">ชื่อ-นามสกุล</b-col>
+        <b-col>
+          <b-form-input v-model="bookingDetail.name" disabled> </b-form-input>
+        </b-col>
       </b-col>
-      <b-col>
-        <b-row>
-          <b-col cols="4">ห้องที่จอง</b-col>
-          <b-col>
-            <b-form-input v-model="detailRoom.room" disabled> </b-form-input>
-          </b-col>
-        </b-row>
-        <b-row>
-          <b-col cols="4">วันที่จอง</b-col>
-          <b-col>
-            <b-form-input v-model="detailRoom.dateBooking" disabled>
-            </b-form-input>
-          </b-col>
-        </b-row>
-      </b-col>
-      <b-col>
-        <b-row>
-          <b-col cols="4">เวลาเริ่ม</b-col>
-          <b-col>
-            <b-form-input v-model="detailRoom.timeStart" disabled>
-            </b-form-input>
-          </b-col>
-        </b-row>
-        <b-row>
-          <b-col cols="4">เวลาสิ้นสุด</b-col>
-          <b-col>
-            <b-form-input v-model="detailRoom.timeEnd" disabled> </b-form-input>
-          </b-col>
-        </b-row>
-      </b-col>
-      <b-col>
-        <b-row>
-          <b-col cols="4">จุดประสงค์</b-col>
-          <b-col>
-            <b-form-input v-model="detailRoom.usefor" disabled> </b-form-input>
-          </b-col>
-        </b-row>
-        <b-row>
-          <b-col cols="4">อุปกรณ์</b-col>
-          <b-col>
-            <b-form-input v-model="detailRoom.accessory" disabled>
-            </b-form-input>
-          </b-col>
-        </b-row>
+      <b-col class="data">
+        <b-col cols="4">เบอร์โทร</b-col>
+        <b-col>
+          <b-form-input v-model="bookingDetail.phoneNumber" disabled>
+          </b-form-input>
+        </b-col>
       </b-col>
     </b-row>
     <b-row>
-      <b-col><b-button variant="danger">ยกเลิก</b-button></b-col>
-      <b-col><b-button variant="outline-primary">ตกลง</b-button></b-col>
+      <b-col class="data">
+        <b-col cols="4">ห้องที่จอง</b-col>
+        <b-col>
+          <b-form-input v-model="bookingDetail.room" disabled> </b-form-input>
+        </b-col>
+      </b-col>
+      <b-col class="data">
+        <b-col cols="4">วันที่จอง</b-col>
+        <b-col>
+          <b-form-input v-model="bookingDetail.dateBooking" disabled>
+          </b-form-input>
+        </b-col>
+      </b-col>
+    </b-row>
+    <b-row>
+      <b-col class="data">
+        <b-col cols="4">เวลาเริ่ม</b-col>
+        <b-col>
+          <b-form-input v-model="bookingDetail.timeStart" disabled>
+          </b-form-input>
+        </b-col>
+      </b-col>
+      <b-col class="data">
+        <b-col cols="4">เวลาสิ้นสุด</b-col>
+        <b-col>
+          <b-form-input v-model="bookingDetail.timeEnd" disabled>
+          </b-form-input>
+        </b-col>
+      </b-col>
+    </b-row>
+    <b-row>
+      <b-col class="data">
+        <b-col cols="4">จุดประสงค์</b-col>
+        <b-col>
+          <b-form-input v-model="bookingDetail.usefor" disabled> </b-form-input>
+        </b-col>
+      </b-col>
+      <b-col class="data">
+        <b-col cols="4">อุปกรณ์</b-col>
+        <b-col>
+          <b-form-input v-model="bookingDetail.accessory" disabled>
+          </b-form-input>
+        </b-col>
+      </b-col>
+    </b-row>
+    <b-row class="data">
+      <b-col
+        ><b-button variant="danger">ยกเลิก</b-button>
+        <b-button variant="outline-primary">ตกลง</b-button>
+      </b-col>
     </b-row>
   </div>
 </template>
@@ -99,4 +98,8 @@ export default {
   }
 }
 </script>
-<style></style>
+<style>
+.data {
+  margin: 10px 10px 10px 10px;
+}
+</style>
