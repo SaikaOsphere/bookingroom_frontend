@@ -40,8 +40,8 @@
 
       <b-button type="submit"  style="float:right;">เพิ่ม</b-button>
       <b-button type="reset"  style="float:right;">ลบ</b-button> <br><br><br>
-      <b-button type="submit" variant="primary" style="float:right;">ยืนยัน</b-button>
-      <b-button type="reset" variant="danger" style="float:right;">ยกเลิก</b-button>
+      <b-button type="submit" variant="primary" style="float:right;" to="/addInstututionSuccess">ยืนยัน</b-button>
+      <b-button type="reset" variant="danger" style="float:right;" to="/instutution">ยกเลิก</b-button>
     </b-form>
   </div>
 </template>

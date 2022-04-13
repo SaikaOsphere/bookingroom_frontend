@@ -56,11 +56,10 @@
           <router-link to="/EditRoomManagementSuccess">EditRoomManagementSuccess</router-link> |
           <router-link to="/DeleteRoomManagement">DeleteRoomManagement</router-link> |
           <router-link to="/DeleteRoomManagementSuccess">DeleteRoomManagementSuccess</router-link> |
-
-          <!-- <router-link to="/editInstututionSuccess">EditInstututionSuccess</router-link> | -->
-          <!-- <router-link to="/editInstutution">EditInstutution</router-link> | -->
-          <!-- <router-link to="/addInstutution">AddInstutution</router-link> |
-          <router-link to="/editBuilding">Edit Building</router-link>
+          <!-- <router-link to="/editInstututionSuccess">EditInstututionSuccess</router-link> |
+          <router-link to="/editInstutution">EditInstutution</router-link> |
+          <router-link to="/addInstutution">AddInstutution</router-link> |
+          <router-link to="/editBuilding">Edit Building</router-link> |
           <router-link to="/editInstututionSuccess">EditInstututionSuccess</router-link> |
           <router-link to="/editInstutution">EditInstutution</router-link> |
           <router-link to="/addInstutution">AddInstutution</router-link> |

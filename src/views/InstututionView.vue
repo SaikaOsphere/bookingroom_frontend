@@ -1,11 +1,10 @@
 <template>
   <div>
-    <h1>จัดการหน่วยงาน</h1>
-    <b-button size="sm" class="mr-2" style="float:right;" to="/addInstutution">เพิ่ม</b-button>
+    <b-button size="sm" class="mr-2" style="float:right;" to="">เพิ่ม</b-button>
     <b-table :items="items" :fields="fields" striped responsive="sm">
       <template #cell(ดำเนินการ)>
-        <b-button size="sm" class="mr-2" to="/editInstutution">เเก้ไข</b-button>
-        <b-button size="sm" class="mr-2" to="/deleteInstutution">ลบ</b-button>
+        <b-button size="sm" class="mr-2">เเก้ไข</b-button>
+        <b-button size="sm" class="mr-2">ลบ</b-button>
       </template>
 
     </b-table>

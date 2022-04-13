@@ -24,18 +24,12 @@ import EditRoomManagement from '../views/RoomManagement/EditRoomManagement.vue'
 import EditRoomManagementSuccess from '../views/RoomManagement/EditRoomManagementSuccess.vue'
 import DeleteRoomManagement from '../views/RoomManagement/DeleteRoomManagement.vue'
 import DeleteRoomManagementSuccess from '../views/RoomManagement/DeleteRoomManagementSuccess.vue'
-// import AddInstututionSuccess from '../views/AddInstututionSuccessView.vue'
-// import DeleteInstutution from '../views/DeleteInstututionView.vue'
-// import AddInstutution from '../views/AddInstututionView.vue'
-// import DeleteInstututionSuccess from '../views/DeleteInstututionSuccessView.vue'
-// import EditInstutution from '../views/EditInstututionView.vue'
-// import EditInstututionSuccess from '../views/EditInstututionSuccessView.vue'
-// import AddInstututionSuccess from '../views/Instutution/AddInstututionSuccessView.vue'
-// import DeleteInstutution from '../views/Instutution/DeleteInstututionView.vue'
-// import AddInstutution from '../views/Instutution/AddInstututionView.vue'
-// import DeleteInstututionSuccess from '../views/Instutution/DeleteInstututionSuccessView.vue'
-// import EditInstutution from '../views/Instutution/EditInstututionView.vue'
-// import EditInstututionSuccess from '../views/Instutution/EditInstututionSuccessView.vue'
+import AddInstututionSuccess from '../views/Instutution/AddInstututionSuccessView.vue'
+import DeleteInstutution from '../views/Instutution/DeleteInstututionView.vue'
+import AddInstutution from '../views/Instutution/AddInstututionView.vue'
+import DeleteInstututionSuccess from '../views/Instutution/DeleteInstututionSuccessView.vue'
+import EditInstutution from '../views/Instutution/EditInstututionView.vue'
+import EditInstututionSuccess from '../views/Instutution/EditInstututionSuccessView.vue'
 
 Vue.use(VueRouter)
 
@@ -159,37 +153,37 @@ const routes = [
     path: '/deleteRoomManagementSuccess',
     name: 'deleteRoomManagementSuccess',
     component: DeleteRoomManagementSuccess
+  },
+  {
+    path: '/editInstututionSuccess',
+    name: 'editInstututionSuccess',
+    component: EditInstututionSuccess
+  },
+  {
+    path: '/editInstutution',
+    name: 'editInstutution',
+    component: EditInstutution
+  },
+  {
+    path: '/addInstutution',
+    name: 'addInstutution',
+    component: AddInstutution
+  },
+  {
+    path: '/addInstututionSuccess',
+    name: 'addInstututionSuccess',
+    component: AddInstututionSuccess
+  },
+  {
+    path: '/deleteInstutution',
+    name: 'deleteInstutution',
+    component: DeleteInstutution
+  },
+  {
+    path: '/deleteInstututionSuccess',
+    name: 'deleteInstututionSuccess',
+    component: DeleteInstututionSuccess
   }
-  // {
-  //   path: '/editInstututionSuccess',
-  //   name: 'editInstututionSuccess',
-  //   component: EditInstututionSuccess
-  // },
-  // {
-  //   path: '/editInstutution',
-  //   name: 'editInstutution',
-  //   component: EditInstutution
-  // },
-  // {
-  //   path: '/addInstutution',
-  //   name: 'addInstutution',
-  //   component: AddInstutution
-  // },
-  // {
-  //   path: '/addInstututionSuccess',
-  //   name: 'addInstututionSuccess',
-  //   component: AddInstututionSuccess
-  // },
-  // {
-  //   path: '/deleteInstutution',
-  //   name: 'deleteInstutution',
-  //   component: DeleteInstutution
-  // },
-  // {
-  //   path: '/deleteInstututionSuccess',
-  //   name: 'deleteInstututionSuccess',
-  //   component: DeleteInstututionSuccess
-  // }
 ]
 
 const router = new VueRouter({
