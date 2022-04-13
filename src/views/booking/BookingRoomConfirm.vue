@@ -57,26 +57,31 @@
       <b-col class="data">
         <b-col cols="4">จุดประสงค์</b-col>
         <b-col>
-          <b-form-input v-model="bookingDetail.usefor" disabled> </b-form-input>
+          <b-form-input v-model="bookingDetail.usefor"> </b-form-input>
         </b-col>
       </b-col>
       <b-col class="data">
         <b-col cols="4">อุปกรณ์</b-col>
         <b-col>
-          <b-form-input v-model="bookingDetail.accessory" disabled>
+          <b-form-input v-model="bookingDetail.accessory">
           </b-form-input>
         </b-col>
       </b-col>
     </b-row>
     <b-row class="data">
       <b-col
-        ><b-button variant="danger">ยกเลิก</b-button>
-        <b-button variant="outline-primary">ตกลง</b-button>
+        ><b-button variant="danger" to="/bookingRoomDetail">ยกเลิก</b-button>
+        <confirm-dialog
+          :product="selectedItem"
+          ref="productForm"
+          @save="saveProduct"
+        ></confirm-dialog>
       </b-col>
     </b-row>
   </div>
 </template>
 <script>
+import confirmDialog from '@/components/BookingConfirmDialog.vue'
 export default {
   data () {
     return {
@@ -95,6 +100,9 @@ export default {
         result: ''
       }
     }
+  },
+  components: {
+    confirmDialog
   }
 }
 </script>

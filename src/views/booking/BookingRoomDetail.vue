@@ -56,6 +56,10 @@
       @ready="ready($event)"
       @view-change="viewChange($event)"
     />
+    <b-col
+        ><b-button variant="danger" to="/booking">ยกเลิก</b-button>
+        <b-button variant="primary" to="/bookingRoomConfirm">ตกลง</b-button>
+      </b-col>
   </div>
 </template>
 <script>
