@@ -9,6 +9,8 @@ import Petition from '../views/PetitionView.vue'
 import RoomManagement from '../views/RoomManagement.vue'
 import Building from '../views/BuildingView.vue'
 import BookingRoomDetail from '../views/booking/BookingRoomDetail.vue'
+import BookingDetail from '../views/booking/BookingDetail.vue'
+import BookingRoomConfirm from '../views/booking/BookingRoomConfirm.vue'
 // import AddInstututionSuccess from '../views/AddInstututionSuccessView.vue'
 // import DeleteInstutution from '../views/DeleteInstututionView.vue'
 // import AddInstutution from '../views/AddInstututionView.vue'
@@ -60,10 +62,21 @@ const routes = [
     component: Building
   },
   {
+    path: '/bookingRoomDetail',
+    name: 'bookingRoomDetail',
+    component: BookingRoomDetail
+  },
+  {
     path: '/bookingDetail',
     name: 'bookingDetail',
-    component: BookingRoomDetail
+    component: BookingDetail
+  },
+  {
+    path: '/bookingRoomConfirm',
+    name: 'bookingRoomConfirm',
+    component: BookingRoomConfirm
   }
+
   // {
   //   path: '/editInstututionSuccess',
   //   name: 'editInstututionSuccess',
