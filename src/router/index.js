@@ -17,6 +17,7 @@ import DeleteBuilding from '../views/DeleteBuilding.vue'
 import AddBuildingSuccess from '../views/AddBuildingSuccess.vue'
 import EditBuildingSuccess from '../views/EditBuildingSuccess.vue'
 import DeleteBuildingSuccess from '../views/DeleteBuildingSuccess.vue'
+import Approver from '../views/ApproverView.vue'
 // import AddInstututionSuccess from '../views/AddInstututionSuccessView.vue'
 // import DeleteInstutution from '../views/DeleteInstututionView.vue'
 // import AddInstutution from '../views/AddInstututionView.vue'
@@ -117,6 +118,11 @@ const routes = [
     path: '/deleteBuildingSuccess',
     name: 'deleteBuildingSuccess',
     component: DeleteBuildingSuccess
+  },
+  {
+    path: '/approver',
+    name: 'approver',
+    component: Approver
   }
   // {
   //   path: '/editInstututionSuccess',
