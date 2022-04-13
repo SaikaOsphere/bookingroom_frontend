@@ -19,6 +19,7 @@
       <b-nav-item to="/instutution">จัดการหน่วยงาน</b-nav-item>
       <b-nav-item to="/approver">จัดการผู้อนุมัติ</b-nav-item>
       <b-nav-item to="/petition">จัดการคำร้อง</b-nav-item>
+      <b-nav-item to="/manageRoom">จัดการห้อง</b-nav-item>
       <!-- <b-nav-item @click="showFormInput = !showFormInput"
         >Form input
         <b-icon
