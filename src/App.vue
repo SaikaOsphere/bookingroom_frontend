@@ -41,8 +41,9 @@
           <router-link to="/petition">Petition</router-link> |
           <router-link to="/manageRoom">RoomManagement</router-link> |
           <router-link to="/building">Building</router-link> |
+          <router-link to="/deleteRoomManagement">DeleRoomManagement</router-link>
           <!-- <router-link to="/editInstututionSuccess">EditInstututionSuccess</router-link> | -->
-          <!-- <router-link to="/editInstutution">EditInstutution</router-link> | -->
+          <router-link to="/editInstutution">EditInstutution</router-link> |
           <!-- <router-link to="/addInstutution">AddInstutution</router-link> |
         <router-link to="/addInstututionSuccess">AddInstututionSuccess</router-link> |
         <router-link to="/deleteInstutution">DeleteInstutution</router-link> |
