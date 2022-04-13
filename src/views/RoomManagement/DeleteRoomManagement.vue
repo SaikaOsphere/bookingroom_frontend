@@ -15,10 +15,10 @@
               </b-form-group>
             </b-form>
             <b-form>
-              <b-button type="submit" variant="primary" class="m-2">
+              <b-button type="submit" variant="primary" class="m-2" to="/deleteRoomManagementSuccess">
                   ยืนยัน
               </b-button>
-              <b-button type="submit" variant="primary" class="m-2">
+              <b-button type="submit" variant="primary" class="m-2" to="/manageRoom">
                   ยกเลิก
               </b-button>
             </b-form>
