@@ -75,6 +75,8 @@
         >
         </b-form-select>
       </b-form-group>
+      <b-button type="submit" variant="primary" class="float-xl-right" style="margin-left:10px">Submit</b-button>
+      <b-button type="reset" variant="danger"  class="float-xl-right">Reset</b-button>
     </b-form>
   </div>
 </template>
@@ -97,7 +99,7 @@ export default {
         'ห้องประชุมกลาง',
         'ห้องประชุมใหญ่'
       ],
-      instutution: [{ text: 'Select One', value: null }, 'IF', 'CC', 'SC'],
+      instutution: [{ text: 'Select One', value: null }, 'Informatices', 'Computer Center', 'Science'],
       floor: [{ text: 'Select One', value: null }, '2', '3', '4'],
       equipmentlist: [],
       reviewer: [

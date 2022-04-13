@@ -18,6 +18,7 @@ import AddBuildingSuccess from '../views/AddBuildingSuccess.vue'
 import EditBuildingSuccess from '../views/EditBuildingSuccess.vue'
 import DeleteBuildingSuccess from '../views/DeleteBuildingSuccess.vue'
 import Approver from '../views/ApproverView.vue'
+import AddRoomManagement from '../views/RoomManagement/AddRoomManagement .vue'
 // import AddInstututionSuccess from '../views/AddInstututionSuccessView.vue'
 // import DeleteInstutution from '../views/DeleteInstututionView.vue'
 // import AddInstutution from '../views/AddInstututionView.vue'
@@ -123,6 +124,11 @@ const routes = [
     path: '/approver',
     name: 'approver',
     component: Approver
+  },
+  {
+    path: '/addRoomManagement',
+    name: 'addRoomManagement',
+    component: AddRoomManagement
   }
   // {
   //   path: '/editInstututionSuccess',
