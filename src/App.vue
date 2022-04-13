@@ -1,9 +1,9 @@
 <template>
   <div id="app">
-    <NavBar />
+    <NavBar v-if="showHeader" />
     <b-container fluid>
       <b-row>
-        <b-col cols="2" class="app-menu min-vh-100"><MenuBar /></b-col>
+        <b-col cols="2" class="app-menu min-vh-100"><MenuBar v-if="showSidetab" /></b-col>
         <b-col cols="10">
           <b-container>
             <b-row class="text-justify">
@@ -16,6 +16,8 @@
     <div class="bottom" v-if="dev">
       <div>Router For Dev</div>
       <div>
+        <b-button variant="outline-primary" @click="toggleHeader()">Header</b-button> |
+        <b-button variant="outline-primary" @click="toggleSidetab()">Sidetab</b-button> |
         <router-link to="/">Login</router-link> |
         <router-link to="/home">Home</router-link> |
         <router-link to="/about">About</router-link> |
@@ -43,12 +45,22 @@ import MenuBar from '@/components/MenuBar.vue'
 export default {
   data () {
     return {
-      dev: true
+      dev: true,
+      showHeader: true,
+      showSidetab: true
     }
   },
   components: {
     NavBar,
     MenuBar
+  },
+  methods: {
+    toggleHeader (event) {
+      this.showHeader = !this.showHeader
+    },
+    toggleSidetab (event) {
+      this.showSidetab = !this.showSidetab
+    }
   }
 }
 </script>
