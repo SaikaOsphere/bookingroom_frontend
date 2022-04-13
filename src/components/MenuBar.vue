@@ -15,6 +15,8 @@
       <b-nav-item class="sub-menu" v-if="showGroupBooking" to="/booking">
         Booking
       </b-nav-item>
+      <b-nav-item to="/building">จัดการตึก</b-nav-item>
+      <b-nav-item to="/instutution">จัดการหน่วยงาน</b-nav-item>
       <!-- <b-nav-item @click="showFormInput = !showFormInput"
         >Form input
         <b-icon

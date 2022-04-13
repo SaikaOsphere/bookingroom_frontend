@@ -15,7 +15,7 @@
               </b-form-group>
             </b-form>
             <b-form>
-              <b-button type="submit" variant="danger" class="m-2">
+              <b-button type="submit" variant="danger" class="m-2" to="/building">
                   ยกเลิก
               </b-button>
               <b-button type="submit" variant="primary" class="m-2" >
