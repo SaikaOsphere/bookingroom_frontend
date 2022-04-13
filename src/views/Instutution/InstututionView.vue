@@ -1,5 +1,6 @@
 <template>
   <div>
+    <h1>จัดการหน่วยงาน</h1>
     <b-button size="sm" class="mr-2" style="float:right;">เพิ่ม</b-button>
     <b-table :items="items" :fields="fields" striped responsive="sm">
       <template #cell(ดำเนินการ)>
