@@ -19,6 +19,11 @@ import EditBuildingSuccess from '../views/building/EditBuildingSuccess.vue'
 import DeleteBuildingSuccess from '../views/building/DeleteBuildingSuccess.vue'
 import Approver from '../views/ApproverView.vue'
 import AddRoomManagement from '../views/RoomManagement/AddRoomManagement .vue'
+import AddRoomManagementSuccess from '../views/RoomManagement/AddRoomManagementSuccess.vue'
+import EditRoomManagement from '../views/RoomManagement/EditRoomManagement.vue'
+import EditRoomManagementSuccess from '../views/RoomManagement/EditRoomManagementSuccess.vue'
+import DeleteRoomManagement from '../views/RoomManagement/DeleteRoomManagement.vue'
+import DeleteRoomManagementSuccess from '../views/RoomManagement/DeleteRoomManagementSuccess.vue'
 // import AddInstututionSuccess from '../views/AddInstututionSuccessView.vue'
 // import DeleteInstutution from '../views/DeleteInstututionView.vue'
 // import AddInstutution from '../views/AddInstututionView.vue'
@@ -129,6 +134,31 @@ const routes = [
     path: '/addRoomManagement',
     name: 'addRoomManagement',
     component: AddRoomManagement
+  },
+  {
+    path: '/addRoomManagementSuccess',
+    name: 'addRoomManagementSuccess',
+    component: AddRoomManagementSuccess
+  },
+  {
+    path: '/editRoomManagement',
+    name: 'editRoomManagement',
+    component: EditRoomManagement
+  },
+  {
+    path: '/editRoomManagementSuccess',
+    name: 'editRoomManagementSuccess',
+    component: EditRoomManagementSuccess
+  },
+  {
+    path: '/deleteRoomManagement',
+    name: 'deleteRoomManagement',
+    component: DeleteRoomManagement
+  },
+  {
+    path: '/deleteRoomManagementSuccess',
+    name: 'deleteRoomManagementSuccess',
+    component: DeleteRoomManagementSuccess
   }
   // {
   //   path: '/editInstututionSuccess',

@@ -50,7 +50,13 @@
           <router-link to="/editBuildingSuccess">Edit Building Success</router-link> |
           <router-link to="/deleteBuildingSuccess">Delete Building Success</router-link> |
           <router-link to="/approver">Approver</router-link> |
-          <router-link to="/addRoom">AddRoomManagement</router-link> |
+          <router-link to="/AddRoomManagement">AddRoomManagement</router-link> |
+          <router-link to="/AddRoomManagementSuccess">AddRoomManagementSuccess</router-link> |
+          <router-link to="/EditRoomManagement">EditRoomManagement</router-link> |
+          <router-link to="/EditRoomManagementSuccess">EditRoomManagementSuccess</router-link> |
+          <router-link to="/DeleteRoomManagement">DeleteRoomManagement</router-link> |
+          <router-link to="/DeleteRoomManagementSuccess">DeleteRoomManagementSuccess</router-link> |
+
           <!-- <router-link to="/editInstututionSuccess">EditInstututionSuccess</router-link> | -->
           <!-- <router-link to="/editInstutution">EditInstutution</router-link> | -->
           <!-- <router-link to="/addInstutution">AddInstutution</router-link> |

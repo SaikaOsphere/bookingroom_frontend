@@ -1,6 +1,6 @@
 <template>
   <div>
-    <h1>เพิ่มข้อมูลตึก</h1>
+    <h3>เพิ่มข้อมูลตึก</h3>
     <b-form @submit="onSubmit" @reset="onReset" v-if="show">
       <b-form-group id="input-group-1" label="ชื่อห้อง : " label-for="input-1">
         <b-form-input
