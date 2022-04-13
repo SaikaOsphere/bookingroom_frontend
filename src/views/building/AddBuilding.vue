@@ -36,7 +36,7 @@
         ></b-form-select>
       </b-form-group>
           <b-button type="submit" variant="primary" class="float-xl-right" style="margin-left:10px" to="/addBuildingSuccess">ยืนยัน</b-button>
-      <b-button type="reset" variant="danger"  class="float-xl-right" to="/addBuildingSuccess">ยกเลิก</b-button>
+      <b-button type="reset" variant="danger"  class="float-xl-right" to="/building">ยกเลิก</b-button>
     </b-form>
   </div>
 </template>
