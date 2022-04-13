@@ -1,6 +1,6 @@
 <template>
   <div>
-    <h1>เพิ่มข้อมูลตึก</h1>
+    <h1>แก้ไขข้อมูลตึก</h1>
     <b-form @submit="onSubmit" @reset="onReset" v-if="show">
       <b-form-group
         id="input-group-1"
@@ -10,7 +10,6 @@
         <b-form-input
           id="input-1"
           type="text"
-          placeholder="โปรดป้อนชื่อหน่วยงาน"
           v-model="form.name"
           required
         >
@@ -20,7 +19,6 @@
       <b-form-group id="input-group-2" label="ตำแหน่งตึก:" label-for="input-2">
         <b-form-input
           id="input-2"
-          placeholder="โปรดป้อนตำแหน่งตึก"
           v-model="form.position"
           required
         >
@@ -35,8 +33,8 @@
           required
         ></b-form-select>
       </b-form-group>
-        <b-button type="submit" variant="primary" >Submit</b-button>
-       <b-button type="reset" variant="danger"  style="margin-left:10px">Reset</b-button>
+         <b-button type="submit" variant="primary" class="float-xl-right" style="margin-left:10px">Submit</b-button>
+        <b-button type="reset" variant="danger"  class="float-xl-right">Reset</b-button>
     </b-form>
   </div>
 </template>
