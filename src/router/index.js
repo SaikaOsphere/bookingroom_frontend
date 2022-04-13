@@ -16,7 +16,7 @@ import EditBuilding from '../views/EditBuilding.vue'
 import DeleteBuilding from '../views/DeleteBuilding.vue'
 import AddBuildingSuccess from '../views/AddBuildingSuccess.vue'
 import EditBuildingSuccess from '../views/EditBuildingSuccess.vue'
-
+import DeleteBuildingSuccess from '../views/DeleteBuildingSuccess.vue'
 // import AddInstututionSuccess from '../views/AddInstututionSuccessView.vue'
 // import DeleteInstutution from '../views/DeleteInstututionView.vue'
 // import AddInstutution from '../views/AddInstututionView.vue'
@@ -112,12 +112,12 @@ const routes = [
     path: '/editBuildingSuccess',
     name: 'editBuildingSuccess',
     component: EditBuildingSuccess
+  },
+  {
+    path: '/deleteBuildingSuccess',
+    name: 'deleteBuildingSuccess',
+    component: DeleteBuildingSuccess
   }
-  // {
-  //   path: '/deleteBuildingSuccess',
-  //   name: 'deleteBuildingSuccess',
-  //   component: DeleteBuildingSuccess
-  // }
   // {
   //   path: '/editInstututionSuccess',
   //   name: 'editInstututionSuccess',
