@@ -36,6 +36,8 @@ import DeleteApprover from '../views/Approver/DeleteApproverView.vue'
 import DeleteApproverSuccess from '../views/Approver/DeleteApproverSuccessView.vue'
 import EditApprover from '../views/Approver/EditApproverView.vue'
 import EditApproverSuccess from '../views/Approver/EditApproverSuccessView.vue'
+import Petitiondetail from '../views/Petition/Petition_detail.vue'
+import PetitionApprov from '../views/Petition/Petition_Approv.vue'
 Vue.use(VueRouter)
 
 const routes = [
@@ -218,6 +220,16 @@ const routes = [
     path: '/editApproverSuccess',
     name: 'editApproverSuccess',
     component: EditApproverSuccess
+  },
+  {
+    path: '/Pettitiondetail',
+    name: 'Petitiondetail',
+    component: Petitiondetail
+  },
+  {
+    path: '/PettitionApprov',
+    name: 'PetitionApprov',
+    component: PetitionApprov
   }
 ]
 

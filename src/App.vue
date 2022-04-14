@@ -56,6 +56,8 @@
           <router-link to="/EditRoomManagementSuccess">EditRoomManagementSuccess</router-link> |
           <router-link to="/DeleteRoomManagement">DeleteRoomManagement</router-link> |
           <router-link to="/DeleteRoomManagementSuccess">DeleteRoomManagementSuccess</router-link> |
+          <router-link to="/Prtitiondetail">Prtitiondetail</router-link> |
+          <router-link to="/PrtitionApprov">PrtitionApprov</router-link> |
           <!-- <router-link to="/editInstututionSuccess">EditInstututionSuccess</router-link> |
           <router-link to="/editInstutution">EditInstutution</router-link> |
           <router-link to="/addInstutution">AddInstutution</router-link> |
