@@ -42,7 +42,8 @@ export default {
         { key: 'equipment', label: 'รายการอุปกรณ์' },
         { key: 'approveres', label: 'ลำดับผู้พิจารณา' },
         'ดำเนินการ'],
-      items: []
+      items: [],
+      selectedItem: null
     }
   },
   methods: {

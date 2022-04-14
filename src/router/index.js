@@ -11,7 +11,7 @@ import Building from '../views/building/BuildingView.vue'
 import BookingRoomDetail from '../views/booking/BookingRoomDetail.vue'
 import BookingDetail from '../views/booking/recentBookingDetail.vue'
 import BookingRoomConfirm from '../views/booking/BookingRoomConfirm.vue'
-import Approver from '../views/ApproverView.vue'
+import Approver from '../views/approver/ApproverView.vue'
 import Petitiondetail from '../views/Petition/Petition_detail.vue'
 import PetitionApprov from '../views/Petition/Petition_Approv.vue'
 
