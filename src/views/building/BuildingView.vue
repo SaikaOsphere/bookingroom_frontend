@@ -1,56 +1,69 @@
 <template>
   <div>
+    <b-row>
+        <b-col class="text-right">
+          <BuildingForm
+            :building="selectedItem"
+            ref="buildingForm"
+            @save="saveBuilding"
+          ></BuildingForm>
+        </b-col>
+      </b-row>
     <h1>ตึก</h1>
-        <b-button size="sm" class="mr-2" style="float:right;" to="/AddBuilding">เพิ่ม</b-button>
     <b-table :items="items" :fields="fields" striped responsive="sm">
+      <template #cell(ลำดับ)="data">
+        {{ data.index + 1 }}
+      </template>
       <template #cell(การดำเนินการ)>
-        <b-button size="sm" class="mr-2" to="/editBuilding">เเก้ไข</b-button>
-        <b-button size="sm" class="mr-2" to="/deleteBuilding">ลบ</b-button>
+        <b-button size="sm" class="mr-2" >เเก้ไข</b-button>
+        <b-button size="sm" class="mr-2" >ลบ</b-button>
       </template>
     </b-table>
   </div>
 </template>
 
 <script>
+import api from '../../services/api'
+import BuildingForm from './BuildingForm.vue'
 export default {
+  components: {
+    BuildingForm
+  },
   data () {
     return {
-      fields: ['ลำดับ', 'ชื่อ', 'ตำแหน่งตึก', 'ห้อง', 'การดำเนินการ'],
-      items: [
-        {
-          isActive: false,
-          ลำดับ: 1,
-          ชื่อ: 'วิทยาการสารสนเทศ',
-          ตำแหน่งตึก: 'xx',
-          ห้อง: 'IF-401',
-          การดำเนินการ: ''
-        },
-        {
-          isActive: false,
-          ลำดับ: 2,
-          ชื่อ: 'ศึกษาศาสตร์',
-          ตำแหน่งตึก: 'xx',
-          ห้อง: 'ED-402',
-          การดำเนินการ: ''
-        },
-        {
-          isActive: false,
-          ลำดับ: 3,
-          ชื่อ: 'วิศวกรรมศาสตร์',
-          ตำแหน่งตึก: 'xx',
-          ห้อง: 'EG-403',
-          การดำเนินการ: ''
-        },
-        {
-          isActive: false,
-          ลำดับ: 4,
-          ชื่อ: 'รัฐศาสตร์',
-          ตำแหน่งตึก: 'xx',
-          ห้อง: 'PC-404',
-          การดำเนินการ: ''
-        }
-      ]
+      fields: [
+        'ลำดับ',
+        { key: 'code', label: 'รหัส' },
+        { key: 'name', label: 'ชื่อ' },
+        { key: 'floor', label: 'ชั้น' },
+        'การดำเนินการ'
+      ],
+      items: [],
+      selectedItem: null
     }
+  },
+  methods: {
+    getBuildings () {
+      api.get('http://localhost:3000/buildings').then(
+        function (response) {
+          this.items = response.data
+        }.bind(this)
+      )
+    },
+    saveBuilding (building) {
+      console.log('Submit', building)
+      if (building._id === '') {
+        api.post('http://localhost:3000/buildings', building).then(
+          function (response) {
+            this.getBuildings()
+          }.bind(this)
+        ).catch(() => {
+        })
+      }
+    }
+  },
+  mounted () {
+    this.getBuildings()
   }
 }
 </script>

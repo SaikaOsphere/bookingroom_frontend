@@ -1,11 +1,22 @@
 <template>
   <div>
+     <b-row>
+        <b-col class="text-right">
+          <BuildingForm
+            :building="selectedItem"
+            ref="buildingForm"
+            @save="saveBuilding"
+          ></BuildingForm>
+        </b-col>
+      </b-row>
     <h1>จัดการหน่วยงาน</h1>
-    <b-button size="sm" class="mr-2" style="float:right;" to="/addInstutution">เพิ่ม</b-button>
     <b-table :items="items" :fields="fields" striped responsive="sm">
-      <template #cell(ดำเนินการ)>
-        <b-button size="sm" class="mr-2" to="/editInstutution">เเก้ไข</b-button>
-        <b-button size="sm" class="mr-2" to="/deleteInstutution">ลบ</b-button>
+       <template #cell(ลำดับ)="data">
+        {{ data.index + 1 }}
+      </template>
+      <template #cell(การดำเนินการ)>
+        <b-button size="sm" class="mr-2" >เเก้ไข</b-button>
+        <b-button size="sm" class="mr-2" >ลบ</b-button>
       </template>
 
     </b-table>
@@ -13,41 +24,30 @@
 </template>
 
 <script>
+import api from '../../services/api'
 export default {
   data () {
     return {
-      fields: ['ไอดีหน่วยงาน', 'ชื่อหน่วยงาน', 'ห้องภายในหน่วยงาน', 'ดำเนินการ'],
-      items: [
-        {
-          isActive: true,
-          ไอดีหน่วยงาน: 40,
-          ชื่อหน่วยงาน: 'Dickerson',
-          ห้องภายในหน่วยงาน: 'Macdonald',
-          ดำเนินการ: ''
-        },
-        {
-          isActive: false,
-          ไอดีหน่วยงาน: 21,
-          ชื่อหน่วยงาน: 'Larsen',
-          ห้องภายในหน่วยงาน: 'Shaw',
-          ดำเนินการ: ''
-        },
-        {
-          isActive: false,
-          ไอดีหน่วยงาน: 89,
-          ชื่อหน่วยงาน: 'Geneva',
-          ห้องภายในหน่วยงาน: 'Wilson',
-          ดำเนินการ: ''
-        },
-        {
-          isActive: true,
-          ไอดีหน่วยงาน: 38,
-          ชื่อหน่วยงาน: 'Jami',
-          ห้องภายในหน่วยงาน: 'Carney',
-          ดำเนินการ: ''
-        }
-      ]
+      fields: [
+        'ลำดับ',
+        { key: 'name', label: 'ชื่อ' },
+        { key: 'room', label: 'ห้อง' },
+        'การดำเนินการ'
+      ],
+      items: []
     }
+  },
+  methods: {
+    getInstitutions () {
+      api.get('/institutions').then(
+        function (response) {
+          this.items = response.data
+        }.bind(this)
+      )
+    }
+  },
+  mounted () {
+    this.getInstitutions()
   }
 }
 </script>
