@@ -36,6 +36,7 @@ import DeleteApprover from '../views/Approver/DeleteApproverView.vue'
 import DeleteApproverSuccess from '../views/Approver/DeleteApproverSuccessView.vue'
 import EditApprover from '../views/Approver/EditApproverView.vue'
 import EditApproverSuccess from '../views/Approver/EditApproverSuccessView.vue'
+
 Vue.use(VueRouter)
 
 const routes = [

@@ -2,6 +2,9 @@
   <div>
     <b-button size="sm" class="mr-2" style="float:right;" to="/addRoomManagement">เพิ่ม</b-button>
     <b-table :items="items" :fields="fields" striped responsive="sm">
+       <template #cell(ลำดับ)="data">
+        {{ data.index + 1 }}
+      </template>
       <template #cell(ดำเนินการ)>
         <b-button size="sm" class="mr-2" to="/editRoomManagement">เเก้ไข</b-button>
         <b-button size="sm" class="mr-2" to="/deleteRoomManagement">ลบ</b-button>
@@ -12,57 +15,34 @@
 </template>
 
 <script>
+import api from '../../services/api'
+
 export default {
   data () {
     return {
-      fields: ['ชื่อห้อง', 'ประเภทห้อง', 'ตึก', 'ชั้น', 'จำนวนคนที่รองรับ', 'รายการอุปกรณ์', 'ลำดับผู้พิจารณา', 'ดำเนินการ'],
-      items: [
-        {
-          isActive: true,
-          ชื่อห้อง: 'IF-3C01',
-          ประเภทห้อง: 'ห้องประชุมเล็ก',
-          ตึก: 'คณะวิทยาการสารสนเทศ',
-          ชั้น: '3',
-          จำนวนคนที่รองรับ: '100',
-          รายการอุปกรณ์: 'Microphone,Projecter,TV',
-          ลำดับผู้พิจารณา: 'approver1',
-          ดำเนินการ: ''
-        },
-        {
-          isActive: false,
-          ชื่อห้อง: 'IF-3C01',
-          ประเภทห้อง: 'ห้องประชุมเล็ก',
-          ตึก: 'คณะวิทยาการสารสนเทศ',
-          ชั้น: '3',
-          จำนวนคนที่รองรับ: '150',
-          รายการอุปกรณ์: 'Microphone,Projecter,TV',
-          ลำดับผู้พิจารณา: 'approver1',
-          ดำเนินการ: ''
-        },
-        {
-          isActive: true,
-          ชื่อห้อง: 'SC-4C01',
-          ประเภทห้อง: 'ห้องประชุมใหญ่',
-          ตึก: 'คณะวิทยาศาสตร์',
-          ชั้น: '4',
-          จำนวนคนที่รองรับ: '200',
-          รายการอุปกรณ์: 'Microphone,Projecter,TV',
-          ลำดับผู้พิจารณา: 'approver3',
-          ดำเนินการ: ''
-        },
-        {
-          isActive: false,
-          ชื่อห้อง: 'SC-4C02',
-          ประเภทห้อง: 'ห้องประชุมเล็ก',
-          ตึก: 'คณะวิทยาศาสตร์',
-          ชั้น: '4',
-          จำนวนคนที่รองรับ: '100',
-          รายการอุปกรณ์: 'Microphone,Projecter,TV',
-          ลำดับผู้พิจารณา: 'approver4',
-          ดำเนินการ: ''
-        }
-      ]
+      fields: [
+        { key: '_id', label: 'ลำดับ' },
+        { key: 'code', label: 'ชื่อห้อง' },
+        { key: 'building', label: 'ตึก' },
+        { key: 'floor', label: 'ชั้น' },
+        { key: 'capacity', label: 'จำนวนคนที่รองรับ' },
+        { key: 'equipment', label: 'รายการอุปกรณ์' },
+        { key: 'approveres', label: 'ลำดับผู้พิจารณา' },
+        'ดำเนินการ'],
+      items: []
     }
+  },
+  methods: {
+    getRoomManagement () {
+      api.get('http://localhost:3000/rooms').then(
+        function (response) {
+          this.items = response.data
+        }.bind(this)
+      )
+    }
+  },
+  mounted () {
+    this.getRoomManagement()
   }
 }
 </script>
