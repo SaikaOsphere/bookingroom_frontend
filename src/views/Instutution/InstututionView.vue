@@ -2,11 +2,11 @@
   <div>
      <b-row>
         <b-col class="text-right">
-          <BuildingForm
-            :building="selectedItem"
-            ref="buildingForm"
-            @save="saveBuilding"
-          ></BuildingForm>
+          <InstitutionForm
+            :institution="selectedItem"
+            ref="institutionForm"
+            @save="saveInstitution"
+          ></InstitutionForm>
         </b-col>
       </b-row>
     <h1>จัดการหน่วยงาน</h1>
@@ -25,7 +25,11 @@
 
 <script>
 import api from '../../services/api'
+import InstitutionForm from './InstitutionForm'
 export default {
+  components: {
+    InstitutionForm
+  },
   data () {
     return {
       fields: [
@@ -44,6 +48,17 @@ export default {
           this.items = response.data
         }.bind(this)
       )
+    },
+    saveInstitution (institution) {
+      console.log('Submit', institution)
+      if (institution._id === '') {
+        api.post('http://localhost:3000/institutions', institution).then(
+          function (response) {
+            this.getInstitutions()
+          }.bind(this)
+        ).catch(() => {
+        })
+      }
     }
   },
   mounted () {

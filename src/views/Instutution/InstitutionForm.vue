@@ -2,35 +2,35 @@
   <div>
     <b-button @click="addNew" variant="primary">เพิ่ม</b-button>
     <b-modal
-      id="modal-building"
-      ref="modalBuilding"
-      title="ตึก"
+      id="modal-institution"
+      ref="modalInstitution"
+      title="หน่วยงาน"
       @show="showModal"
       @hidden="resetModal"
       @ok="handleOk"
     >
       <b-form @submit.stop.prevent="submit" @reset.prevent="reset">
         <b-form-group
-          id="form-group-building-name"
-          label="ชื่อตึก"
-          label-for="building-name"
+          id="form-group-institution-name"
+          label="ชื่อหน่วยงาน"
+          label-for="institution-name"
         >
           <b-form-input
             type="text"
-            id="building-name"
-            placeholder="ชื่อตึก Informatics..."
+            id="institution-name"
+            placeholder="Facalty of ..."
             v-model="form.name"
           >
           </b-form-input>
         </b-form-group>
         <b-form-group
-          id="form-group-building-rooms"
+          id="form-group-institution-rooms"
           label="ห้อง"
-          label-for="building-rooms"
+          label-for="institution-rooms"
         >
           <b-form-input
             type="text"
-            id="building-rooms"
+            id="institution-rooms"
             placeholder="xx"
             v-model="form.rooms"
           >
@@ -49,7 +49,7 @@
 <script>
 export default {
   props: {
-    building: Object
+    institution: Object
   },
   data () {
     return {
@@ -78,11 +78,11 @@ export default {
       })
     },
     show () {
-      this.$refs.modalBuilding.show()
+      this.$refs.modalInstitution.show()
     },
     submit () {
-      const building = JSON.parse(JSON.stringify(this.form))
-      this.$emit('save', building)
+      const institution = JSON.parse(JSON.stringify(this.form))
+      this.$emit('save', institution)
       this.reset()
     },
     reset () {
@@ -97,9 +97,9 @@ export default {
         this.reset()
       } else {
         // Edit
-        this.form._id = this.building._id
-        this.form.name = this.building.name
-        this.form.rooms = this.building.rooms
+        this.form._id = this.institution._id
+        this.form.name = this.institution.name
+        this.form.rooms = this.institution.rooms
       }
     },
     resetModal (evt) {
@@ -109,7 +109,7 @@ export default {
       evt.preventDefault()
       this.submit()
       this.$nextTick(() => {
-        this.$bvModal.hide('modal-building')
+        this.$bvModal.hide('modal-institution')
       })
     }
   }
