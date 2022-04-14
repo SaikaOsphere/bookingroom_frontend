@@ -1,13 +1,21 @@
 <template>
   <div>
-    <b-button size="sm" class="mr-2" style="float:right;" to="/addRoomManagement">เพิ่ม</b-button>
+        <b-row>
+        <b-col class="text-right">
+          <roomManagementForm
+            :RoomManagement="selectedItem"
+            ref="roomManagementForm"
+            @save="saveRoomManagement"
+          ></roomManagementForm>
+        </b-col>
+      </b-row>
     <b-table :items="items" :fields="fields" striped responsive="sm">
        <template #cell(ลำดับ)="data">
         {{ data.index + 1 }}
       </template>
       <template #cell(ดำเนินการ)>
-        <b-button size="sm" class="mr-2" to="/editRoomManagement">เเก้ไข</b-button>
-        <b-button size="sm" class="mr-2" to="/deleteRoomManagement">ลบ</b-button>
+        <b-button size="sm" class="mr-2" >เเก้ไข</b-button>
+        <b-button size="sm" class="mr-2" >ลบ</b-button>
       </template>
 
     </b-table>
@@ -16,8 +24,12 @@
 
 <script>
 import api from '../../services/api'
+import roomManagementForm from './RoomManagementForm.vue'
 
 export default {
+  components: {
+    roomManagementForm
+  },
   data () {
     return {
       fields: [
