@@ -1,6 +1,6 @@
 <template>
   <div>
-        <b-row>
+      <b-row>
         <b-col class="text-right">
           <roomManagementForm
             :RoomManagement="selectedItem"
@@ -9,6 +9,7 @@
           ></roomManagementForm>
         </b-col>
       </b-row>
+      <h1>การจัดการห้อง</h1>
     <b-table :items="items" :fields="fields" striped responsive="sm">
        <template #cell(ลำดับ)="data">
         {{ data.index + 1 }}
