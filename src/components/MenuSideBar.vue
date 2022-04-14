@@ -5,7 +5,7 @@
         <b-nav-item to="/">เข้าสู่ระบบ</b-nav-item>
         <b-nav-item to="/home">หนัาหลัก</b-nav-item>
         <!-- <b-nav-item to="/about">About</b-nav-item> -->
-        <b-nav-item @click="showGroupBooking = !showGroupBooking">
+        <b-nav-item to="/booking">
           จองห้อง</b-nav-item
         >
         <!-- <b-icon

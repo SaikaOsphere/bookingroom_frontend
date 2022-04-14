@@ -22,7 +22,7 @@
               <b-form-select
                 id="input-3"
                 v-model="test"
-                :options="filterBuilding"
+                :options="filterFloor"
                 required
               ></b-form-select>
             </b-form-group> </b-col
@@ -36,7 +36,7 @@
               <b-form-select
                 id="input-3"
                 v-model="test"
-                :options="filterBuilding"
+                :options="filterType"
                 required
               ></b-form-select>
             </b-form-group> </b-col
@@ -48,7 +48,7 @@
               <b-form-select
                 id="input-3"
                 v-model="test"
-                :options="filterBuilding"
+                :options="filterSize"
                 required
               ></b-form-select>
             </b-form-group> </b-col
@@ -58,20 +58,20 @@
         ><b-col cols="6">รหัสห้อง</b-col
         ><b-col>
           <b-form-group id="input-group-3" label-for="input-3">
-            <b-form-select
-              id="input-3"
-              v-model="test"
-              :options="filterBuilding"
-              required
-            ></b-form-select>
+            <b-form-input> </b-form-input>
           </b-form-group> </b-col
       ></b-col>
       <b-col><b-button variant="primary" type="submit">ค้นหา</b-button></b-col>
     </b-row>
     <b-row align-v="stretch">
       <b-table :items="rooms" :fields="fields">
-        <template #cell(ดำเนินการ)>
-          <b-button size="sm" class="mr-2" to="/bookingRoomDetail">รายละเอียด</b-button>
+        <template #cell(ลำดับ)="data">
+          {{ data.index + 1 }}
+        </template>
+        <template #cell(การดำเนินการ)>
+          <b-button size="sm" class="mr-2" to="/bookingRoomDetail"
+            >รายละเอียด</b-button
+          >
         </template>
       </b-table>
     </b-row>
@@ -85,14 +85,12 @@ export default {
   data () {
     return {
       test: '',
-      filterBuilding: [
-        { text: 'กรุณาเลือก', value: '' }
-      ],
+      filterBuilding: [{ text: 'กรุณาเลือก', value: '' }],
+      filterFloor: [{ text: 'กรุณาเลือก', value: '' }],
+      filterType: [{ text: 'กรุณาเลือก', value: '' }],
+      filterSize: [{ text: 'กรุณาเลือก', value: '' }],
       fields: [
-        {
-          key: '_id',
-          label: 'ไอดี'
-        },
+        'ลำดับ',
         {
           key: 'capacity',
           label: 'จำนวนคนที่รองรับ'
@@ -116,38 +114,63 @@ export default {
         {
           key: '',
           label: 'รายละเอียด'
-        }
+        },
+        'การดำเนินการ'
       ],
-      rooms: [
-        // {
-        //   isActive: true,
-        //   ลำดับ: 1,
-        //   โค้ดห้อง: 'IL-3L03',
-        //   อุปกรณ์: ['โปรเจคเตอร์', 'กระดาน'],
-        //   ตึก: '',
-        //   จำนวนคนที่รองรับ: 5,
-        //   ดำเนินการ: ''
-        // }
-      ]
+      rooms: []
     }
   },
   methods: {
     getฺRooms () {
-      axios.get('http://localhost:3000/rooms').then(function (response) {
-        console.log(response)
-        this.rooms = response.data
-      }.bind(this))
+      axios.get('http://localhost:3000/rooms').then(
+        function (response) {
+          console.log(response)
+          this.rooms = response.data
+          this.getFloor(response)
+        }.bind(this)
+      )
+    },
+    getFloor (response) {
+      for (let i = 0; i < response.data.length; i++) {
+        let same = false
+        const floor = {
+          text: response.data[i].floor,
+          value: response.data[i].floor
+        }
+        this.filterFloor.forEach((element) => {
+          if (element.value === response.data[i].floor) {
+            same = true
+          }
+        })
+
+        if (!same) {
+          this.filterFloor.push(floor)
+        }
+      }
+    },
+    getBuildings () {
+      axios.get('http://localhost:3000/buildings').then(
+        function (response) {
+          for (let i = 0; i < response.data.length; i++) {
+            const building = {
+              text: response.data[i].name,
+              value: response.data[i].name
+            }
+            this.filterBuilding.push(building)
+          }
+        }.bind(this)
+      )
     }
   },
   mounted () {
     this.getฺRooms()
+    this.getBuildings()
   }
 }
 </script>
 <style>
-.screen {
-  padding-left: 10%;
-  padding-right: 10%;
+.booking {
+  padding: 0px 0px 0px 0px;
 }
 
 b-col,

@@ -49,17 +49,21 @@
         </b-row>
       </b-col>
     </b-row>
-    <vue-cal
-      :locale="th"
-      active-view="week"
-      :events="events"
-      @ready="ready($event)"
-      @view-change="viewChange($event)"
-    />
-    <b-col
+    <b-row>
+      <vue-cal
+        :locale="th"
+        active-view="week"
+        :events="events"
+        @ready="ready($event)"
+        @view-change="viewChange($event)"
+      />
+    </b-row>
+    <b-row>
+      <b-col
         ><b-button variant="danger" to="/booking">ยกเลิก</b-button>
         <b-button variant="primary" to="/bookingRoomConfirm">ตกลง</b-button>
       </b-col>
+    </b-row>
   </div>
 </template>
 <script>
