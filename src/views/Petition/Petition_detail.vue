@@ -1,20 +1,27 @@
 <template>
   <div>
+    <h1>รายละเอียดการจอง</h1>
     <b-row>
-      <b-col class="data">
+      <b-col >
+        <b-col cols="5">หมายเลขการจอง</b-col>
+        <b-col>
+          <b-form-input v-model="bookingDetail.name" disabled> </b-form-input>
+        </b-col>
+      </b-col>
+      <b-col >
         <b-col cols="4">รหัสผู้จอง</b-col>
         <b-col>
           <b-form-input v-model="bookingDetail.idPerson" disabled>
           </b-form-input>
         </b-col>
       </b-col>
-      <b-col class="data">
+      <b-col >
         <b-col cols="5">ชื่อ-นามสกุล</b-col>
         <b-col>
           <b-form-input v-model="bookingDetail.name" disabled> </b-form-input>
         </b-col>
       </b-col>
-      <b-col class="data">
+      <b-col >
         <b-col cols="4">เบอร์โทร</b-col>
         <b-col>
           <b-form-input v-model="bookingDetail.phoneNumber" disabled>
@@ -23,13 +30,13 @@
       </b-col>
     </b-row>
     <b-row>
-      <b-col class="data">
+      <b-col >
         <b-col cols="4">ห้องที่จอง</b-col>
         <b-col>
           <b-form-input v-model="bookingDetail.room" disabled> </b-form-input>
         </b-col>
       </b-col>
-      <b-col class="data">
+      <b-col >
         <b-col cols="4">วันที่จอง</b-col>
         <b-col>
           <b-form-input v-model="bookingDetail.dateBooking" disabled>
@@ -38,14 +45,14 @@
       </b-col>
     </b-row>
     <b-row>
-      <b-col class="data">
+      <b-col >
         <b-col cols="4">เวลาเริ่ม</b-col>
         <b-col>
           <b-form-input v-model="bookingDetail.timeStart" disabled>
           </b-form-input>
         </b-col>
       </b-col>
-      <b-col class="data">
+      <b-col >
         <b-col cols="4">เวลาสิ้นสุด</b-col>
         <b-col>
           <b-form-input v-model="bookingDetail.timeEnd" disabled>
@@ -54,13 +61,13 @@
       </b-col>
     </b-row>
     <b-row>
-      <b-col class="data">
+      <b-col >
         <b-col cols="4">จุดประสงค์</b-col>
         <b-col>
           <b-form-input v-model="bookingDetail.usefor"> </b-form-input>
         </b-col>
       </b-col>
-      <b-col class="data">
+      <b-col >
         <b-col cols="4">อุปกรณ์</b-col>
         <b-col>
           <b-form-input v-model="bookingDetail.accessory">
@@ -68,20 +75,24 @@
         </b-col>
       </b-col>
     </b-row>
-    <b-row class="data">
+    <b-row >
       <b-col
-        ><b-button variant="danger" to="/PetitionView.vue">ยกเลิก</b-button>
-        <confirm-dialog
-          :product="selectedItem"
-          ref="productForm"
-          @save="saveProduct"
-        ></confirm-dialog>
+        ><b-button variant="danger" to="/petition">ย้อนกลับ</b-button>
+      </b-col>
+    </b-row>
+    <b-row >
+      <b-col
+        ><b-button variant="danger" to="/pettitionApprov">ไม่อนุญาติ</b-button>
+      </b-col>
+    </b-row>
+    <b-row >
+      <b-col
+        ><b-button variant="danger" to="/pettitionApprov">อนุญาติ</b-button>
       </b-col>
     </b-row>
   </div>
 </template>
 <script>
-import confirmDialog from '@/components/BookingConfirmDialog.vue'
 export default {
   data () {
     return {
@@ -100,9 +111,6 @@ export default {
         result: ''
       }
     }
-  },
-  components: {
-    confirmDialog
   }
 }
 </script>

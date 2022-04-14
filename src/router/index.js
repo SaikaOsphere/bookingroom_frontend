@@ -222,13 +222,13 @@ const routes = [
     component: EditApproverSuccess
   },
   {
-    path: '/Pettitiondetail',
-    name: 'Petitiondetail',
+    path: '/pettitiondetail',
+    name: 'petitiondetail',
     component: Petitiondetail
   },
   {
-    path: '/PettitionApprov',
-    name: 'PetitionApprov',
+    path: '/pettitionApprov',
+    name: 'petitionApprov',
     component: PetitionApprov
   }
 ]

@@ -87,7 +87,7 @@ export default {
         username: '',
         password: ''
       },
-      loggedIn: true
+      loggedIn: false
     }
   },
   methods: {

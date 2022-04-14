@@ -3,7 +3,7 @@
     <h1>รายการคำร้อง</h1>
     <b-table :items="items" :fields="fields" striped responsive="sm">
       <template #cell(การดำเนินการ)>
-        <b-button size="sm" class="mr-2" to="/Petitiondetail">ดูรายละเอียด</b-button>
+        <b-button size="sm" class="mr-2" to="/pettitiondetail">ดูรายละเอียด</b-button>
       </template>
     </b-table>
   </div>
