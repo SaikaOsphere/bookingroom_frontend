@@ -1,18 +1,16 @@
 <template>
   <div class="home">
-    <img alt="Vue logo" src="../assets/logo.png" />
-    <HelloWorld msg="Welcome to Your Vue.js App" />
+    ยินดีต้อนรับกลับมา {{ user }}
+    กรุณาเลือกเมนูฝั่งซ้ายมือ
   </div>
 </template>
 
 <script>
-// @ is an alias to /src
-import HelloWorld from '@/components/HelloWorld.vue'
-
-export default {
-  name: 'HomeView',
-  components: {
-    HelloWorld
-  }
-}
+export default {}
 </script>
+
+<style>
+.home {
+  padding: 50px 0px 50px 0px;
+}
+</style>

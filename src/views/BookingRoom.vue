@@ -69,7 +69,7 @@
       <b-col><b-button variant="primary" type="submit">ค้นหา</b-button></b-col>
     </b-row>
     <b-row align-v="stretch">
-      <b-table :items="items" :fields="fields">
+      <b-table :items="rooms" :fields="fields">
         <template #cell(ดำเนินการ)>
           <b-button size="sm" class="mr-2" to="/bookingRoomDetail">รายละเอียด</b-button>
         </template>
@@ -79,6 +79,8 @@
   </div>
 </template>
 <script>
+import axios from 'axios'
+
 export default {
   data () {
     return {
@@ -87,25 +89,58 @@ export default {
         { text: 'กรุณาเลือก', value: '' }
       ],
       fields: [
-        'ลำดับ',
-        'โค้ดห้อง',
-        'อุปกรณ์',
-        'ตึก',
-        'จำนวนคนที่รองรับ (คน)',
-        'ดำเนินการ'
-      ],
-      items: [
         {
-          isActive: true,
-          ลำดับ: 1,
-          โค้ดห้อง: 'IL-3L03',
-          อุปกรณ์: ['โปรเจคเตอร์', 'กระดาน'],
-          ตึก: '',
-          จำนวนคนที่รองรับ: 5,
-          ดำเนินการ: ''
+          key: '_id',
+          label: 'ไอดี'
+        },
+        {
+          key: 'capacity',
+          label: 'จำนวนคนที่รองรับ'
+        },
+        {
+          key: 'floor',
+          label: 'ชั้น'
+        },
+        {
+          key: 'building',
+          label: 'อาคาร'
+        },
+        {
+          key: 'equipment',
+          label: 'อุปกรณ์'
+        },
+        {
+          key: 'approveres',
+          label: 'การอนุมัติ'
+        },
+        {
+          key: '',
+          label: 'รายละเอียด'
         }
+      ],
+      rooms: [
+        // {
+        //   isActive: true,
+        //   ลำดับ: 1,
+        //   โค้ดห้อง: 'IL-3L03',
+        //   อุปกรณ์: ['โปรเจคเตอร์', 'กระดาน'],
+        //   ตึก: '',
+        //   จำนวนคนที่รองรับ: 5,
+        //   ดำเนินการ: ''
+        // }
       ]
     }
+  },
+  methods: {
+    getฺRooms () {
+      axios.get('http://localhost:3000/rooms').then(function (response) {
+        console.log(response)
+        this.rooms = response.data
+      }.bind(this))
+    }
+  },
+  mounted () {
+    this.getฺRooms()
   }
 }
 </script>

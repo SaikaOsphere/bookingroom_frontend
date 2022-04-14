@@ -1,26 +1,27 @@
 <template>
   <div>
     <div class="navsidebar">
-    <b-nav vertical>
-      <b-nav-item to="/">เข้าสู่ระบบ</b-nav-item>
-      <b-nav-item to="/home">Home</b-nav-item>
-      <b-nav-item to="/about">About</b-nav-item>
-      <b-nav-item @click="showGroupBooking = !showGroupBooking">
-        Booking
-        <b-icon
+      <b-nav vertical>
+        <b-nav-item to="/">เข้าสู่ระบบ</b-nav-item>
+        <b-nav-item to="/home">หนัาหลัก</b-nav-item>
+        <!-- <b-nav-item to="/about">About</b-nav-item> -->
+        <b-nav-item @click="showGroupBooking = !showGroupBooking">
+          จองห้อง</b-nav-item
+        >
+        <!-- <b-icon
           :icon="showGroupBooking ? 'caret-down-fill' : 'caret-right-fill'"
         >
-        </b-icon>
-      </b-nav-item>
-      <b-nav-item class="sub-menu" v-if="showGroupBooking" to="/booking">
+        </b-icon> -->
+
+        <!-- <b-nav-item class="sub-menu" v-if="showGroupBooking" to="/booking">
         Booking
-      </b-nav-item>
-      <b-nav-item to="/building">จัดการตึก</b-nav-item>
-      <b-nav-item to="/instutution">จัดการหน่วยงาน</b-nav-item>
-      <b-nav-item to="/approver">จัดการผู้อนุมัติ</b-nav-item>
-      <b-nav-item to="/petition">จัดการคำร้อง</b-nav-item>
-      <b-nav-item to="/manageRoom">จัดการห้อง</b-nav-item>
-      <!-- <b-nav-item @click="showFormInput = !showFormInput"
+      </b-nav-item> -->
+        <b-nav-item to="/building">จัดการตึก</b-nav-item>
+        <b-nav-item to="/instutution">จัดการหน่วยงาน</b-nav-item>
+        <b-nav-item to="/approver">จัดการผู้อนุมัติ</b-nav-item>
+        <b-nav-item to="/petition">จัดการคำร้อง</b-nav-item>
+        <b-nav-item to="/manageRoom">จัดการห้อง</b-nav-item>
+        <!-- <b-nav-item @click="showFormInput = !showFormInput"
         >Form input
         <b-icon
           :icon="showFormInput ? 'caret-down-fill' : 'caret-right-fill'"
@@ -90,7 +91,7 @@
       <b-nav-item class="sub-menu" v-if="showCRUDExample" to="./productTable"
         >Product Table</b-nav-item
       > -->
-    </b-nav>
+      </b-nav>
     </div>
   </div>
 </template>
@@ -120,7 +121,7 @@ export default {
   color: gold;
 }
 
-.navsidebar{
+.navsidebar {
   /* border: 1px solid black; */
   background-color: rgba(129, 129, 129, 0.199);
   font-size: 15pt;

@@ -3,14 +3,14 @@
     <b-container fluid style="padding: 0px 0px 0px 0px">
       <NavBar v-if="showHeader"
     /></b-container>
-    <b-container fluid style="height: 100%; padding: 0px 0px 100px 0px;">
+    <b-container fluid style="height: 100%; padding: 0px 0px 100px 0px">
       <b-row>
         <div
-          style="padding: 0px 0px 0px 0px; position: fixed; z-index: 1000;"
+          style="padding: 0px 0px 0px 0px; position: fixed; z-index: 1000"
           v-if="showSidetab"
         >
-          <div><MenuBar /></div
-        ></div>
+          <div><MenuSideBar /></div>
+        </div>
         <b-col style="padding: 0px 0px 0px 0px">
           <b-container>
             <b-row class="text-justify">
@@ -22,51 +22,15 @@
     </b-container>
     <div v-if="showRouter">
       <div class="bottom" v-if="dev">
-        <div>Router For Dev</div>
         <a href="#"><div @click="toggleRouter()">Hide</div></a>
-        <div>
-          <b-button variant="outline-primary" @click="toggleHeader()"
-            >Header</b-button
-          >
-          |
-          <b-button variant="outline-primary" @click="toggleSidetab()"
-            >Sidetab</b-button
-          >
-          | <router-link to="/">Login</router-link> |
-          <router-link to="/home">Home</router-link> |
-          <router-link to="/about">About</router-link> |
-          <router-link to="/booking">Booking</router-link> |
-          <router-link to="/bookingRoomDetail">Booking Room Detail</router-link> |
-          <router-link to="/instutution">Instutution</router-link> |
-          <router-link to="/petition">Petition</router-link> |
-          <router-link to="/manageRoom">RoomManagement</router-link> |
-          <router-link to="/building">Building</router-link> |
-          <router-link to="/bookingDetail">Booking Detail</router-link> |
-          <router-link to="/bookingRoomConfirm">Booking Room Confirm</router-link> |
-          <router-link to="/addBuilding">Add Building</router-link> |
-          <router-link to="/editBuilding">Edit Building</router-link> |
-          <router-link to="/deleteBuilding">Delete Building</router-link> |
-          <router-link to="/addBuildingSuccess">Add Building Success</router-link>  |
-          <router-link to="/editBuildingSuccess">Edit Building Success</router-link> |
-          <router-link to="/deleteBuildingSuccess">Delete Building Success</router-link> |
-          <router-link to="/approver">Approver</router-link> |
-          <router-link to="/AddRoomManagement">AddRoomManagement</router-link> |
-          <router-link to="/AddRoomManagementSuccess">AddRoomManagementSuccess</router-link> |
-          <router-link to="/EditRoomManagement">EditRoomManagement</router-link> |
-          <router-link to="/EditRoomManagementSuccess">EditRoomManagementSuccess</router-link> |
-          <router-link to="/DeleteRoomManagement">DeleteRoomManagement</router-link> |
-          <router-link to="/DeleteRoomManagementSuccess">DeleteRoomManagementSuccess</router-link> |
-          <!-- <router-link to="/editInstututionSuccess">EditInstututionSuccess</router-link> |
-          <router-link to="/editInstutution">EditInstutution</router-link> |
-          <router-link to="/addInstutution">AddInstutution</router-link> |
-          <router-link to="/editBuilding">Edit Building</router-link> |
-          <router-link to="/editInstututionSuccess">EditInstututionSuccess</router-link> |
-          <router-link to="/editInstutution">EditInstutution</router-link> |
-          <router-link to="/addInstutution">AddInstutution</router-link> |
-        <router-link to="/addInstututionSuccess">AddInstututionSuccess</router-link> |
-        <router-link to="/deleteInstutution">DeleteInstutution</router-link> |
-        <router-link to="/deleteInstututionSuccess">DeleteInstututionSuccess</router-link> | -->
-        </div>
+        <b-button variant="outline-primary" @click="toggleHeader()"
+          >Header</b-button
+        >
+        |
+        <b-button variant="outline-primary" @click="toggleSidetab()"
+          >Sidetab</b-button
+        >
+        <AllRouter />
       </div>
     </div>
     <div v-else>
@@ -79,11 +43,13 @@
 
 <script>
 import NavBar from '@/components/HeaderBar.vue'
-import MenuBar from '@/components/MenuBar.vue'
+import MenuSideBar from '@/components/MenuSideBar.vue'
+import AllRouter from '@/components/AllRouter.vue'
+
 export default {
   data () {
     return {
-      showRouter: true,
+      showRouter: false,
       dev: true,
       showHeader: true,
       showSidetab: true
@@ -91,7 +57,8 @@ export default {
   },
   components: {
     NavBar,
-    MenuBar
+    MenuSideBar,
+    AllRouter
   },
   methods: {
     toggleRouter (event) {
