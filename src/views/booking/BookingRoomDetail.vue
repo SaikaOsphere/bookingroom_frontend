@@ -3,21 +3,21 @@
     <b-row>
       <b-col>
         <b-row>
-          <b-col cols="4">ประเภทห้อง</b-col>
+          <b-col cols="4">จำนวนคนที่รองรับ (คน)</b-col>
           <b-col>
             <b-form-input v-model="detailRoom.typeRoom" disabled>
             </b-form-input>
           </b-col>
         </b-row>
         <b-row>
-          <b-col cols="4">ขนาดห้อง</b-col>
+          <b-col cols="4">ชั้น</b-col>
           <b-col>
             <b-form-input v-model="detailRoom.sizeRoom" disabled>
             </b-form-input>
           </b-col>
         </b-row>
       </b-col>
-      <b-col>
+      <!-- <b-col>
         <b-row>
           <b-col cols="4">จำนวนคนที่รองรับ (คน)</b-col>
           <b-col>
@@ -31,7 +31,7 @@
             <b-form-input v-model="detailRoom.floor" disabled> </b-form-input>
           </b-col>
         </b-row>
-      </b-col>
+      </b-col> -->
       <b-col>
         <b-row>
           <b-col cols="4">ตึก</b-col>
