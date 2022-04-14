@@ -5,15 +5,14 @@
         <b-row>
           <b-col cols="4">จำนวนคนที่รองรับ (คน)</b-col>
           <b-col>
-            <b-form-input v-model="detailRoom.typeRoom" disabled>
+            <b-form-input v-model="detailRoom.capacity" disabled>
             </b-form-input>
           </b-col>
         </b-row>
         <b-row>
           <b-col cols="4">ชั้น</b-col>
           <b-col>
-            <b-form-input v-model="detailRoom.sizeRoom" disabled>
-            </b-form-input>
+            <b-form-input v-model="detailRoom.floor" disabled> </b-form-input>
           </b-col>
         </b-row>
       </b-col>
@@ -71,16 +70,19 @@ import VueCal from 'vue-cal'
 import 'vue-cal/dist/vuecal.css'
 import th from '@/locale/th'
 import getEvents from '@/services/event'
+import axios from 'axios'
+
 export default {
   data () {
     return {
+      tempsss: [],
       detailRoom: {
         // typeRoom: 'TestType',
         // sizeRoom: 0,
-        capacity: 0,
-        floor: 0,
-        building: '',
-        dateTime: ''
+        // capacity: 0,
+        // floor: 0,
+        // building: '',
+        // dateTime: ''
       },
       fields: [
         // 'ประเภทห้อง',
@@ -121,6 +123,15 @@ export default {
     }
   },
   methods: {
+    getBuilding () {
+      axios.get('http://localhost:3000/rooms/' + this.$store.state.item).then(
+        function (response) {
+          this.detailRoom.capacity = response.data[0].capacity
+          this.detailRoom.floor = response.data[0].floor
+          this.detailRoom.building = response.data[0].building
+        }.bind(this)
+      )
+    },
     addEvent () {
       const event = {
         start: new Date(this.startDate + ' ' + this.startTime),
@@ -183,6 +194,13 @@ export default {
   },
   components: {
     VueCal
+  },
+  async mounted () {
+    if (this.$store.state.item === '') {
+      this.$router.push({ path: '/bookingRoomDetail' })
+      return
+    }
+    await this.getBuilding()
   }
 }
 </script>
