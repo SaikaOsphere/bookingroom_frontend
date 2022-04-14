@@ -9,7 +9,7 @@
             <b-form-group id="input-group-3" label-for="input-3">
               <b-form-select
                 id="input-3"
-                v-model="test"
+                v-model="filtered.building"
                 :options="filterBuilding"
                 required
               ></b-form-select>
@@ -21,7 +21,7 @@
             <b-form-group id="input-group-3" label-for="input-3">
               <b-form-select
                 id="input-3"
-                v-model="test"
+                v-model="filtered.floor"
                 :options="filterFloor"
                 required
               ></b-form-select>
@@ -35,7 +35,7 @@
             <b-form-group id="input-group-3" label-for="input-3">
               <b-form-select
                 id="input-3"
-                v-model="test"
+                v-model="filtered.type"
                 :options="filterType"
                 required
               ></b-form-select>
@@ -47,7 +47,7 @@
             <b-form-group id="input-group-3" label-for="input-3">
               <b-form-select
                 id="input-3"
-                v-model="test"
+                v-model="filtered.size"
                 :options="filterSize"
                 required
               ></b-form-select>
@@ -61,15 +61,18 @@
             <b-form-input> </b-form-input>
           </b-form-group> </b-col
       ></b-col>
-      <b-col><b-button variant="primary" type="submit">ค้นหา</b-button></b-col>
+      <b-col
+        ><b-button variant="primary" @click="filter()">ค้นหา</b-button></b-col
+      >
     </b-row>
+
     <b-row align-v="stretch">
       <b-table :items="rooms" :fields="fields">
         <template #cell(ลำดับ)="data">
           {{ data.index + 1 }}
         </template>
-        <template #cell(การดำเนินการ)>
-          <b-button size="sm" class="mr-2" to="/bookingRoomDetail"
+        <template #cell(การดำเนินการ)="{ item }">
+          <b-button size="sm" class="mr-2" @click="sending(item)"
             >รายละเอียด</b-button
           >
         </template>
@@ -87,8 +90,18 @@ export default {
       test: '',
       filterBuilding: [{ text: 'กรุณาเลือก', value: '' }],
       filterFloor: [{ text: 'กรุณาเลือก', value: '' }],
-      filterType: [{ text: 'กรุณาเลือก', value: '' }],
-      filterSize: [{ text: 'กรุณาเลือก', value: '' }],
+      filterType: [
+        { text: 'กรุณาเลือก', value: '' },
+        { text: 'ห้องประชุม', value: '' },
+        { text: 'ห้องเรียน', value: '' },
+        { text: 'ห้องโถง', value: '' }
+      ],
+      filterSize: [
+        { text: 'กรุณาเลือก', value: '' },
+        { text: 'เล็ก (ไม่เกิน 6 คน)', value: 1 },
+        { text: 'กลาง (ตั้งแต่ 6 คนจนถึง 15 คน)', value: 2 },
+        { text: 'ใหญ่ (ตั้งแต่ 15 คนขึ้นไป)', value: 3 }
+      ],
       fields: [
         'ลำดับ',
         {
@@ -117,15 +130,40 @@ export default {
         },
         'การดำเนินการ'
       ],
-      rooms: []
+      rooms: [],
+      filtered: {
+        building: '',
+        floor: '',
+        type: '',
+        size: '',
+        coderoom: ''
+      }
     }
   },
   methods: {
     getฺRooms () {
       axios.get('http://localhost:3000/rooms').then(
         function (response) {
-          console.log(response)
+          console.log(response.data)
           this.rooms = response.data
+          // for (let i = 0; i < response.data.length; i++) {
+          //   axios
+          //     .get('http://localhost:3000/buildings/' + this.room[i].building)
+          //     .then(
+          //       function (response2) {
+          //         const roomdata = {
+          //           capacity: response.data[i].capacity,
+          //           floor: response.data[i].floor,
+          //           building: response2.data[0].name,
+          //           equipment: response.data[i].equipment,
+          //           approveres: this.response.data[i].approveres
+          //         }
+          //         this.rooms.push(roomdata)
+          //       }.bind(this)
+          //     )
+
+          //   // this.rooms[i].building = this.roomsData(this.rooms[i].building)
+          // }
           this.getFloor(response)
         }.bind(this)
       )
@@ -160,6 +198,17 @@ export default {
           }
         }.bind(this)
       )
+    },
+    filter () {
+      console.log('Sended')
+      console.log(this.filtered)
+    },
+    sending (item) {
+      console.log(item._id)
+      // this.$store.commit('setItem', item._id)
+      this.$store.dispatch('bookingRoom/setItem', item._id)
+      // console.log('hello' + this.$store.state.item)
+      this.$router.push({ path: '/bookingRoomDetail' })
     }
   },
   mounted () {

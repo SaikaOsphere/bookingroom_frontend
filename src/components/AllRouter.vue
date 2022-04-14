@@ -53,6 +53,9 @@
       <router-link to="/petition">Petition</router-link> |
 
       <router-link to="/approver">Approver</router-link> |
+      <router-link to="/pettitiondetail">Petitiondetail</router-link> |
+
+      <router-link to="/pettitionApprov">PetitionApprov</router-link> |
 
       <!-- <router-link to="/editInstututionSuccess">EditInstututionSuccess</router-link> |
           <router-link to="/editInstutution">EditInstutution</router-link> |
