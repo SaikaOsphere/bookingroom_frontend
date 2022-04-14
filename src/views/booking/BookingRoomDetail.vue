@@ -79,10 +79,10 @@ export default {
       detailRoom: {
         // typeRoom: 'TestType',
         // sizeRoom: 0,
-        // capacity: 0,
-        // floor: 0,
-        // building: '',
-        // dateTime: ''
+        capacity: 0,
+        floor: 0,
+        building: '',
+        dateTime: ''
       },
       fields: [
         // 'ประเภทห้อง',
