@@ -75,16 +75,16 @@ export default {
   data () {
     return {
       detailRoom: {
-        typeRoom: 'TestType',
-        sizeRoom: 0,
+        // typeRoom: 'TestType',
+        // sizeRoom: 0,
         capacity: 0,
         floor: 0,
         building: '',
         dateTime: ''
       },
       fields: [
-        'ประเภทห้อง',
-        'ขนาดห้อง',
+        // 'ประเภทห้อง',
+        // 'ขนาดห้อง',
         'จำนวนคนที่รองรับ',
         'ชั้น',
         'ตึก',
@@ -94,8 +94,8 @@ export default {
         {
           isActive: true,
           ลำดับ: 1,
-          ประเภทห้อง: 'ห้องประชุม',
-          ขนาดห้อง: 'ใหญ่',
+          // ประเภทห้อง: 'ห้องประชุม',
+          // ขนาดห้อง: 'ใหญ่',
           จำนวนคนที่รองรับ: 200,
           ชั้น: 5,
           ตึก: 'ดูไบทาวเวอร์',
