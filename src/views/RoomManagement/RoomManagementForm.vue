@@ -134,6 +134,9 @@
       <b-card>
         <pre>
         {{ form }}
+        {{buildings}}
+        {{approveres}}
+        {{institutions}}
       </pre
         >
       </b-card>
@@ -143,7 +146,10 @@
 <script>
 export default {
   props: {
-    room: Object
+    room: Object,
+    buildings: [Object],
+    approveres: [Object],
+    institutions: [Object]
   },
   data () {
     return {

@@ -6,6 +6,9 @@
       <b-col class="text-right">
         <RoomForm
           :room="selectedItem"
+          :approveres="approveres"
+          :buildings="buildings"
+          :institutions="institutions"
           ref="roomManagementForm"
           @save="saveRoomManagement"
         ></RoomForm>
@@ -51,6 +54,9 @@ export default {
         { key: 'approveres', label: 'ลำดับผู้พิจารณา' },
         'ดำเนินการ'
       ],
+      approveres: [],
+      institutions: [],
+      buildings: [],
       items: [],
       selectedItem: null
     }
@@ -60,6 +66,26 @@ export default {
       api.get('http://localhost:3000/rooms').then(
         function (response) {
           this.items = response.data
+        }.bind(this)
+      )
+      // ดึงตึก
+      api.get('http://localhost:3000/buildings').then(
+        function (response) {
+          this.buildings = response.data
+        }.bind(this)
+      )
+
+      // ดึงผู้พิจารณา
+      api.get('http://localhost:3000/approveres').then(
+        function (response) {
+          this.approveres = response.data
+        }.bind(this)
+      )
+
+      // ดึงคณะ
+      api.get('http://localhost:3000/approveres').then(
+        function (response) {
+          this.institutions = response.data
         }.bind(this)
       )
     },
