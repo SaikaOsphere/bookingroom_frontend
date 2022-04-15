@@ -86,18 +86,11 @@ export default {
   data () {
     return {
       bookingDetail: {
-        id: 0,
-        idPerson: '000000',
         name: 'AAAAA BBBBB',
-        phoneNumber: '0111111111',
-        room: '',
+        room: {},
         date: '',
         timeStart: '',
-        timeEnd: '',
-        usefor: '',
-        accessory: [],
-        status: '',
-        result: ''
+        timeEnd: ''
       },
       formSend: {
         user: {},
@@ -112,7 +105,7 @@ export default {
     confirmDialog
   },
   mounted () {
-    if (this.isLogin) {
+    if (!this.isLogin) {
       this.$router.push({ path: '/' })
     } else {
       if (
@@ -151,7 +144,7 @@ export default {
       this.$store.dispatch('bookingRoom/sendForm', this.formSend)
     },
     getUser () {
-      api.get('http://localhost:3000/users/625900367ecf855fbf3fea12').then(
+      api.get('http://localhost:3000/users/' + this.getCurrentUser._id).then(
         function (response) {
           this.bookingDetail.name =
             response.data.name + ' ' + response.data.surname
@@ -163,7 +156,7 @@ export default {
     getRoom () {
       api.get('http://localhost:3000/rooms/' + this.$store.state.idRoom).then(
         function (response) {
-          this.bookingDetail.room = response.data
+          this.bookingDetail.room = response.data.code
           // console.log(response.data)
           this.$store.dispatch('bookingRoom/sendDataRoom', response.data)
         }.bind(this)
@@ -180,6 +173,9 @@ export default {
   computed: {
     isLogin () {
       return this.$store.getters['auth/isLogin']
+    },
+    getCurrentUser () {
+      return this.$store.state.auth.user
     }
   }
 }
