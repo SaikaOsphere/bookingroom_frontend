@@ -9,7 +9,7 @@
           style="padding: 0px 0px 0px 0px; position: fixed; z-index: 1000"
           v-if="showSidetab"
         >
-          <div><MenuSideBar /></div>
+          <div><MenuSideBar v-if="isLogin" /></div>
         </div>
           <!-- <router-view style="padding: 0px 10% 0px 10%" /> -->
         <b-col style="padding: 0px 0px 0px 0px">
@@ -70,6 +70,11 @@ export default {
     },
     toggleSidetab (event) {
       this.showSidetab = !this.showSidetab
+    }
+  },
+  computed: {
+    isLogin () {
+      return this.$store.getters['auth/isLogin']
     }
   }
 }

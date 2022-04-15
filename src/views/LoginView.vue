@@ -57,11 +57,7 @@
         </div>
       </b-card-text>
       <!-- </iframe> -->
-      <b-card>
-        <pre>
-          {{ form }}
-        </pre>
-      </b-card>
+
     </b-card>
     <!-- <b-card no-body class="overflow-hidden center" style="max-width: 540px;">
     <b-row no-gutters>
