@@ -14,9 +14,9 @@
        <template #cell(ลำดับ)="data">
         {{ data.index + 1 }}
       </template>
-      <template #cell(การดำเนินการ)>
-        <b-button size="sm" class="mr-2" >เเก้ไข</b-button>
-        <b-button size="sm" class="mr-2" >ลบ</b-button>
+      <template #cell(การดำเนินการ)="data">
+        <b-button size="sm" class="mr-2" variant="info"   @click = "edit(data.item)">เเก้ไข</b-button>
+        <b-button size="sm" class="mr-2" variant="danger" @click = "deleteItem(data.item)" >ลบ</b-button>
       </template>
 
     </b-table>
@@ -35,22 +35,23 @@ export default {
       fields: [
         'ลำดับ',
         { key: 'name', label: 'ชื่อ' },
-        { key: 'room', label: 'ห้อง' },
+        { key: 'rooms', label: 'ห้อง' },
         'การดำเนินการ'
       ],
-      items: []
+      items: [],
+      selectedItem: null
     }
   },
   methods: {
     getInstitutions () {
-      api.get('/institutions').then(
+      api.get('http://localhost:3000/institutions').then(
         function (response) {
           this.items = response.data
         }.bind(this)
       )
     },
     saveInstitution (institution) {
-      console.log('Submit', institution)
+      // console.log('Submit', institution)
       if (institution._id === '') {
         api.post('http://localhost:3000/institutions', institution).then(
           function (response) {
@@ -58,6 +59,27 @@ export default {
           }.bind(this)
         ).catch(() => {
         })
+      } else {
+        api.put('http://localhost:3000/institutions/' + institution._id, institution).then(
+          function (response) {
+            this.getBuildings()
+          }.bind(this))
+      }
+    },
+    edit (item) {
+      this.selectedItem = JSON.parse(JSON.stringify(item))
+      this.$nextTick(() => {
+        this.$refs.institutionForm.show()
+      })
+    },
+    deleteItem (item) {
+      // console.log(item)
+      if (confirm(`ต้องการลบคณะชื่อ ${item.name} จริงเปล่า ?`)) {
+        api.delete('http://localhost:3000/institutions/' + item._id).then(
+          function (response) {
+            this.getInstitutions()
+          }.bind(this)
+        )
       }
     }
   },

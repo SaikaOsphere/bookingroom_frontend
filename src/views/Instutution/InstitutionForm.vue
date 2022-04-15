@@ -20,8 +20,12 @@
             id="institution-name"
             placeholder="Facalty of ..."
             v-model="form.name"
+            :state="validateName"
           >
           </b-form-input>
+           <b-form-invalid-feedback :state="validateName">
+            ชื่อต้องมากกว่าหรือเท่ากับ 5 ตัวอักษร
+          </b-form-invalid-feedback>
         </b-form-group>
         <b-form-group
           id="form-group-institution-rooms"
@@ -33,8 +37,12 @@
             id="institution-rooms"
             placeholder="xx"
             v-model="form.rooms"
+             :state="validateRooms"
           >
           </b-form-input>
+           <b-form-invalid-feedback :state="validateRooms">
+            ห้องต้องมีความยาวมากกว่า 5 ตัวอักษร
+          </b-form-invalid-feedback>
         </b-form-group>
       </b-form>
       <b-card>
@@ -63,10 +71,10 @@ export default {
   },
   computed: {
     validateName () {
-      return this.form.name.length >= 3
+      return this.form.name !== '' && this.form.name.length >= 5
     },
-    validateForm () {
-      return this.validateName
+    validateRooms () {
+      return this.form.rooms !== '' && this.form.rooms.length >= 5
     }
   },
   methods: {
@@ -107,10 +115,16 @@ export default {
     },
     handleOk (evt) {
       evt.preventDefault()
+      if (!this.validateForm()) {
+        return
+      }
       this.submit()
       this.$nextTick(() => {
         this.$bvModal.hide('modal-institution')
       })
+    },
+    validateForm () {
+      return this.validateName && this.validateRooms
     }
   }
 }
