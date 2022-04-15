@@ -5,9 +5,7 @@
         <b-nav-item to="/" v-if="!isLogin">เข้าสู่ระบบ</b-nav-item>
         <b-nav-item to="/home">หนัาหลัก</b-nav-item>
         <!-- <b-nav-item to="/about">About</b-nav-item> -->
-        <b-nav-item to="/booking">
-          จองห้อง</b-nav-item
-        >
+        <b-nav-item @click="booking()"> จองห้อง</b-nav-item>
         <!-- <b-icon
           :icon="showGroupBooking ? 'caret-down-fill' : 'caret-right-fill'"
         >
@@ -105,6 +103,14 @@ export default {
       showCRUDExample: false
     }
   },
+  methods: {
+    booking () {
+      this.$store.dispatch('bookingRoom/reset')
+      if (this.$route.name !== 'booking') {
+        this.$router.push({ path: '/booking' })
+      }
+    }
+  },
   computed: {
     isLogin () {
       return this.$store.getters['auth/isLogin']
@@ -112,6 +118,7 @@ export default {
   }
 }
 </script>
+
 <style scope>
 .sub-menu {
   padding-left: 10pt;

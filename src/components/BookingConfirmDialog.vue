@@ -4,89 +4,89 @@
     <b-modal
       id="modal-product"
       ref="modalProduct"
-      title="สินค้า"
+      title="ยืนยันการจอง"
       @show="showModal"
       @hidden="resetModal"
       @ok="handleOk"
       style="width=500px"
     >
-      <b-form @submit.prevent="submit" @reset.stop.prevent="reset">
+      <b-form @submit.prevent="submit" @reset.stop.prevent="reset" style="margin: 0px 20px 0px 20px">
         <b-row>
           <b-col class="data">
-            <b-col>รหัสผู้จอง</b-col>
-            <b-col>
+            <b-row>รหัสผู้จอง</b-row>
+            <b-row>
               <b-form-input v-model="bookingDetail.idPerson" disabled>
               </b-form-input>
-            </b-col>
+            </b-row>
           </b-col>
           <b-col class="data">
-            <b-col>ชื่อ-นามสกุล</b-col>
-            <b-col>
+            <b-row>ชื่อ-นามสกุล</b-row>
+            <b-row>
               <b-form-input v-model="bookingDetail.name" disabled>
               </b-form-input>
-            </b-col>
+            </b-row>
           </b-col>
           <b-col class="data">
-            <b-col>เบอร์โทร</b-col>
-            <b-col>
+            <b-row>เบอร์โทร</b-row>
+            <b-row>
               <b-form-input v-model="bookingDetail.phoneNumber" disabled>
               </b-form-input>
-            </b-col>
+            </b-row>
           </b-col>
         </b-row>
         <b-row>
           <b-col class="data">
-            <b-col>ห้องที่จอง</b-col>
-            <b-col>
+            <b-row>ห้องที่จอง</b-row>
+            <b-row>
               <b-form-input v-model="bookingDetail.room" disabled>
               </b-form-input>
-            </b-col>
+            </b-row>
           </b-col>
           <b-col class="data">
-            <b-col>วันที่จอง</b-col>
-            <b-col>
+            <b-row>วันที่จอง</b-row>
+            <b-row>
               <b-form-input v-model="bookingDetail.dateBooking" disabled>
               </b-form-input>
-            </b-col>
+            </b-row>
           </b-col>
         </b-row>
         <b-row>
           <b-col class="data">
-            <b-col>เวลาเริ่ม</b-col>
-            <b-col>
+            <b-row>เวลาเริ่ม</b-row>
+            <b-row>
               <b-form-input v-model="bookingDetail.timeStart" disabled>
               </b-form-input>
-            </b-col>
+            </b-row>
           </b-col>
-          <b-col>
-            <b-col cols="4">เวลาสิ้นสุด</b-col>
-            <b-col>
+          <b-col class="data">
+            <b-row>เวลาสิ้นสุด</b-row>
+            <b-row>
               <b-form-input v-model="bookingDetail.timeEnd" disabled>
               </b-form-input>
-            </b-col>
+            </b-row>
           </b-col>
         </b-row>
         <b-row>
-          <b-col>
-            <b-col cols="4">จุดประสงค์</b-col>
-            <b-col>
+          <b-col class="data">
+            <b-row>จุดประสงค์</b-row>
+            <b-row>
               <b-form-input v-model="bookingDetail.usefor"> </b-form-input>
-            </b-col>
+            </b-row>
           </b-col>
           <b-col class="data">
-            <b-col>อุปกรณ์</b-col>
-            <b-col>
+            <b-row>อุปกรณ์</b-row>
+            <b-row>
               <b-form-input v-model="bookingDetail.accessory"> </b-form-input>
-            </b-col>
+            </b-row>
           </b-col>
         </b-row>
       </b-form>
-      <b-card>
+      <!-- <b-card>
         <pre>
         {{ form }}
       </pre
         >
-      </b-card>
+      </b-card> -->
     </b-modal>
   </div>
 </template>
