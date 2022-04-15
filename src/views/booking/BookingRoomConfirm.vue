@@ -63,8 +63,7 @@
       <b-col class="data">
         <b-col cols="4">อุปกรณ์</b-col>
         <b-col>
-          <b-form-input v-model="bookingDetail.accessory">
-          </b-form-input>
+          <b-form-input v-model="bookingDetail.accessory"> </b-form-input>
         </b-col>
       </b-col>
     </b-row>
@@ -103,7 +102,9 @@ export default {
   },
   components: {
     confirmDialog
-  }
+  },
+  mounted () {},
+  methods: {}
 }
 </script>
 <style>

@@ -1,14 +1,16 @@
 export default {
   namespaced: true,
   state: {
-    item: ''
+    idRoom: '',
+    datetime: {}
   },
-  mutations: {
-  },
+  mutations: {},
   actions: {
-    setItem (context, payload) {
-      this.state.item = payload
-      console.log(this.state.item)
+    sendRoom (context, payload) {
+      this.state.idRoom = payload
+    },
+    sendTime (context, payload) {
+      this.state.datetime = payload
     }
   }
 }

@@ -1,6 +1,12 @@
 <template>
   <div>
     <b-navbar class="bar">
+      <!-- <b-nav-item @click="showCRUDExample = !showCRUDExample"
+        >CRUD Example
+        <b-icon
+          :icon="showCRUDExample ? 'caret-down-fill' : 'caret-right-fill'"
+        ></b-icon
+      ></b-nav-item> -->
       <b-img
         v-bind="logo"
         src="@/assets/buu.png"

@@ -30,18 +30,6 @@
       </b-col>
       <b-col>
         <b-row
-          ><b-col cols="4">ประเภท</b-col
-          ><b-col>
-            <b-form-group id="input-group-3" label-for="input-3">
-              <b-form-select
-                id="input-3"
-                v-model="filtered.type"
-                :options="filterType"
-                required
-              ></b-form-select>
-            </b-form-group> </b-col
-        ></b-row>
-        <b-row
           ><b-col cols="4">ขนาดห้อง</b-col
           ><b-col>
             <b-form-group id="input-group-3" label-for="input-3">
@@ -53,14 +41,15 @@
               ></b-form-select>
             </b-form-group> </b-col
         ></b-row>
+        <b-row>
+          <b-col cols="4">รหัสห้อง</b-col
+          ><b-col>
+            <b-form-group id="input-group-3" label-for="input-3">
+              <b-form-input> </b-form-input>
+            </b-form-group>
+          </b-col>
+        </b-row>
       </b-col>
-      <b-col
-        ><b-col cols="6">รหัสห้อง</b-col
-        ><b-col>
-          <b-form-group id="input-group-3" label-for="input-3">
-            <b-form-input> </b-form-input>
-          </b-form-group> </b-col
-      ></b-col>
       <b-col
         ><b-button variant="primary" @click="filter()">ค้นหา</b-button></b-col
       >
@@ -146,24 +135,6 @@ export default {
         function (response) {
           console.log(response.data)
           this.rooms = response.data
-          // for (let i = 0; i < response.data.length; i++) {
-          //   axios
-          //     .get('http://localhost:3000/buildings/' + this.room[i].building)
-          //     .then(
-          //       function (response2) {
-          //         const roomdata = {
-          //           capacity: response.data[i].capacity,
-          //           floor: response.data[i].floor,
-          //           building: response2.data[0].name,
-          //           equipment: response.data[i].equipment,
-          //           approveres: this.response.data[i].approveres
-          //         }
-          //         this.rooms.push(roomdata)
-          //       }.bind(this)
-          //     )
-
-          //   // this.rooms[i].building = this.roomsData(this.rooms[i].building)
-          // }
           this.getFloor(response)
         }.bind(this)
       )
@@ -206,7 +177,7 @@ export default {
     sending (item) {
       console.log(item._id)
       // this.$store.commit('setItem', item._id)
-      this.$store.dispatch('bookingRoom/setItem', item._id)
+      this.$store.dispatch('bookingRoom/sendRoom', item._id)
       // console.log('hello' + this.$store.state.item)
       this.$router.push({ path: '/bookingRoomDetail' })
     }

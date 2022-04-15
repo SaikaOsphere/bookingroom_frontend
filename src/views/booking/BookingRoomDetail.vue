@@ -16,7 +16,7 @@
           </b-col>
         </b-row>
       </b-col> -->
-      <b-col>
+      <b-col cols="4">
         <b-row>
           <b-col cols="4">จำนวนคนที่รองรับ (คน)</b-col>
           <b-col>
@@ -40,14 +40,52 @@
           </b-col>
         </b-row>
         <b-row>
-          <b-col cols="4">เวลา</b-col>
           <b-col>
-            <b-form-input v-model="detailRoom.dateTime" disabled>
-            </b-form-input>
+            <b-col>เวลาเริ่ม</b-col
+            ><b-col>
+              <b-form-datepicker
+                id="example-datepicker"
+                v-model="detailRoom.date"
+                class="mb-2"
+              ></b-form-datepicker
+            ></b-col>
+          </b-col>
+          <b-col>
+            <b-col>เวลาเริ่ม</b-col>
+            <b-col>
+              <b-form-timepicker
+                v-model="detailRoom.timeStart"
+                locale="en"
+              ></b-form-timepicker>
+            </b-col>
+          </b-col>
+          <b-col>
+            <b-col>เวลาสิ้นสุด</b-col>
+            <b-col>
+              <b-form-timepicker
+                v-model="detailRoom.timeEnd"
+                locale="en"
+              ></b-form-timepicker>
+            </b-col>
           </b-col>
         </b-row>
       </b-col>
     </b-row>
+    <b-row
+      ><b-col cols="10">
+        <b-alert
+          variant="danger"
+          dismissible
+          fade
+          :show="alerted"
+          @dismissed="alerted = false"
+          >กรุณากรอกข้อมูลให้ครบ</b-alert
+        > </b-col
+      ><b-col
+        ><b-button variant="danger" to="/booking">ยกเลิก</b-button>
+        <b-button variant="primary" @click="sendToFormDetail()">ตกลง</b-button>
+      </b-col></b-row
+    >
     <b-row>
       <vue-cal
         :locale="th"
@@ -55,13 +93,8 @@
         :events="events"
         @ready="ready($event)"
         @view-change="viewChange($event)"
+        style="margin: 30px 0px 30px 0px"
       />
-    </b-row>
-    <b-row>
-      <b-col
-        ><b-button variant="danger" to="/booking">ยกเลิก</b-button>
-        <b-button variant="primary" to="/bookingRoomConfirm">ตกลง</b-button>
-      </b-col>
     </b-row>
   </div>
 </template>
@@ -75,14 +108,16 @@ import axios from 'axios'
 export default {
   data () {
     return {
-      tempsss: [],
+      alerted: false,
       detailRoom: {
         // typeRoom: 'TestType',
         // sizeRoom: 0,
         capacity: 0,
         floor: 0,
         building: '',
-        dateTime: ''
+        date: '',
+        timeStart: '',
+        timeEnd: ''
       },
       fields: [
         // 'ประเภทห้อง',
@@ -123,8 +158,25 @@ export default {
     }
   },
   methods: {
+    sendToFormDetail () {
+      if (
+        this.detailRoom.date === '' ||
+        this.detailRoom.timeStart === '' ||
+        this.detailRoom.timeEnd === ''
+      ) {
+        this.alerted = true
+      } else {
+        const dataTime = {
+          date: this.detailRoom.date,
+          timeStart: this.detailRoom.timeStart,
+          timeEnd: this.detailRoom.timeEnd
+        }
+        this.$store.dispatch('bookingRoom/sendTime', dataTime)
+        this.$router.push({ path: '/bookingRoomConfirm' })
+      }
+    },
     getBuilding () {
-      axios.get('http://localhost:3000/rooms/' + this.$store.state.item).then(
+      axios.get('http://localhost:3000/rooms/' + this.$store.state.idRoom).then(
         function (response) {
           this.detailRoom.capacity = response.data[0].capacity
           this.detailRoom.floor = response.data[0].floor
@@ -195,12 +247,12 @@ export default {
   components: {
     VueCal
   },
-  async mounted () {
-    if (this.$store.state.item === '') {
+  mounted () {
+    if (this.$store.state.idRoom === '') {
       this.$router.push({ path: '/bookingRoomDetail' })
-      return
+    } else {
+      this.getBuilding()
     }
-    await this.getBuilding()
   }
 }
 </script>
