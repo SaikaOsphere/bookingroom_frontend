@@ -6,10 +6,11 @@
             :approver="selectedItem"
             ref="approverForm"
             @save="saveApprover"
+            :users="users"
+            :institutions="institutions"
           ></ApproverForm>
         </b-col>
       </b-row>
-
     <h1>จัดการผู้อนุมัติ</h1>
     <b-table :items="items" :fields="fields" striped responsive="sm">
       <template #cell(ลำดับ)="data">
@@ -25,7 +26,7 @@
 
 <script>
 import api from '../../services/api'
-import ApproverForm from './ApproverForm.vue'
+import ApproverForm from './ApproverForm'
 export default {
   components: {
     ApproverForm
@@ -33,36 +34,55 @@ export default {
   data () {
     return {
       fields: [
-        'ลำดับ',
+        // 'ลำดับ',
+        { key: '_id', label: 'id' },
         { key: 'name', label: 'ชื่อลําดับผู้อนุมัติ' },
-        { key: 'approveres', label: 'ผู้อนุมัติ' },
-        { key: 'institution', lebel: 'หน่วยงาน' },
+        { key: 'approveres', label: 'รายการผู้อนุมัติ' },
+        { key: 'institution.name', label: 'หน่วยงาน' },
         'การดำเนินการ'
       ],
       items: [],
+      users: [],
+      institutions: [],
       selectedItem: null
     }
   },
   methods: {
     getApprovers () {
-      api.get('http://localhost:3000/approvers').then(
+      api.get('http://localhost:3000/approveres').then(
         function (response) {
           this.items = response.data
         }.bind(this)
       )
     },
+    getInstitutions () {
+      api.get('http://localhost:3000/institutions').then(
+        function (response) {
+          this.institutions = response.data
+        }.bind(this)
+      )
+    },
+    getUsers () {
+      api.get('http://localhost:3000/users').then(
+        function (response) {
+          this.users = response.data
+        }.bind(this)
+      )
+    },
     saveApprover (approver) {
-      // console.log('Submit', institution)
+      console.log('Submit', approver)
       if (approver._id === '') {
-        api.post('http://localhost:3000/approvers', approver).then(
+        api.post('http://localhost:3000/approveres', approver).then(
           function (response) {
+            console.log(response)
             this.getApprovers()
           }.bind(this)
         ).catch(() => {
         })
       } else {
-        api.put('http://localhost:3000/approvers/' + approver._id, approver).then(
+        api.put('http://localhost:3000/approveres/' + approver._id, approver).then(
           function (response) {
+            console.log(response)
             this.getApprovers()
           }.bind(this))
       }
@@ -75,8 +95,8 @@ export default {
     },
     deleteItem (item) {
       // console.log(item)
-      if (confirm(`ต้องการลบคณะชื่อ ${item.name} จริงเปล่า ?`)) {
-        api.delete('http://localhost:3000/approvers/' + item._id).then(
+      if (confirm(`ต้องการลบลำดับผู้พิจารณา ${item.name} จริงเปล่า ?`)) {
+        api.delete('http://localhost:3000/approveres/' + item._id).then(
           function (response) {
             this.getApprovers()
           }.bind(this)
