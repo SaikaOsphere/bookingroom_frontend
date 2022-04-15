@@ -14,8 +14,8 @@
       <template #cell(ลำดับ)="data">
         {{ data.index + 1 }}
       </template>
-      <template #cell(การดำเนินการ)>
-        <b-button size="sm" class="mr-2"  >เเก้ไข</b-button>
+      <template #cell(การดำเนินการ)="data">
+        <b-button size="sm" class="mr-2"  @click = "edit(data.item)">เเก้ไข</b-button>
         <b-button size="sm" class="mr-2" >ลบ</b-button>
       </template>
     </b-table>
@@ -59,7 +59,20 @@ export default {
           }.bind(this)
         ).catch(() => {
         })
+      } else {
+        api.put('http://localhost:3000/buildings/' + building._id, building).then(
+          function (response) {
+            this.getBuildings()
+          }.bind(this))
       }
+    },
+    /* ------------------------ edit ------------------------ */
+    edit (item) {
+      this.selectedItem = JSON.parse(JSON.stringify(item))
+      // !- ทำ nextTick เพราะ state ยังไม่ได้ถูก load ทำให้error ต้องใช้ nextTick
+      this.$nextTick(() => {
+        this.$refs.buildingForm.show()
+      })
     }
   },
   mounted () {

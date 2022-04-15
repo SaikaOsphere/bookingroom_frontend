@@ -103,7 +103,7 @@ export default {
       return this.form.name !== '' && this.form.name.length >= 5
     },
     validateFloor () {
-      return this.form.floor !== '' && this.form.floor.length >= 1
+      return this.form.floor !== ''
     }
   },
   methods: {
@@ -119,6 +119,7 @@ export default {
     },
     submit () {
       const building = JSON.parse(JSON.stringify(this.form))
+      building.floor = parseFloat(building.floor)
       this.$emit('save', building)
       this.reset()
     },
@@ -136,8 +137,9 @@ export default {
       } else {
         // Edit
         this.form._id = this.building._id
+        this.form.code = this.building.code
         this.form.name = this.building.name
-        this.form.rooms = this.building.rooms
+        this.form.floor = this.building.floor
       }
     },
     resetModal (evt) {
@@ -145,6 +147,9 @@ export default {
     },
     handleOk (evt) {
       evt.preventDefault()
+      if (!this.validateForm()) {
+        return
+      }
       this.submit()
       this.$nextTick(() => {
         this.$bvModal.hide('modal-building')
