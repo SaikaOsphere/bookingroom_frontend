@@ -1,6 +1,6 @@
 import { AUTH_LOGIN, AUTH_LOGOUT } from '../mutation-types'
 import router from '../../router'
-import auth from '../../services/auth'
+import { login } from '../../services/auth'
 
 export default {
   namespaced: true,
@@ -19,17 +19,18 @@ export default {
     async login ({ commit }, payload) {
       console.log(payload)
       try {
-        const res = await auth.login(payload.email, payload.password)
+        // console.log('login')
+        const res = await login(payload.username, payload.password)
         const user = res.data.user
         const token = res.data.token
         localStorage.setItem('token', token)
         localStorage.setItem('user', JSON.stringify(user))
-        console.log(res)
+        // console.log(res)
 
-        router.push('/')
+        router.push('/home')
         commit(AUTH_LOGIN, user)
       } catch (e) {
-        console.log('Error')
+        router.push('/')
       }
       // if correct
     },
