@@ -10,27 +10,16 @@
       @ok="handleOk"
       style="width=500px"
     >
-      <b-form @submit.prevent="submit" @reset.stop.prevent="reset" style="margin: 0px 20px 0px 20px">
+      <b-form
+        @submit="submit()"
+        @reset.stop.prevent="reset"
+        style="margin: 0px 20px 0px 20px"
+      >
         <b-row>
-          <b-col class="data">
-            <b-row>รหัสผู้จอง</b-row>
-            <b-row>
-              <b-form-input v-model="bookingDetail.idPerson" disabled>
-              </b-form-input>
-            </b-row>
-          </b-col>
           <b-col class="data">
             <b-row>ชื่อ-นามสกุล</b-row>
             <b-row>
-              <b-form-input v-model="bookingDetail.name" disabled>
-              </b-form-input>
-            </b-row>
-          </b-col>
-          <b-col class="data">
-            <b-row>เบอร์โทร</b-row>
-            <b-row>
-              <b-form-input v-model="bookingDetail.phoneNumber" disabled>
-              </b-form-input>
+              <b-form-input v-model="form.user.name" disabled> </b-form-input>
             </b-row>
           </b-col>
         </b-row>
@@ -66,7 +55,7 @@
             </b-row>
           </b-col>
         </b-row>
-        <b-row>
+        <!-- <b-row>
           <b-col class="data">
             <b-row>จุดประสงค์</b-row>
             <b-row>
@@ -79,7 +68,7 @@
               <b-form-input v-model="bookingDetail.accessory"> </b-form-input>
             </b-row>
           </b-col>
-        </b-row>
+        </b-row> -->
       </b-form>
       <!-- <b-card>
         <pre>
@@ -97,26 +86,7 @@ export default {
   },
   data () {
     return {
-      form: {
-        id: '',
-        name: '',
-        price: 0
-      },
-      isAddNew: false,
-      bookingDetail: {
-        id: 0,
-        idPerson: '000000',
-        name: 'AAAAA BBBBB',
-        phoneNumber: '0111111111',
-        room: '',
-        dateBooking: '',
-        timeStart: '',
-        timeEnd: '',
-        usefor: '',
-        accessory: [],
-        status: '',
-        result: ''
-      }
+      form: {}
     }
   },
   computed: {
@@ -142,9 +112,12 @@ export default {
       this.$refs.modalProduct.show()
     },
     submit () {
-      const product = JSON.parse(JSON.stringify(this.form))
-      product.price = parseFloat(product.price)
-      this.$emit('save', product)
+      // api.post('http://localhost:3000/bookings', this.$store.state.form).then(
+      //   function (response) {
+      //     console.log(response)
+      //   }
+      // )
+      console.log('send!')
       this.reset()
     },
     reset () {
@@ -155,13 +128,15 @@ export default {
       }
     },
     showModal (evt) {
-      if (this.isAddNew) {
-        this.reset()
-      } else {
-        this.form._id = this.product._id
-        this.form.name = this.product.name
-        this.form.price = this.product.price
-      }
+      // if (this.isAddNew) {
+      //   this.reset()
+      // } else {
+      //   this.form._id = this.product._id
+      //   this.form.name = this.product.name
+      //   this.form.price = this.product.price
+      // }
+      console.log('start')
+      this.form = this.$store.state.form
     },
     resetModal (evt) {
       this.reset()

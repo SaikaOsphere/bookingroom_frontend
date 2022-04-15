@@ -158,6 +158,10 @@ export default {
     }
   },
   methods: {
+    backToBooking () {
+      this.$store.dispatch('bookingRoom/reset')
+      this.$router.push({ path: '/booking' })
+    },
     sendToFormDetail () {
       if (
         this.detailRoom.date === '' ||
@@ -243,16 +247,23 @@ export default {
   computed: {
     th () {
       return th
+    },
+    isLogin () {
+      return this.$store.getters['auth/isLogin']
     }
   },
   components: {
     VueCal
   },
   mounted () {
-    if (this.$store.state.idRoom === '') {
-      this.$router.push({ path: '/bookingRoomDetail' })
+    if (!this.isLogin) {
+      this.$router.push({ path: '/' })
     } else {
-      this.getBuilding()
+      if (this.$store.state.idRoom === undefined) {
+        this.$router.push({ path: '/booking' })
+      } else {
+        this.getBuilding()
+      }
     }
   }
 }

@@ -52,7 +52,7 @@
         </b-col>
       </b-col>
     </b-row>
-    <b-row>
+    <!-- <b-row>
       <b-col class="data">
         <b-col cols="4">จุดประสงค์</b-col>
         <b-col>
@@ -65,15 +65,16 @@
           <b-form-input v-model="bookingDetail.accessory"> </b-form-input>
         </b-col>
       </b-col>
-    </b-row>
+    </b-row> -->
     <b-row class="data">
       <b-col
         ><b-button variant="danger" to="/bookingRoomDetail">ยกเลิก</b-button>
-        <confirm-dialog
+        <!-- <confirm-dialog
           :product="selectedItem"
           ref="productForm"
           @save="saveProduct"
-        ></confirm-dialog>
+        ></confirm-dialog> -->
+        <confirm-dialog></confirm-dialog>
       </b-col>
     </b-row>
   </div>
@@ -111,34 +112,43 @@ export default {
     confirmDialog
   },
   mounted () {
-    this.getRecentData()
-    this.getRoom()
-    this.getUser()
-    // console.log(this.bookingDetail)
-    // console.log(this.formSend)
-    // this.test22()
+    if (this.isLogin) {
+      this.$router.push({ path: '/' })
+    } else {
+      if (
+        this.$store.state.datetime === undefined ||
+        this.$store.state.idRoom === undefined
+      ) {
+        this.$router.push({ path: '/booking' })
+      } else {
+        this.getRecentData()
+        this.getRoom()
+        this.getUser()
+        // console.log(this.bookingDetail)
+        // console.log(this.formSend)
+        // this.test22()
 
-    // const currentDateWithFormat = new Date('2010-03-20' + ' ' + this.formSend.datetime_start)
-    // .toJSON()
-    // .slice(0, 10)
-    // .replace(/-/g, '/')
-    // console.log('test time')
-    // console.log(this.formSend.datetime_start)
-    // console.log(currentDateWithFormat)
-    this.sendToDB()
+        // const currentDateWithFormat = new Date('2010-03-20' + ' ' + this.formSend.datetime_start)
+        // .toJSON()
+        // .slice(0, 10)
+        // .replace(/-/g, '/')
+        // console.log('test time')
+        // console.log(this.formSend.datetime_start)
+        // console.log(currentDateWithFormat)
+        this.sendToDB()
+      }
+    }
   },
   methods: {
     sendToDB () {
       this.formSend.datetime_reserve = new Date(Date.now())
-      this.formSend.datetime_start = new Date(this.bookingDetail.date + ' ' + this.bookingDetail.timeStart)
-      this.formSend.datetime_end = new Date(this.bookingDetail.date + ' ' + this.bookingDetail.timeEnd)
-      this.formSend.room = this.$store.state.room
-      this.formSend.user = this.$store.state.user
-      // api.post('http://localhost:3000/bookings', this.formSend).then(
-      //   function (response) {
-      //     console.log(response)
-      //   }
-      // )
+      this.formSend.datetime_start = new Date(
+        this.bookingDetail.date + ' ' + this.bookingDetail.timeStart
+      )
+      this.formSend.datetime_end = new Date(
+        this.bookingDetail.date + ' ' + this.bookingDetail.timeEnd
+      )
+      this.$store.dispatch('bookingRoom/sendForm', this.formSend)
     },
     getUser () {
       api.get('http://localhost:3000/users/625900367ecf855fbf3fea12').then(
@@ -165,6 +175,11 @@ export default {
       this.bookingDetail.timeEnd = this.$store.state.datetime.timeEnd
       // this.formSend.datetime_start = this.$store.state.datetime.timeStart
       // this.formSend.datetime_end = this.$store.state.datetime.timeEnd
+    }
+  },
+  computed: {
+    isLogin () {
+      return this.$store.getters['auth/isLogin']
     }
   }
 }
