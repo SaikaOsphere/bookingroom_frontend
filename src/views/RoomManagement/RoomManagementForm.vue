@@ -1,6 +1,5 @@
 <template>
   <div>
-
     <b-button @click="addNew" variant="primary" class="ml-5"
       >เพิ่มห้อง</b-button
     >
@@ -23,10 +22,9 @@
             id="room-name"
             placeholder="IF,K,Q,AH"
             v-model="form.name"
-
           >
           </b-form-input>
-          <b-form-invalid-feedback >
+          <b-form-invalid-feedback>
             ชื่อตึกต้องมีตัวอักษรมากกว่าหรือเท่ากับ 5 ตัวอักษร
           </b-form-invalid-feedback>
         </b-form-group>
@@ -134,9 +132,9 @@
       <b-card>
         <pre>
         {{ form }}
-        {{buildings}}
-        {{approveres}}
-        {{institutions}}
+        {{ buildings }}
+        {{ approveres }}
+        {{ institutions }}
       </pre
         >
       </b-card>
@@ -145,14 +143,11 @@
 </template>
 <script>
 export default {
-  props: [
-    {
-      room: Object,
-      buildings: [Object],
-      approveres: [Object],
-      institutions: [Object]
-    }
-  ],
+  props: {
+    buildings: Object,
+    approveres: Object,
+    institutions: Object
+  },
   data () {
     return {
       form: {

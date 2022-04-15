@@ -64,6 +64,18 @@
           {{ test }} //{{ getBuildingsName(data.value) }}
           55555
         </template> -->
+
+        <template #cell(อุปกรณ์)="data">
+          <ul>
+            <li
+              v-for="(item, index) in rooms[data.index].equipment"
+              :key="index"
+            >
+              {{ item.name }}
+            </li>
+          </ul>
+        </template>
+
         <template #cell(การดำเนินการ)="{ item }">
           <b-button size="sm" class="mr-2" @click="sending(item)"
             >รายละเอียด</b-button
@@ -109,13 +121,10 @@ export default {
           label: 'ชั้น'
         },
         {
-          key: 'building',
+          key: 'building.name',
           label: 'อาคาร'
         },
-        {
-          key: 'equipment',
-          label: 'อุปกรณ์'
-        },
+        'อุปกรณ์',
         // {
         //   key: 'institution',
         //   label: 'หน่วยงาน'
@@ -293,7 +302,7 @@ export default {
     } else {
       this.getฺRooms()
       this.getBuildings()
-      this.getEquipment()
+      // this.getEquipment()
     }
   },
   computed: {

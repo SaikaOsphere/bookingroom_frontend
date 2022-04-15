@@ -51,6 +51,7 @@ export default {
     getApprovers () {
       api.get('http://localhost:3000/approveres').then(
         function (response) {
+          console.log(response.data)
           this.items = response.data
         }.bind(this)
       )
