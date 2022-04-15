@@ -35,7 +35,7 @@ export default {
       fields: [
         'ลำดับ',
         { key: 'name', label: 'ชื่อ' },
-        { key: 'rooms', label: 'ห้อง' },
+        // { key: 'rooms', label: 'ห้อง' },
         'การดำเนินการ'
       ],
       items: [],
