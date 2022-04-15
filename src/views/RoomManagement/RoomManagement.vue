@@ -9,7 +9,7 @@
           :approveres="approveres"
           :buildings="buildings"
           :institutions="institutions"
-          ref="roomManagementForm"
+          ref="roomForm"
           @save="saveRoomManagement"
         ></RoomForm>
       </b-col>
@@ -25,7 +25,7 @@
         </ul>
       </template>
 
-      <template #cell(ดำเนินการ)>
+      <template #cell(ดำเนินการ)="data">
         <b-button size="sm" class="mr-2" variant="info" @click="edit(data.item)"
           >เเก้ไข</b-button
         >
@@ -129,7 +129,7 @@ export default {
     },
     /* ------------------------ edit ------------------------ */
     edit (item) {
-      this.selectedItem = JSON.parse(JSON.stringify(item.name))
+      this.selectedItem = JSON.parse(JSON.stringify(item))
       // !- ทำ nextTick เพราะ state ยังไม่ได้ถูก load ทำให้error ต้องใช้ nextTick
       this.$nextTick(() => {
         this.$refs.roomForm.show()
@@ -138,7 +138,7 @@ export default {
 
     deleteItem (item) {
       // console.log(item)
-      if (confirm(`ต้องการลบตึกชื่อ ${item.name} จริงเปล่า ?`)) {
+      if (confirm(`ต้องการลบห้องชื่อ ${item.code} จริงหรือเปล่า ?`)) {
         api.delete('http://localhost:3000/rooms/' + item._id).then(
           function (response) {
             this.getRoomManagement()

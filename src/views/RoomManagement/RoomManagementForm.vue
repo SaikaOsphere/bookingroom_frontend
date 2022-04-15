@@ -178,12 +178,12 @@
 </template>
 <script>
 export default {
-  props: {
-    room: Object,
-    buildings: Object,
-    approveres: Object,
-    institutions: Object
-  },
+  props: [
+    { room: Object },
+    { buildings: Object },
+    { approveres: Object },
+    { institutions: Object }
+  ],
   data () {
     return {
       form: {
