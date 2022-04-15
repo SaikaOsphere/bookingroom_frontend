@@ -8,9 +8,9 @@ import Instutution from '../views/Instutution/InstututionView.vue'
 import Petition from '../views/PetitionView.vue'
 import RoomManagement from '../views/RoomManagement/RoomManagement.vue'
 import Building from '../views/building/BuildingView.vue'
-import BookingRoomDetail from '../views/booking/BookingRoomDetail.vue'
+import BookingRoomDetail from '../views/booking/BookingTime.vue'
 import BookingDetail from '../views/booking/recentBookingDetail.vue'
-import BookingRoomConfirm from '../views/booking/BookingRoomConfirm.vue'
+import BookingRoomConfirm from '../views/booking/BookingDetail.vue'
 import Approver from '../views/approver/ApproverView.vue'
 import Petitiondetail from '../views/Petition/Petition_detail.vue'
 import PetitionApprov from '../views/Petition/Petition_Approv.vue'
@@ -88,7 +88,6 @@ const routes = [
     name: 'petitionApprov',
     component: PetitionApprov
   }
-
 ]
 
 const router = new VueRouter({

@@ -134,28 +134,18 @@ export default {
       this.formSend.datetime_end = new Date(this.bookingDetail.date + ' ' + this.bookingDetail.timeEnd)
       this.formSend.room = this.$store.state.room
       this.formSend.user = this.$store.state.user
-      console.log('sending')
-      console.log(this.formSend)
-      api.post('http://localhost:3000/bookings', this.formSend).then(
-        function (response) {
-          console.log(response)
-        }
-      )
-    },
-    test22 () {
-      api.get('http://localhost:3000/bookings/625900367ecf855fbf3fea5b').then(
-        function (response) {
-          const test3 = new Date(response.data[0].datetime_start)
-          console.log(test3)
-        }
-      )
+      // api.post('http://localhost:3000/bookings', this.formSend).then(
+      //   function (response) {
+      //     console.log(response)
+      //   }
+      // )
     },
     getUser () {
       api.get('http://localhost:3000/users/625900367ecf855fbf3fea12').then(
         function (response) {
           this.bookingDetail.name =
             response.data.name + ' ' + response.data.surname
-          console.log(response.data)
+          // console.log(response.data)
           this.$store.dispatch('bookingRoom/sendDataUser', response.data)
         }.bind(this)
       )
@@ -164,7 +154,7 @@ export default {
       api.get('http://localhost:3000/rooms/' + this.$store.state.idRoom).then(
         function (response) {
           this.bookingDetail.room = response.data
-          console.log(response.data)
+          // console.log(response.data)
           this.$store.dispatch('bookingRoom/sendDataRoom', response.data)
         }.bind(this)
       )

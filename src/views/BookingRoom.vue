@@ -60,6 +60,10 @@
         <template #cell(ลำดับ)="data">
           {{ data.index + 1 }}
         </template>
+        <!-- <template #cell(building)="data">
+          {{ test }} //{{ getBuildingsName(data.value) }}
+          55555
+        </template> -->
         <template #cell(การดำเนินการ)="{ item }">
           <b-button size="sm" class="mr-2" @click="sending(item)"
             >รายละเอียด</b-button
@@ -71,11 +75,12 @@
   </div>
 </template>
 <script>
-import axios from 'axios'
+import api from '@/services/api'
 
 export default {
   data () {
     return {
+      test3: [],
       test: '',
       filterBuilding: [{ text: 'กรุณาเลือก', value: '' }],
       filterFloor: [{ text: 'กรุณาเลือก', value: '' }],
@@ -130,14 +135,56 @@ export default {
     }
   },
   methods: {
+    getฺBuildingName (id) {
+      api
+        .get('http://localhost:3000/buildings/' + id)
+        .then(function (response) {
+          console.log(response.data.name)
+          this.test = response.data.name
+        })
+        .bind(this)
+    },
     getฺRooms () {
-      axios.get('http://localhost:3000/rooms').then(
+      api.get('http://localhost:3000/rooms').then(
         function (response) {
-          console.log(response.data)
+          // console.log(response.data)
           this.rooms = response.data
+          // this.rooms[0].building = '111'
           this.getFloor(response)
+          for (let i = 0; i < this.rooms.length; i++) {
+            api
+              .get('http://localhost:3000/buildings/' + this.rooms[i].building)
+              .then(
+                function (response) {
+                  // console.log(response.data.name)
+                  this.rooms[i].building = response.data.name
+                }.bind(this)
+              )
+          }
         }.bind(this)
       )
+      for (let i = 0; i < this.rooms.length; i++) {
+        // const temp = []
+        for (let j = 0; j < this.rooms[i].equipment.length; j++) {
+          api
+            .get(
+              'http://localhost:3000/equipments/' + this.rooms[i].equipment[j]
+            )
+            .then(function (response) {
+              // console.log(response.data.name)
+              this.test3.push(response.data.name)
+              console.log(this.test3)
+              // this.rooms[i].equipment.pop()
+              // this.rooms[i].equipment.push(response.data.name)
+              // this.rooms[i].equipment[j] = 'eoeo'
+            })
+        }
+        // console.log(i)
+        // console.log(temp)
+        // this.rooms[i].equipment = []
+        this.rooms[i].equipment = this.test3
+        // console.log(this.rooms[i].equipment)
+      }
     },
     getFloor (response) {
       for (let i = 0; i < response.data.length; i++) {
@@ -158,7 +205,7 @@ export default {
       }
     },
     getBuildings () {
-      axios.get('http://localhost:3000/buildings').then(
+      api.get('http://localhost:3000/buildings').then(
         function (response) {
           for (let i = 0; i < response.data.length; i++) {
             const building = {
@@ -173,6 +220,7 @@ export default {
     filter () {
       console.log('Sended')
       console.log(this.filtered)
+      console.log(this.rooms)
     },
     sending (item) {
       console.log(item._id)
@@ -180,11 +228,19 @@ export default {
       this.$store.dispatch('bookingRoom/sendRoom', item._id)
       // console.log('hello' + this.$store.state.item)
       this.$router.push({ path: '/bookingRoomDetail' })
-    }
+    },
+    testEq () {}
   },
   mounted () {
     this.getฺRooms()
+    this.testEq()
     this.getBuildings()
+  },
+  computed: {
+    test2 (text) {
+      this.getBuildingsName(text)
+      return this.test
+    }
   }
 }
 </script>
