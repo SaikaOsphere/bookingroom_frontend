@@ -10,6 +10,8 @@ export default {
       return this.$store.getters['auth/isLogin']
     }
   },
+
+  // ทำเมื่อมีอะไรเปลื่ยนแปลง
   watch: {
     isLogin (newValue, oldValue) {
       if (!newValue) {

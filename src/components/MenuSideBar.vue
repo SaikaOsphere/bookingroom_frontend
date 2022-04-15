@@ -2,7 +2,7 @@
   <div>
     <div class="navsidebar">
       <b-nav vertical>
-        <b-nav-item to="/">เข้าสู่ระบบ</b-nav-item>
+        <b-nav-item to="/" v-if="!isLogin">เข้าสู่ระบบ</b-nav-item>
         <b-nav-item to="/home">หนัาหลัก</b-nav-item>
         <!-- <b-nav-item to="/about">About</b-nav-item> -->
         <b-nav-item @click="booking()"> จองห้อง</b-nav-item>
@@ -16,7 +16,7 @@
       </b-nav-item> -->
         <b-nav-item to="/building">จัดการตึก</b-nav-item>
         <b-nav-item to="/instutution">จัดการหน่วยงาน</b-nav-item>
-        <b-nav-item to="/approver">จัดการผู้อนุมัติ</b-nav-item>
+        <b-nav-item to="/approver">จัดการลำดับผู้อนุมัติ</b-nav-item>
         <b-nav-item to="/petition">จัดการคำร้อง</b-nav-item>
         <b-nav-item to="/manageRoom">จัดการห้อง</b-nav-item>
         <!-- <b-nav-item @click="showFormInput = !showFormInput"
@@ -110,9 +110,15 @@ export default {
         this.$router.push({ path: '/booking' })
       }
     }
+  },
+  computed: {
+    isLogin () {
+      return this.$store.getters['auth/isLogin']
+    }
   }
 }
 </script>
+
 <style scope>
 .sub-menu {
   padding-left: 10pt;
