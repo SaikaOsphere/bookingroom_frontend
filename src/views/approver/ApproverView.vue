@@ -21,8 +21,8 @@
           <li v-for="(item,index) in items[data.index].approveres " :key="index">{{item.username}}</li>
         </ul>
       </template>
-      <template #cell(การดำเนินการ)>
-        <b-button size="sm" class="mr-2">เเก้ไข</b-button>
+      <template #cell(การดำเนินการ)="data">
+        <b-button size="sm" class="mr-2" variant="info" @click="edit(data.item)">เเก้ไข</b-button>
         <b-button size="sm" class="mr-2">ลบ</b-button>
       </template>
     </b-table>
@@ -97,7 +97,7 @@ export default {
     edit (item) {
       this.selectedItem = JSON.parse(JSON.stringify(item))
       this.$nextTick(() => {
-        this.$refs.ApproverForm.show()
+        this.$refs.approverForm.show()
       })
     },
     deleteItem (item) {
