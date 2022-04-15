@@ -18,40 +18,57 @@
           <b-form-input
             type="text"
             id="room-name"
-            placeholder="ชื่อ : ชื่อห้อง "
+            placeholder="IF,K,Q,AH"
             v-model="form.name"
+            :state="validateCode"
           >
           </b-form-input>
+          <b-form-invalid-feedback :state="validateCode">
+            ชื่อตึกต้องมีตัวอักษรมากกว่าหรือเท่ากับ 5 ตัวอักษร
+          </b-form-invalid-feedback>
         </b-form-group>
 
+        <!-- ชื่อตึก -->
         <b-form-group
           id="form-group-building-name"
-          label="ชื่อตึก "
+          label="ชื่อตึก"
           label-for="building-name"
         >
           <b-form-input
             type="text"
             id="building-name"
-            placeholder="ชื่อตึก : Informatics... "
-            v-model="form.buildingname"
+            placeholder="Faculty of Informatics"
+            v-model="form.name"
+            :state="validateName"
           >
           </b-form-input>
+          <b-form-invalid-feedback :state="validateName">
+            ชื่อตึกต้องมีตัวอักษรมากกว่าหรือเท่ากับ 5 ตัวอักษร
+          </b-form-invalid-feedback>
         </b-form-group>
+        <!-- จบชื่อตึก -->
 
+        <!-- ชั้นตึก -->
         <b-form-group
           id="form-group-building-floor"
-          label="ชั้น "
+          label="ชั้น"
           label-for="building-floor"
         >
           <b-form-input
-            type="text"
+            type="number"
             id="building-floor"
-            placeholder="ชั้น : "
+            placeholder="10 20 30"
             v-model="form.floor"
+            :state="validateFloor"
           >
           </b-form-input>
+          <b-form-invalid-feedback :state="validateFloor">
+            ชั้นต้องมีมากกว่า 1 ชั้น
+          </b-form-invalid-feedback>
         </b-form-group>
+        <!-- จบชั้นตึก -->
 
+        <!-- จำนวนคน -->
         <b-form-group
           id="form-group-room-capacity"
           label="จำนวนคนที่รองรับ "
@@ -62,10 +79,16 @@
             id="room-capacity"
             placeholder="จำนวนคนที่รองรับ : "
             v-model="form.capacity"
+            :state="validatePerson"
           >
           </b-form-input>
+          <b-form-invalid-feedback :state="validatePerson">
+            ต้องมีคนมากกว่า 2 คน
+          </b-form-invalid-feedback>
         </b-form-group>
+        <!-- จบ -->
 
+        <!-- รายการอุปกรณ์ -->
         <b-form-group
           id="form-group-room-equipment"
           label="รายการอุปกรณ์ "
@@ -76,13 +99,19 @@
             id="room-equipment"
             placeholder="รายการอุปกรณ์ : "
             v-model="form.equipment"
+            :state="validateEquipment"
           >
           </b-form-input>
+          <b-form-invalid-feedback :state="validateEquipment">
+            อุปกรณ์ต้องมีมากกว่า 1 ชิ้น
+          </b-form-invalid-feedback>
         </b-form-group>
+        <!-- จบ -->
 
+        <!-- ลำดับผู้พิจารณา -->
         <b-form-group
           id="form-group-room-approveres"
-          label="รายการอุปกรณ์ "
+          label="ลำดับผู้พิจารณา "
           label-for="room-approveres"
         >
           <b-form-input
@@ -90,9 +119,14 @@
             id="room-approveres"
             placeholder="ลำดับผู้พิจารณา : "
             v-model="form.approveres"
+            :state="validateApproveres"
           >
           </b-form-input>
+          <b-form-invalid-feedback :state="validateApproveres">
+            ต้องมีมากกว่า 1 คน หรือ เท่ากับ 1
+          </b-form-invalid-feedback>
         </b-form-group>
+        <!-- จบ -->
       </b-form>
       <b-card>
         <pre>
@@ -123,11 +157,23 @@ export default {
     }
   },
   computed: {
-    validateName () {
-      return this.form.name.length >= 3
+    validateCode () {
+      return this.form.code !== '' && this.form.code.length >= 1
     },
-    validateForm () {
-      return this.validateName
+    validateName () {
+      return this.form.name.length >= '' && this.form.name.length >= 5
+    },
+    validateFloor () {
+      return this.form.floor !== ''
+    },
+    validatePerson () {
+      return this.form.capacity !== ''
+    },
+    validateEquipment () {
+      return this.form.equipment !== ''
+    },
+    validateApproveres () {
+      return this.form.approveres !== ''
     }
   },
   methods: {
@@ -143,6 +189,8 @@ export default {
     },
     submit () {
       const room = JSON.parse(JSON.stringify(this.form))
+      room.floor = parseFloat(room.floor)
+      room.capacity = parseFloat(room.capacity)
       this.$emit('save', room)
       this.reset()
     },
@@ -176,11 +224,16 @@ export default {
     },
     handleOk (evt) {
       evt.preventDefault()
-      // if (!this.validateForm) return
+      if (!this.validateForm()) {
+        return
+      }
       this.submit()
       this.$nextTick(() => {
         this.$bvModal.hide('modal-room')
       })
+    },
+    validateForm () {
+      return this.validateName && this.validateFloor && this.validateCode && this.validatePerson && this.validateEquipment && this.validateApproveres
     }
   }
 }

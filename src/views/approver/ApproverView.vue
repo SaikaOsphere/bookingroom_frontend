@@ -19,7 +19,6 @@
         <b-button size="sm" class="mr-2">เเก้ไข</b-button>
         <b-button size="sm" class="mr-2">ลบ</b-button>
       </template>
-
     </b-table>
   </div>
 </template>
