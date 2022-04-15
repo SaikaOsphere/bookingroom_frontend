@@ -4,7 +4,8 @@ export default {
     idRoom: '',
     datetime: {},
     room: {},
-    user: {}
+    user: {},
+    form: {}
   },
   mutations: {},
   actions: {
@@ -20,9 +21,15 @@ export default {
     sendTime (context, payload) {
       this.state.datetime = payload
     },
+    sendForm (context, payload) {
+      this.state.form = payload
+      this.state.form.room = this.state.room
+      this.state.form.user = this.state.user
+    },
     reset (context) {
       this.state.idRoom = ''
       this.state.datetime = {}
+      this.state.room = {}
     }
   }
 }
