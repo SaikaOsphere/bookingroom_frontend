@@ -135,10 +135,11 @@ export default {
 
 .navsidebar {
   /* border: 1px solid black; */
-  background-color: rgba(129, 129, 129, 0.199);
   font-size: 15pt;
   padding: 50px 25px 50px 25px;
-  width: 25vh;
-  min-height: 100%;
+  width: 100%;
+  background-color: rgba(129, 129, 129, 0.199);
+  /* min-height: 100%; */
+  height: 100%;
 }
 </style>

@@ -1,47 +1,70 @@
 <template>
   <div>
-      <b-row>
-        <b-col class="text-right">
-          <roomManagementForm
-            :RoomManagement="selectedItem"
-            ref="roomManagementForm"
-            @save="saveRoomManagement"
-          ></roomManagementForm>
-        </b-col>
-      </b-row>
-      <h1>การจัดการห้อง</h1>
+    <h1>การจัดการห้อง</h1>
+
+    <b-row>
+      <b-col class="text-right">
+        <RoomForm
+          :room="selectedItem"
+          :approveres="approveres"
+          :buildings="buildings"
+          :institutions="institutions"
+          ref="roomManagementForm"
+          @save="saveRoomManagement"
+        ></RoomForm>
+      </b-col>
+    </b-row>
     <b-table :items="items" :fields="fields" striped responsive="sm">
-       <template #cell(ลำดับ)="data">
+      <template #cell(ลำดับ)="data">
         {{ data.index + 1 }}
       </template>
-      <template #cell(ดำเนินการ)>
-        <b-button size="sm" class="mr-2" >เเก้ไข</b-button>
-        <b-button size="sm" class="mr-2" >ลบ</b-button>
+
+      <template #cell(รายการอุปกรณ์)="data">
+        <ul>
+          <li v-for="(item,index) in items[data.index].equipment " :key="index">{{item.name}}</li>
+        </ul>
       </template>
 
+      <template #cell(ดำเนินการ)>
+        <b-button size="sm" class="mr-2" variant="info" @click="edit(data.item)"
+          >เเก้ไข</b-button
+        >
+        <b-button
+          size="sm"
+          class="mr-2"
+          variant="danger"
+          @click="deleteItem(data.item)"
+          >ลบ</b-button
+        >
+      </template>
     </b-table>
   </div>
 </template>
 
 <script>
 import api from '../../services/api'
-import roomManagementForm from './RoomManagementForm.vue'
+import RoomForm from './RoomManagementForm.vue'
 
 export default {
   components: {
-    roomManagementForm
+    RoomForm
   },
   data () {
     return {
       fields: [
-        { key: '_id', label: 'ลำดับ' },
+        'ลำดับ',
         { key: 'code', label: 'ชื่อห้อง' },
-        { key: 'building', label: 'ตึก' },
-        { key: 'floor', label: 'ชั้น' },
         { key: 'capacity', label: 'จำนวนคนที่รองรับ' },
-        { key: 'equipment', label: 'รายการอุปกรณ์' },
-        { key: 'approveres', label: 'ลำดับผู้พิจารณา' },
-        'ดำเนินการ'],
+        { key: 'building.name', label: 'ตึก' },
+        { key: 'floor', label: 'ชั้น' },
+        'รายการอุปกรณ์',
+        { key: 'approveres.name', label: 'ชื่อลำดับผู้พิจารณา' },
+        { key: 'institution.name', label: 'คณะ' },
+        'ดำเนินการ'
+      ],
+      approveres: [],
+      institutions: [],
+      buildings: [],
       items: [],
       selectedItem: null
     }
@@ -50,9 +73,78 @@ export default {
     getRoomManagement () {
       api.get('http://localhost:3000/rooms').then(
         function (response) {
+          console.log(response)
           this.items = response.data
         }.bind(this)
       )
+
+      // ดึงผู้พิจารณา
+      api.get('http://localhost:3000/approveres').then(
+        function (response) {
+          this.approveres = response.data
+        }.bind(this)
+      )
+
+      // ดึงคณะ
+      api.get('http://localhost:3000/approveres').then(
+        function (response) {
+          this.institutions = response.data
+        }.bind(this)
+      )
+
+      // ดึงตึก
+      api.get('http://localhost:3000/buildings').then(
+        function (response) {
+          this.buildings = response.data
+
+          // for (let i = 0; i < this.buildings.lenght; i++) {
+          //   const idInstitution = this.buildings[i].institution
+          //   for (let j = 0; j < this.institutions; j++) {
+          //     if (idInstitution === this.institutions_id) {
+
+          //     }
+          //   }
+          // }
+        }.bind(this)
+      )
+    },
+    saveRoomManagement (room) {
+      // console.log('Submit', room)
+      if (room._id === '') {
+        api
+          .post('http://localhost:3000/rooms', room)
+          .then(
+            function (response) {
+              this.getRoomManagement()
+            }.bind(this)
+          )
+          .catch(() => {})
+      } else {
+        api.put('http://localhost:3000/rooms/' + room._id, room).then(
+          function (response) {
+            this.getRoomManagement()
+          }.bind(this)
+        )
+      }
+    },
+    /* ------------------------ edit ------------------------ */
+    edit (item) {
+      this.selectedItem = JSON.parse(JSON.stringify(item.name))
+      // !- ทำ nextTick เพราะ state ยังไม่ได้ถูก load ทำให้error ต้องใช้ nextTick
+      this.$nextTick(() => {
+        this.$refs.roomForm.show()
+      })
+    } /* ----------------------- delete ----------------------- */,
+
+    deleteItem (item) {
+      // console.log(item)
+      if (confirm(`ต้องการลบตึกชื่อ ${item.name} จริงเปล่า ?`)) {
+        api.delete('http://localhost:3000/rooms/' + item._id).then(
+          function (response) {
+            this.getRoomManagement()
+          }.bind(this)
+        )
+      }
     }
   },
   mounted () {
