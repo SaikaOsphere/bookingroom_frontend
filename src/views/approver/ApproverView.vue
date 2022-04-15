@@ -53,19 +53,40 @@ export default {
       )
     },
     saveApprover (approver) {
-      console.log('Submit', approver)
+      // console.log('Submit', institution)
       if (approver._id === '') {
         api.post('http://localhost:3000/approvers', approver).then(
           function (response) {
-            this.getBuildings()
+            this.getApprovers()
           }.bind(this)
         ).catch(() => {
         })
+      } else {
+        api.put('http://localhost:3000/approvers/' + approver._id, approver).then(
+          function (response) {
+            this.getApprovers()
+          }.bind(this))
+      }
+    },
+    edit (item) {
+      this.selectedItem = JSON.parse(JSON.stringify(item))
+      this.$nextTick(() => {
+        this.$refs.ApproverForm.show()
+      })
+    },
+    deleteItem (item) {
+      // console.log(item)
+      if (confirm(`ต้องการลบคณะชื่อ ${item.name} จริงเปล่า ?`)) {
+        api.delete('http://localhost:3000/approvers/' + item._id).then(
+          function (response) {
+            this.getApprovers()
+          }.bind(this)
+        )
       }
     }
   },
   mounted () {
-    this.getBuildings()
+    this.getApprovers()
   }
 }
 </script>
