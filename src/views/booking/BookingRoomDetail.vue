@@ -178,9 +178,10 @@ export default {
     getBuilding () {
       axios.get('http://localhost:3000/rooms/' + this.$store.state.idRoom).then(
         function (response) {
-          this.detailRoom.capacity = response.data[0].capacity
-          this.detailRoom.floor = response.data[0].floor
-          this.detailRoom.building = response.data[0].building
+          console.log(response)
+          this.detailRoom.capacity = response.data.capacity
+          this.detailRoom.floor = response.data.floor
+          this.detailRoom.building = response.data.building
         }.bind(this)
       )
     },

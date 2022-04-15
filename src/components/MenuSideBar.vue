@@ -5,9 +5,7 @@
         <b-nav-item to="/">เข้าสู่ระบบ</b-nav-item>
         <b-nav-item to="/home">หนัาหลัก</b-nav-item>
         <!-- <b-nav-item to="/about">About</b-nav-item> -->
-        <b-nav-item to="/booking">
-          จองห้อง</b-nav-item
-        >
+        <b-nav-item @click="booking()"> จองห้อง</b-nav-item>
         <!-- <b-icon
           :icon="showGroupBooking ? 'caret-down-fill' : 'caret-right-fill'"
         >
@@ -103,6 +101,14 @@ export default {
       showFormInput: false,
       showForm: false,
       showCRUDExample: false
+    }
+  },
+  methods: {
+    booking () {
+      this.$store.dispatch('bookingRoom/reset')
+      if (this.$route.name !== 'booking') {
+        this.$router.push({ path: '/booking' })
+      }
     }
   }
 }
