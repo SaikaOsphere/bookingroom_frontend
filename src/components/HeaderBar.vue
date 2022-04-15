@@ -30,30 +30,43 @@
           >
         </b-nav-form>
 
-        <b-nav-item-dropdown right>
+        <b-nav-item-dropdown right v-if="isLogin">
           <!-- Using 'button-content' slot -->
           <template #button-content>
-            <em>{{ currentUser }}</em>
+            <em>{{ getCurrentUser }} </em>
           </template>
           <b-dropdown-item href="#">Profile</b-dropdown-item>
-          <b-dropdown-item href="#">Sign Out</b-dropdown-item>
+          <b-dropdown-item @click="logout()">Sign Out</b-dropdown-item>
         </b-nav-item-dropdown>
       </b-navbar-nav>
     </b-navbar>
   </div>
 </template>
 <script>
+import router from '@/router'
 export default {
   data () {
     return {
-      userName: 'Dev',
-      userRole: 'Admin',
-      currentUser: '',
+
       logo: { width: 60, height: 60 }
     }
   },
+  methods: {
+    logout () {
+      this.$store.dispatch('auth/logout')
+      this.currentUser = ''
+      router.push('/')
+    }
+  },
   mounted () {
-    this.currentUser = this.userName + '\n' + this.userRole
+  },
+  computed: {
+    isLogin () {
+      return this.$store.getters['auth/isLogin']
+    },
+    getCurrentUser () {
+      return this.$store.state.auth.user.username
+    }
   }
 }
 </script>

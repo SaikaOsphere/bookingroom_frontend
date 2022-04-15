@@ -44,5 +44,6 @@ export default {
     isLogin (state, getters) {
       return state.user != null
     }
+
   }
 }

@@ -2,7 +2,7 @@
   <div>
     <div class="navsidebar">
       <b-nav vertical>
-        <b-nav-item to="/">เข้าสู่ระบบ</b-nav-item>
+        <b-nav-item to="/" v-if="!isLogin">เข้าสู่ระบบ</b-nav-item>
         <b-nav-item to="/home">หนัาหลัก</b-nav-item>
         <!-- <b-nav-item to="/about">About</b-nav-item> -->
         <b-nav-item to="/booking">
@@ -103,6 +103,11 @@ export default {
       showFormInput: false,
       showForm: false,
       showCRUDExample: false
+    }
+  },
+  computed: {
+    isLogin () {
+      return this.$store.getters['auth/isLogin']
     }
   }
 }
