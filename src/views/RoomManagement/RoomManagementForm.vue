@@ -1,6 +1,5 @@
 <template>
   <div>
-
     <b-button @click="addNew" variant="primary" class="ml-5"
       >เพิ่มห้อง</b-button
     >
