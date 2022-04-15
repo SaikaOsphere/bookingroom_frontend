@@ -15,7 +15,7 @@
         {{ data.index + 1 }}
       </template>
       <template #cell(การดำเนินการ)>
-        <b-button size="sm" class="mr-2" >เเก้ไข</b-button>
+        <b-button size="sm" class="mr-2"  >เเก้ไข</b-button>
         <b-button size="sm" class="mr-2" >ลบ</b-button>
       </template>
     </b-table>
