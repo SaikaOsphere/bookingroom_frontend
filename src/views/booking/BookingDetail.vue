@@ -67,20 +67,65 @@
       </b-col>
     </b-row> -->
     <b-row class="data">
-      <b-col
+      <b-col col="12"
         ><b-button variant="danger" to="/bookingRoomDetail">ยกเลิก</b-button>
-        <!-- <confirm-dialog
-          :product="selectedItem"
-          ref="productForm"
-          @save="saveProduct"
-        ></confirm-dialog> -->
-        <confirm-dialog></confirm-dialog>
+
+        <b-button
+          variant="primary"
+          id="show-btn"
+          @click="$bvModal.show('modal-confirmbooking')"
+          >ยืนยัน</b-button
+        >
+
+        <b-modal id="modal-confirmbooking" @ok="saveBooking">
+          <template #modal-title> ยืนยันการจองห้อง </template>
+          <b-row>
+            <b-col class="data">
+              <b-row>ชื่อ-นามสกุล</b-row>
+              <b-row>
+                <b-form-input v-model="bookingDetail.name" disabled>
+                </b-form-input>
+              </b-row>
+            </b-col>
+          </b-row>
+          <b-row>
+            <b-col class="data">
+              <b-row>ห้องที่จอง</b-row>
+              <b-row>
+                <b-form-input v-model="bookingDetail.room" disabled>
+                </b-form-input>
+              </b-row>
+            </b-col>
+            <b-col class="data">
+              <b-row>วันที่จอง</b-row>
+              <b-row>
+                <b-form-input v-model="bookingDetail.date" disabled>
+                </b-form-input>
+              </b-row>
+            </b-col>
+          </b-row>
+          <b-row>
+            <b-col class="data">
+              <b-row>เวลาเริ่ม</b-row>
+              <b-row>
+                <b-form-input v-model="bookingDetail.timeStart" disabled>
+                </b-form-input>
+              </b-row>
+            </b-col>
+            <b-col class="data">
+              <b-row>เวลาสิ้นสุด</b-row>
+              <b-row>
+                <b-form-input v-model="bookingDetail.timeEnd" disabled>
+                </b-form-input>
+              </b-row>
+            </b-col>
+          </b-row>
+        </b-modal>
       </b-col>
     </b-row>
   </div>
 </template>
 <script>
-import confirmDialog from '@/components/BookingConfirmDialog.vue'
 import api from '@/services/api'
 export default {
   data () {
@@ -101,9 +146,7 @@ export default {
       }
     }
   },
-  components: {
-    confirmDialog
-  },
+  components: {},
   mounted () {
     if (!this.isLogin) {
       this.$router.push({ path: '/' })
@@ -133,6 +176,21 @@ export default {
     }
   },
   methods: {
+    saveBooking (evt) {
+      evt.preventDefault()
+
+      console.log(this.formSend)
+
+      api.post('http://localhost:3000/bookings', this.formSend).then(
+        function (response) {
+          console.log(response)
+        }
+      )
+      this.$router.push({ path: '/home' })
+      this.$nextTick(() => {
+        this.$bvModal.hide('modal-confirmbooking')
+      })
+    },
     sendToDB () {
       this.formSend.datetime_reserve = new Date(Date.now())
       this.formSend.datetime_start = new Date(
@@ -148,6 +206,7 @@ export default {
         function (response) {
           this.bookingDetail.name =
             response.data.name + ' ' + response.data.surname
+          this.formSend.user = response.data
           // console.log(response.data)
           this.$store.dispatch('bookingRoom/sendDataUser', response.data)
         }.bind(this)
@@ -157,6 +216,7 @@ export default {
       api.get('http://localhost:3000/rooms/' + this.$store.state.idRoom).then(
         function (response) {
           this.bookingDetail.room = response.data.code
+          this.formSend.room = response.data
           // console.log(response.data)
           this.$store.dispatch('bookingRoom/sendDataRoom', response.data)
         }.bind(this)
@@ -176,6 +236,9 @@ export default {
     },
     getCurrentUser () {
       return this.$store.state.auth.user
+    },
+    getData () {
+      return this.$store.state.form
     }
   }
 }

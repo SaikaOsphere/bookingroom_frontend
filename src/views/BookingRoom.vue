@@ -123,6 +123,7 @@ export default {
         'การดำเนินการ'
       ],
       rooms: [],
+      allRooms: 0,
       filtered: {
         building: '',
         floor: '',
@@ -174,6 +175,7 @@ export default {
         function (response) {
           this.rooms = response.data
           console.log(this.rooms)
+          this.allRooms = this.rooms.length
           this.getFloor(response)
           for (let i = 0; i < this.rooms.length; i++) {
             api
@@ -227,11 +229,58 @@ export default {
         this.filtered.coderoom === ''
       ) {
         this.getฺRooms()
-        this.getBuildings()
         this.getEquipment()
+      } else {
+        console.log(this.filtered.size)
+        if (this.rooms.length < this.allRooms) {
+          this.getฺRooms()
+          this.getEquipment()
+        }
+        if (this.filtered.building !== '') {
+          for (let i = 0; i < this.rooms.length; i++) {
+            if (this.filtered.building !== this.rooms[i].building) {
+              this.rooms.splice(i, 1)
+              i--
+            }
+          }
+        }
+        if (this.filtered.floor !== '') {
+          for (let i = 0; i < this.rooms.length; i++) {
+            if (this.filtered.floor !== this.rooms[i].floor) {
+              this.rooms.splice(i, 1)
+              i--
+            }
+          }
+        }
+        if (this.filtered.size !== '') {
+          for (let i = 0; i < this.rooms.length; i++) {
+            if (this.filtered.size === 1) {
+              if (this.rooms[i].capacity > 6) {
+                this.rooms.splice(i, 1)
+                i--
+              }
+            } else if (this.filtered.size === 2) {
+              if (this.rooms[i].capacity < 7 || this.rooms[i].capacity > 15) {
+                this.rooms.splice(i, 1)
+                i--
+              }
+            } else if (this.filtered.size === 3) {
+              if (this.rooms[i].capacity < 15) {
+                this.rooms.splice(i, 1)
+                i--
+              }
+            }
+          }
+        }
+        if (this.filtered.coderoom !== '') {
+          for (let i = 0; i < this.rooms.length; i++) {
+            if (this.rooms[i].code !== this.filtered.coderoom) {
+              this.rooms.splice(i, 1)
+              i--
+            }
+          }
+        }
       }
-      console.log(this.filtered)
-      console.log(this.rooms)
     },
     sending (item) {
       this.$store.dispatch('bookingRoom/sendRoom', item._id)

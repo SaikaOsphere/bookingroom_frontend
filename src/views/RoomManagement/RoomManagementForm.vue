@@ -23,10 +23,10 @@
             id="room-name"
             placeholder="IF,K,Q,AH"
             v-model="form.name"
-            :state="validateCode"
+
           >
           </b-form-input>
-          <b-form-invalid-feedback :state="validateCode">
+          <b-form-invalid-feedback >
             ชื่อตึกต้องมีตัวอักษรมากกว่าหรือเท่ากับ 5 ตัวอักษร
           </b-form-invalid-feedback>
         </b-form-group>
@@ -173,12 +173,14 @@
 </template>
 <script>
 export default {
-  props: {
-    room: Object,
-    buildings: [Object],
-    approveres: [Object],
-    institutions: [Object]
-  },
+  props: [
+    {
+      room: Object,
+      buildings: [Object],
+      approveres: [Object],
+      institutions: [Object]
+    }
+  ],
   data () {
     return {
       form: {
@@ -312,7 +314,7 @@ export default {
         this.validateName &&
         this.validateInstitution &&
         this.validateFloor &&
-        this.validateCode &&
+
         this.validatePerson &&
         this.validateEquipment &&
         this.validateApproveres
