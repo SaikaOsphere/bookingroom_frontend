@@ -90,15 +90,6 @@ export default {
     }
   },
   computed: {
-    validateName () {
-      return this.form.name.length >= 3
-    },
-    validatePrice () {
-      return this.form.price !== '' && this.form.price >= 0
-    },
-    validateForm () {
-      return this.validateName && this.validatePrice
-    }
   },
   methods: {
     addNew () {

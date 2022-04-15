@@ -180,6 +180,21 @@ export default {
       }
     },
     getBuilding () {
+      axios.get('http://localhost:3000/buildings/').then(
+        function (response) {
+          console.log('data')
+          console.log(this.detailRoom.building)
+          console.log(response.data)
+          for (let i = 0; i < response.data.length; i++) {
+            if (this.detailRoom.building === response.data[i]._id) {
+              this.detailRoom.building = response.data[i].name
+              return
+            }
+          }
+        }.bind(this)
+      )
+    },
+    getRoom () {
       axios.get('http://localhost:3000/rooms/' + this.$store.state.idRoom).then(
         function (response) {
           console.log(response)
@@ -262,6 +277,7 @@ export default {
       if (this.$store.state.idRoom === undefined) {
         this.$router.push({ path: '/booking' })
       } else {
+        this.getRoom()
         this.getBuilding()
       }
     }
