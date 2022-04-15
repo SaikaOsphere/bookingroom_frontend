@@ -1,6 +1,6 @@
 <template>
   <div>
-    <b-navbar class="bar">
+    <b-navbar class="bar pl-5 pr-5" >
       <!-- <b-nav-item @click="showCRUDExample = !showCRUDExample"
         >CRUD Example
         <b-icon
@@ -19,7 +19,7 @@
       >
 
       <b-navbar-nav class="ml-auto">
-        <b-nav-form>
+        <!-- <b-nav-form>
           <b-form-input
             size="sm"
             class="mr-sm-2"
@@ -28,14 +28,14 @@
           <b-button size="sm" class="my-2 my-sm-0" type="submit"
             >Search</b-button
           >
-        </b-nav-form>
-
-        <b-nav-item-dropdown right v-if="isLogin">
+        </b-nav-form> -->
+        <b-avatar size="72px" v-if="isLogin"></b-avatar>
+        <b-nav-item-dropdown right v-if="isLogin" class="mt-3 ">
           <!-- Using 'button-content' slot -->
-          <template #button-content>
-            <em>{{ getCurrentUser }} </em>
+          <template #button-content >
+            <em class="ml-2">{{ getCurrentUser }} </em>
           </template>
-          <b-dropdown-item href="#">Profile</b-dropdown-item>
+          <b-dropdown-item href="#" >Profile</b-dropdown-item>
           <b-dropdown-item @click="logout()">Sign Out</b-dropdown-item>
         </b-nav-item-dropdown>
       </b-navbar-nav>
@@ -47,7 +47,6 @@ import router from '@/router'
 export default {
   data () {
     return {
-
       logo: { width: 60, height: 60 }
     }
   },
@@ -58,8 +57,7 @@ export default {
       router.push('/')
     }
   },
-  mounted () {
-  },
+  mounted () {},
   computed: {
     isLogin () {
       return this.$store.getters['auth/isLogin']

@@ -1,6 +1,7 @@
 <template>
   <div>
-    <b-button @click="addNew" variant="primary">เพิ่ม</b-button>
+         <b-button @click="addNew" variant="primary">เพิ่ม</b-button>
+
     <b-modal
       id="modal-building"
       ref="modalBuilding"
@@ -41,10 +42,10 @@
             id="building-name"
             placeholder="Faculty of Informatics"
             v-model="form.name"
-            :state="validateCode"
+            :state="validateName"
           >
           </b-form-input>
-          <b-form-invalid-feedback :state="validateCode">
+          <b-form-invalid-feedback :state="validateName">
             ชื่อตึกต้องมีตัวอักษรมากกว่าหรือเท่ากับ 5 ตัวอักษร
           </b-form-invalid-feedback>
         </b-form-group>

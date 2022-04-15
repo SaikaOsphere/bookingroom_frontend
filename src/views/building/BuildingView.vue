@@ -1,22 +1,32 @@
 <template>
   <div>
+    <h1>จัดการตึก</h1>
+
     <b-row>
-        <b-col class="text-right">
-          <BuildingForm
-            :building="selectedItem"
-            ref="buildingForm"
-            @save="saveBuilding"
-          ></BuildingForm>
-        </b-col>
-      </b-row>
-    <h1>ตึก</h1>
+      <b-col class="text-right ">
+        <BuildingForm
+          :building="selectedItem"
+          ref="buildingForm"
+          @save="saveBuilding"
+        ></BuildingForm>
+      </b-col>
+    </b-row>
+
     <b-table :items="items" :fields="fields" striped responsive="sm">
       <template #cell(ลำดับ)="data">
         {{ data.index + 1 }}
       </template>
       <template #cell(การดำเนินการ)="data">
-        <b-button size="sm" class="mr-2"  variant="info" @click = "edit(data.item)">เเก้ไข</b-button>
-        <b-button size="sm" class="mr-2" variant="danger" @click = "deleteItem(data.item)">ลบ</b-button>
+        <b-button size="sm" class="mr-2" variant="info" @click="edit(data.item)"
+          >เเก้ไข</b-button
+        >
+        <b-button
+          size="sm"
+          class="mr-2"
+          variant="danger"
+          @click="deleteItem(data.item)"
+          >ลบ</b-button
+        >
       </template>
     </b-table>
   </div>
@@ -53,17 +63,22 @@ export default {
     saveBuilding (building) {
       // console.log('Submit', building)
       if (building._id === '') {
-        api.post('http://localhost:3000/buildings', building).then(
-          function (response) {
-            this.getBuildings()
-          }.bind(this)
-        ).catch(() => {
-        })
+        api
+          .post('http://localhost:3000/buildings', building)
+          .then(
+            function (response) {
+              this.getBuildings()
+            }.bind(this)
+          )
+          .catch(() => {})
       } else {
-        api.put('http://localhost:3000/buildings/' + building._id, building).then(
-          function (response) {
-            this.getBuildings()
-          }.bind(this))
+        api
+          .put('http://localhost:3000/buildings/' + building._id, building)
+          .then(
+            function (response) {
+              this.getBuildings()
+            }.bind(this)
+          )
       }
     },
     /* ------------------------ edit ------------------------ */
@@ -73,7 +88,7 @@ export default {
       this.$nextTick(() => {
         this.$refs.buildingForm.show()
       })
-    }, /* ----------------------- delete ----------------------- */
+    } /* ----------------------- delete ----------------------- */,
 
     deleteItem (item) {
       // console.log(item)

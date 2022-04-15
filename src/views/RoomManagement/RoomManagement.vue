@@ -1,35 +1,43 @@
 <template>
   <div>
-      <b-row>
-        <b-col class="text-right">
-          <RoomManagementForm
-            :room="selectedItem"
-            ref="roomManagementForm"
-            @save="saveRoomManagement"
-          ></RoomManagementForm>
-        </b-col>
-      </b-row>
-      <h1>การจัดการห้อง</h1>
+    <h1>การจัดการห้อง</h1>
+
+    <b-row>
+      <b-col class="text-right">
+        <RoomForm
+          :room="selectedItem"
+          ref="roomManagementForm"
+          @save="saveRoomManagement"
+        ></RoomForm>
+      </b-col>
+    </b-row>
     <b-table :items="items" :fields="fields" striped responsive="sm">
-       <template #cell(ลำดับ)="data">
+      <template #cell(ลำดับ)="data">
         {{ data.index + 1 }}
       </template>
       <template #cell(ดำเนินการ)>
-        <b-button size="sm" class="mr-2" variant="info" @click = "edit(data.item)">เเก้ไข</b-button>
-        <b-button size="sm" class="mr-2" variant="danger" @click = "deleteItem(data.item)">ลบ</b-button>
+        <b-button size="sm" class="mr-2" variant="info" @click="edit(data.item)"
+          >เเก้ไข</b-button
+        >
+        <b-button
+          size="sm"
+          class="mr-2"
+          variant="danger"
+          @click="deleteItem(data.item)"
+          >ลบ</b-button
+        >
       </template>
-
     </b-table>
   </div>
 </template>
 
 <script>
 import api from '../../services/api'
-import RoomManagementForm from './RoomManagementForm.vue'
+import RoomForm from './RoomManagementForm.vue'
 
 export default {
   components: {
-    RoomManagementForm
+    RoomForm
   },
   data () {
     return {
@@ -41,7 +49,8 @@ export default {
         { key: 'floor', label: 'ชั้น' },
         { key: 'equipment', label: 'รายการอุปกรณ์' },
         { key: 'approveres', label: 'ลำดับผู้พิจารณา' },
-        'ดำเนินการ'],
+        'ดำเนินการ'
+      ],
       items: [],
       selectedItem: null
     }
@@ -57,17 +66,20 @@ export default {
     saveRoomManagement (room) {
       // console.log('Submit', room)
       if (room._id === '') {
-        api.post('http://localhost:3000/rooms', room).then(
-          function (response) {
-            this.getRoomManagement()
-          }.bind(this)
-        ).catch(() => {
-        })
+        api
+          .post('http://localhost:3000/rooms', room)
+          .then(
+            function (response) {
+              this.getRoomManagement()
+            }.bind(this)
+          )
+          .catch(() => {})
       } else {
         api.put('http://localhost:3000/rooms/' + room._id, room).then(
           function (response) {
             this.getRoomManagement()
-          }.bind(this))
+          }.bind(this)
+        )
       }
     },
     /* ------------------------ edit ------------------------ */
@@ -77,7 +89,7 @@ export default {
       this.$nextTick(() => {
         this.$refs.roomForm.show()
       })
-    }, /* ----------------------- delete ----------------------- */
+    } /* ----------------------- delete ----------------------- */,
 
     deleteItem (item) {
       // console.log(item)

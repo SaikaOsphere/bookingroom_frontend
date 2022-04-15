@@ -1,6 +1,9 @@
 <template>
   <div>
-    <b-button @click="addNew" variant="primary">เพิ่มห้อง</b-button>
+
+    <b-button @click="addNew" variant="primary" class="ml-5"
+      >เพิ่มห้อง</b-button
+    >
     <b-modal
       id="modal-room"
       ref="modalRoom"
@@ -157,11 +160,8 @@ export default {
     }
   },
   computed: {
-    validateCode () {
-      return this.form.code !== '' && this.form.code.length >= 1
-    },
     validateName () {
-      return this.form.name.length >= '' && this.form.name.length >= 5
+      return this.form.name !== '' && this.form.name.length >= 5
     },
     validateFloor () {
       return this.form.floor !== ''
@@ -233,7 +233,14 @@ export default {
       })
     },
     validateForm () {
-      return this.validateName && this.validateFloor && this.validateCode && this.validatePerson && this.validateEquipment && this.validateApproveres
+      return (
+        this.validateName &&
+        this.validateFloor &&
+        this.validateCode &&
+        this.validatePerson &&
+        this.validateEquipment &&
+        this.validateApproveres
+      )
     }
   }
 }
