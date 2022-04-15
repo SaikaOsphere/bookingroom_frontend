@@ -23,11 +23,11 @@
             id="room-name"
             placeholder="IF,K,Q,AH"
             v-model="form.name"
-
+            :state="validateName"
           >
           </b-form-input>
-          <b-form-invalid-feedback >
-            ชื่อตึกต้องมีตัวอักษรมากกว่าหรือเท่ากับ 5 ตัวอักษร
+          <b-form-invalid-feedback :state="validateName">
+            ชื่อห้องต้องมีตัวอักษรมากกว่าหรือเท่ากับ 5 ตัวอักษร
           </b-form-invalid-feedback>
         </b-form-group>
 
@@ -43,10 +43,10 @@
             placeholder="Faculty of Informatics"
             v-model="form.nameInstitution"
             :options="nameInstitutions"
-            :state="validateNameInstitution"
+            :state="validateInstitution"
           >
           </b-form-select>
-          <b-form-invalid-feedback :state="validateNameInstitution">
+          <b-form-invalid-feedback :state="validateInstitution">
             ต้องเลือก 1 คณะ
           </b-form-invalid-feedback>
         </b-form-group>
@@ -64,10 +64,10 @@
             placeholder="Faculty of Informatics"
             v-model="form.buildingname"
             :options="buildingnames"
-            :state="validateName"
+            :state="validatebuilding"
           >
           </b-form-select>
-          <b-form-invalid-feedback :state="validateName">
+          <b-form-invalid-feedback :state="validatebuilding">
             ต้องเลือก 1 ตึก
           </b-form-invalid-feedback>
         </b-form-group>
@@ -115,27 +115,33 @@
         <!-- จบ -->
 
         <!-- รายการอุปกรณ์ -->
-        <b-form-group
+        <b-form-group label="รายการอุปกรณ์" v-slot="{ ariaDescribedby }">
+          <b-form-checkbox-group
+            id="checkbox-group-1"
+            v-model="form.equipment"
+            :options="equipments"
+            :aria-describedby="ariaDescribedby"
+          ></b-form-checkbox-group>
+        </b-form-group>
+        <!-- <b-form-group
           id="form-group-room-equipment"
           label="รายการอุปกรณ์ "
           label-for="room-equipment"
-          v-slot="{ validateEquipment }"
+          v-slot="{ ariaDescribedby }"
         >
           <b-form-checkbox-group
             id="room-equipment"
             placeholder="รายการอุปกรณ์ : "
             v-model="form.equipment"
-            :state="validateEquipment"
-          >
-          <b-form-checkbox value="me"> TV</b-form-checkbox>
-          <b-form-checkbox value="that"> Projecter</b-form-checkbox>
-          <b-form-checkbox value="me"> Microphone</b-form-checkbox>
-          <b-form-checkbox value="that"> Presentation</b-form-checkbox>
-          </b-form-checkbox-group>
-          <b-form-invalid-feedback :state="validateEquipment">
-           เลือกอุปกรณ์ที่ต้องการ
-          </b-form-invalid-feedback>
-        </b-form-group>
+            :options="equipments"
+            :aria-describedby="ariaDescribedby"
+          > -->
+          <!-- <b-form-checkbox value="TV"> TV</b-form-checkbox>
+          <b-form-checkbox value="Projecter"> Projecter</b-form-checkbox>
+          <b-form-checkbox value="Microphone"> Microphone</b-form-checkbox>
+          <b-form-checkbox value="Presentation"> Presentation</b-form-checkbox> -->
+          <!-- </b-form-checkbox-group>
+        </b-form-group> -->
         <!-- จบ -->
 
         <!-- ลำดับผู้พิจารณา -->
@@ -162,9 +168,9 @@
       <b-card>
         <pre>
         {{ form }}
-        {{buildings}}
-        {{approveres}}
-        {{institutions}}
+        {{ buildings }}
+        {{ approveres }}
+        {{ institutions }}
       </pre
         >
       </b-card>
@@ -173,14 +179,12 @@
 </template>
 <script>
 export default {
-  props: [
-    {
-      room: Object,
-      buildings: [Object],
-      approveres: [Object],
-      institutions: [Object]
-    }
-  ],
+  props: {
+    room: Object,
+    buildings: Object,
+    approveres: Object,
+    institutions: Object
+  },
   data () {
     return {
       form: {
@@ -205,7 +209,8 @@ export default {
         'Faculty of Informatics',
         'Faculty of Business Administration',
         'Faculty of Science',
-        'Faculty of Health Sciences'
+        'Faculty of Health Sciences',
+        'Tamrong Buasri Building'
       ],
       floors: [
         { text: 'Select One', value: null },
@@ -222,30 +227,35 @@ export default {
       ],
       approver: [
         { text: 'Select One', value: null },
-        'Faculty of Informatics',
-        'Computer Center',
-        'Department of Mathematics',
-        'International College',
-        'Tamrong Buasri Building'
+        'approvers1',
+        'approvers2',
+        'approvers3',
+        'approvers4'
+      ],
+      equipments: [
+        { text: 'Television', value: 'television' },
+        { text: 'Projecter', value: 'projecter' },
+        { text: 'Microphone', value: 'microphone' },
+        { text: 'Presentation', value: 'presentation' }
       ],
       isAddNew: false
     }
   },
   computed: {
     validateName () {
-      return this.form.name !== '' && this.form.name.length >= 5
+      return this.form.name !== ''
     },
     validateInstitution () {
       return this.form.nameInstitution !== ''
+    },
+    validatebuilding () {
+      return this.form.buildingname !== ''
     },
     validateFloor () {
       return this.form.floor !== ''
     },
     validatePerson () {
       return this.form.capacity !== ''
-    },
-    validateEquipment () {
-      return this.form.equipment !== ''
     },
     validateApproveres () {
       return this.form.approveres !== ''
@@ -277,7 +287,7 @@ export default {
         buildingname: '',
         floor: '',
         capacity: '',
-        equipment: '',
+        equipment: [],
         approveres: ''
       }
     },
@@ -288,12 +298,12 @@ export default {
         // Edit
         this.form._id = this.room._id
         this.form.name = this.room.name
-        this.form.nameInstitution = []
-        this.form.buildingname = []
+        this.form.nameInstitution = this.room.nameInstitution
+        this.form.buildingname = this.room.buildingname
         this.form.floor = this.room.floor
         this.form.capacity = this.room.capacity
-        this.form.equipment = null
-        this.form.approveres = []
+        this.form.equipment = this.room.equipment
+        this.form.approveres = this.room.approveres
       }
     },
     resetModal (evt) {
@@ -313,10 +323,9 @@ export default {
       return (
         this.validateName &&
         this.validateInstitution &&
+        this.validatebuilding &&
         this.validateFloor &&
-
         this.validatePerson &&
-        this.validateEquipment &&
         this.validateApproveres
       )
     }
