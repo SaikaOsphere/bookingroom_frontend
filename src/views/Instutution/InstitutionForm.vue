@@ -27,23 +27,6 @@
             ชื่อต้องมากกว่าหรือเท่ากับ 5 ตัวอักษร
           </b-form-invalid-feedback>
         </b-form-group>
-        <b-form-group
-          id="form-group-institution-rooms"
-          label="ห้อง"
-          label-for="institution-rooms"
-        >
-          <b-form-input
-            type="text"
-            id="institution-rooms"
-            placeholder="xx"
-            v-model="form.rooms"
-             :state="validateRooms"
-          >
-          </b-form-input>
-           <b-form-invalid-feedback :state="validateRooms">
-            ห้องต้องมีความยาวมากกว่า 5 ตัวอักษร
-          </b-form-invalid-feedback>
-        </b-form-group>
       </b-form>
       <b-card>
         <pre>
@@ -63,8 +46,7 @@ export default {
     return {
       form: {
         _id: '',
-        name: '',
-        rooms: []
+        name: ''
       },
       isAddNew: false
     }
@@ -72,9 +54,6 @@ export default {
   computed: {
     validateName () {
       return this.form.name !== '' && this.form.name.length >= 5
-    },
-    validateRooms () {
-      return this.form.rooms !== '' && this.form.rooms.length >= 5
     }
   },
   methods: {
@@ -96,8 +75,7 @@ export default {
     reset () {
       this.form = {
         _id: '',
-        name: '',
-        rooms: ''
+        name: ''
       }
     },
     showModal () {
@@ -107,7 +85,6 @@ export default {
         // Edit
         this.form._id = this.institution._id
         this.form.name = this.institution.name
-        this.form.rooms = this.institution.rooms
       }
     },
     resetModal (evt) {
@@ -124,7 +101,7 @@ export default {
       })
     },
     validateForm () {
-      return this.validateName && this.validateRooms
+      return this.validateName
     }
   }
 }

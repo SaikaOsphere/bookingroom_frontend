@@ -80,8 +80,6 @@ import api from '@/services/api'
 export default {
   data () {
     return {
-      test3: [],
-      test: '',
       filterBuilding: [{ text: 'กรุณาเลือก', value: '' }],
       filterFloor: [{ text: 'กรุณาเลือก', value: '' }],
       filterType: [
@@ -99,6 +97,10 @@ export default {
       fields: [
         'ลำดับ',
         {
+          key: 'code',
+          label: 'รหัสห้อง'
+        },
+        {
           key: 'capacity',
           label: 'จำนวนคนที่รองรับ'
         },
@@ -114,14 +116,10 @@ export default {
           key: 'equipment',
           label: 'อุปกรณ์'
         },
-        {
-          key: 'approveres',
-          label: 'การอนุมัติ'
-        },
-        {
-          key: '',
-          label: 'รายละเอียด'
-        },
+        // {
+        //   key: 'institution',
+        //   label: 'หน่วยงาน'
+        // },
         'การดำเนินการ'
       ],
       rooms: [],
@@ -131,10 +129,37 @@ export default {
         type: '',
         size: '',
         coderoom: ''
-      }
+      },
+      equip: []
     }
   },
   methods: {
+    getEquipment () {
+      api.get('http://localhost:3000/equipments').then(
+        function (response) {
+          this.equip = response.data
+          console.log(response.data)
+
+          for (let i = 0; i < this.rooms.length; i++) {
+            let temp = ''
+            for (let j = 0; j < this.rooms[i].equipment.length; j++) {
+              for (let k = 0; k < this.equip.length; k++) {
+                if (this.rooms[i].equipment[j] === this.equip[k]._id) {
+                  temp += this.equip[k].name
+                  if (k < this.equip.length - 1) {
+                    temp += ', '
+                  }
+                }
+              }
+            }
+            // console.log(temp)
+            this.rooms[i].equipment = temp
+          }
+
+          console.log(this.rooms)
+        }.bind(this)
+      )
+    },
     getฺBuildingName (id) {
       api
         .get('http://localhost:3000/buildings/' + id)
@@ -147,44 +172,20 @@ export default {
     getฺRooms () {
       api.get('http://localhost:3000/rooms').then(
         function (response) {
-          // console.log(response.data)
           this.rooms = response.data
-          // this.rooms[0].building = '111'
+          console.log(this.rooms)
           this.getFloor(response)
           for (let i = 0; i < this.rooms.length; i++) {
             api
               .get('http://localhost:3000/buildings/' + this.rooms[i].building)
               .then(
                 function (response) {
-                  // console.log(response.data.name)
                   this.rooms[i].building = response.data.name
                 }.bind(this)
               )
           }
         }.bind(this)
       )
-      for (let i = 0; i < this.rooms.length; i++) {
-        // const temp = []
-        for (let j = 0; j < this.rooms[i].equipment.length; j++) {
-          api
-            .get(
-              'http://localhost:3000/equipments/' + this.rooms[i].equipment[j]
-            )
-            .then(function (response) {
-              // console.log(response.data.name)
-              this.test3.push(response.data.name)
-              console.log(this.test3)
-              // this.rooms[i].equipment.pop()
-              // this.rooms[i].equipment.push(response.data.name)
-              // this.rooms[i].equipment[j] = 'eoeo'
-            })
-        }
-        // console.log(i)
-        // console.log(temp)
-        // this.rooms[i].equipment = []
-        this.rooms[i].equipment = this.test3
-        // console.log(this.rooms[i].equipment)
-      }
     },
     getFloor (response) {
       for (let i = 0; i < response.data.length; i++) {
@@ -218,28 +219,37 @@ export default {
       )
     },
     filter () {
-      console.log('Sended')
+      if (
+        this.filtered.building === '' &&
+        this.filtered.floor === '' &&
+        this.filtered.type === '' &&
+        this.filtered.size === '' &&
+        this.filtered.coderoom === ''
+      ) {
+        this.getฺRooms()
+        this.getBuildings()
+        this.getEquipment()
+      }
       console.log(this.filtered)
       console.log(this.rooms)
     },
     sending (item) {
-      console.log(item._id)
-      // this.$store.commit('setItem', item._id)
       this.$store.dispatch('bookingRoom/sendRoom', item._id)
-      // console.log('hello' + this.$store.state.item)
       this.$router.push({ path: '/bookingRoomDetail' })
-    },
-    testEq () {}
+    }
   },
   mounted () {
-    this.getฺRooms()
-    this.testEq()
-    this.getBuildings()
+    if (!this.isLogin) {
+      this.$router.push({ path: '/' })
+    } else {
+      this.getฺRooms()
+      this.getBuildings()
+      this.getEquipment()
+    }
   },
   computed: {
-    test2 (text) {
-      this.getBuildingsName(text)
-      return this.test
+    isLogin () {
+      return this.$store.getters['auth/isLogin']
     }
   }
 }
