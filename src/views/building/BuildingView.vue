@@ -15,8 +15,8 @@
         {{ data.index + 1 }}
       </template>
       <template #cell(การดำเนินการ)="data">
-        <b-button size="sm" class="mr-2"  @click = "edit(data.item)">เเก้ไข</b-button>
-        <b-button size="sm" class="mr-2" >ลบ</b-button>
+        <b-button size="sm" class="mr-2"  variant="info" @click = "edit(data.item)">เเก้ไข</b-button>
+        <b-button size="sm" class="mr-2" variant="danger" @click = "deleteItem(data.item)">ลบ</b-button>
       </template>
     </b-table>
   </div>
@@ -73,6 +73,17 @@ export default {
       this.$nextTick(() => {
         this.$refs.buildingForm.show()
       })
+    }, /* ----------------------- delete ----------------------- */
+
+    deleteItem (item) {
+      console.log(item)
+      if (confirm(`ต้องการลบตึกชื่อ ${item.name} จริงเปล่า ?`)) {
+        api.delete('http://localhost:3000/buildings/' + item._id).then(
+          function (response) {
+            this.getBuildings()
+          }.bind(this)
+        )
+      }
     }
   },
   mounted () {
