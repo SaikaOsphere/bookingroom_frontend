@@ -62,7 +62,7 @@ export default {
       } else {
         api.put('http://localhost:3000/institutions/' + institution._id, institution).then(
           function (response) {
-            this.getBuildings()
+            this.getInstitutions()
           }.bind(this))
       }
     },
