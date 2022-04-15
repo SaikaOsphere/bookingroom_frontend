@@ -13,15 +13,15 @@
     >
       <b-form @submit.stop.prevent="submit" @reset.prevent="reset">
         <b-form-group
-          id="form-group-room-name"
+          id="form-group-room-code"
           label="ชื่อห้อง "
-          label-for="room-name"
+          label-for="room-code"
         >
           <b-form-input
             type="text"
-            id="room-name"
+            id="room-code"
             placeholder="IF,K,Q,AH"
-            v-model="form.name"
+            v-model="form.code"
             :state="validateName"
           >
           </b-form-input>
@@ -32,15 +32,15 @@
 
         <!-- ชื่อตึก -->
         <b-form-group
-          id="form-group-room-nameInstitution"
+          id="form-group-room-institution"
           label="ชื่อคณะ"
-          label-for="room-nameInstitution"
+          label-for="room-institution"
         >
           <b-form-select
             type="text"
             id="room-nameInstitutionInstitution"
             placeholder="Faculty of Informatics"
-            v-model="form.nameInstitution"
+            v-model="form.institution"
             :options="nameInstitutions"
             :state="validateInstitution"
           >
@@ -53,13 +53,13 @@
 
         <!-- ชื่อตึก -->
         <b-form-group
-          id="form-group-room-name"
+          id="form-group-room-code"
           label="ชื่อตึก"
-          label-for="room-name"
+          label-for="room-code"
         >
           <b-form-select
             type="text"
-            id="room-name"
+            id="room-code"
             placeholder="Faculty of Informatics"
             v-model="form.buildingname"
             :options="buildingnames"
@@ -122,25 +122,6 @@
             :aria-describedby="ariaDescribedby"
           ></b-form-checkbox-group>
         </b-form-group>
-        <!-- <b-form-group
-          id="form-group-room-equipment"
-          label="รายการอุปกรณ์ "
-          label-for="room-equipment"
-          v-slot="{ ariaDescribedby }"
-        >
-          <b-form-checkbox-group
-            id="room-equipment"
-            placeholder="รายการอุปกรณ์ : "
-            v-model="form.equipment"
-            :options="equipments"
-            :aria-describedby="ariaDescribedby"
-          > -->
-          <!-- <b-form-checkbox value="TV"> TV</b-form-checkbox>
-          <b-form-checkbox value="Projecter"> Projecter</b-form-checkbox>
-          <b-form-checkbox value="Microphone"> Microphone</b-form-checkbox>
-          <b-form-checkbox value="Presentation"> Presentation</b-form-checkbox> -->
-          <!-- </b-form-checkbox-group>
-        </b-form-group> -->
         <!-- จบ -->
 
         <!-- ลำดับผู้พิจารณา -->
@@ -167,9 +148,9 @@
       <b-card>
         <pre>
         {{ form }}
-        {{ buildings }}
+        <!-- {{ buildings }}
         {{ approveres }}
-        {{ institutions }}
+        {{ institutions }} -->
       </pre
         >
       </b-card>
@@ -178,18 +159,22 @@
 </template>
 <script>
 export default {
-  props: [
-    { room: Object },
-    { buildings: Object },
-    { approveres: Object },
-    { institutions: Object }
-  ],
+  props: {
+    room: Object,
+    buildings: [],
+    approveres: [],
+    institutions: []
+  },
+  // { room: Object },
+  // { buildings: Object },
+  // { approveres: Object },
+  // { institutions: Object }
   data () {
     return {
       form: {
         _id: '',
-        name: '',
-        nameInstitution: '',
+        code: '',
+        institution: '',
         buildingname: '',
         floor: '',
         capacity: '',
@@ -242,10 +227,10 @@ export default {
   },
   computed: {
     validateName () {
-      return this.form.name !== ''
+      return this.form.code !== ''
     },
     validateInstitution () {
-      return this.form.nameInstitution !== ''
+      return this.form.institution !== ''
     },
     validatebuilding () {
       return this.form.buildingname !== ''
@@ -281,8 +266,8 @@ export default {
     reset () {
       this.form = {
         _id: '',
-        name: '',
-        nameInstitution: '',
+        code: '',
+        institution: '',
         buildingname: '',
         floor: '',
         capacity: '',
@@ -296,8 +281,8 @@ export default {
       } else {
         // Edit
         this.form._id = this.room._id
-        this.form.name = this.room.name
-        this.form.nameInstitution = this.room.nameInstitution
+        this.form.code = this.room.code
+        this.form.institution = this.room.institution
         this.form.buildingname = this.room.buildingname
         this.form.floor = this.room.floor
         this.form.capacity = this.room.capacity

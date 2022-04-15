@@ -43,7 +43,7 @@
 
 <script>
 import api from '../../services/api'
-import RoomForm from './RoomManagementForm.vue'
+import RoomForm from './RoomForm.vue'
 
 export default {
   components: {
@@ -86,7 +86,7 @@ export default {
       )
 
       // ดึงคณะ
-      api.get('http://localhost:3000/approveres').then(
+      api.get('http://localhost:3000/institutions').then(
         function (response) {
           this.institutions = response.data
         }.bind(this)
@@ -96,7 +96,6 @@ export default {
       api.get('http://localhost:3000/buildings').then(
         function (response) {
           this.buildings = response.data
-
           // for (let i = 0; i < this.buildings.lenght; i++) {
           //   const idInstitution = this.buildings[i].institution
           //   for (let j = 0; j < this.institutions; j++) {
