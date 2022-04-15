@@ -33,14 +33,15 @@
           label="ชื่อหน่วยงาน"
           label-for="institution-name"
         >
-          <b-form-input
+          <b-form-select
             type="text"
-            id="approver-institution"
+            id="institution-name"
             placeholder="InstitutionTest"
             v-model="form.institution"
             :state="validateInstitution"
           >
-          </b-form-input>
+          <option value=""></option>
+          </b-form-select>
           <b-form-invalid-feedback :state="validateInstitution">
             Test Institution
           </b-form-invalid-feedback>
@@ -51,14 +52,15 @@
           label="รายการผู้อนุมัติ"
           label-for="approver-name"
         >
-          <b-form-input
+          <b-form-select
+            v-model="form.institutions"
             type="text"
             id="approver-approveres"
             placeholder="approveresTest"
-            v-model="form.approveres"
             :state="validateApproveres"
           >
-          </b-form-input>
+          <option value=""></option>
+          </b-form-select>
           <b-form-invalid-feedback :state="validateApproveres">
             Test Approver
           </b-form-invalid-feedback>
@@ -75,11 +77,13 @@
 </template>
 <script>
 export default {
-  props: {
-    approver: Object,
-    users: [Object],
-    institutions: [Object]
-  },
+  props: [
+    {
+      approver: Object,
+      users: [Object],
+      institutions: [Object]
+    }
+  ],
   data () {
     return {
       form: {
@@ -96,15 +100,10 @@ export default {
       return this.form.name !== '' && this.form.name.length >= 5
     },
     validateInstitution () {
-      return this.form.institution !== '' && this.form.institution.length >= 1
+      return this.form.institution !== ''
     },
     validateApproveres () {
-      return this.form.approveres !== '' && this.form.approveres.length >= 1
-    },
-    validateForm () {
-      return (
-        this.validateName && this.validateInstitution && this.validateApproveres
-      )
+      return this.form.approveres !== ''
     }
   },
   methods: {
@@ -154,6 +153,11 @@ export default {
       this.$nextTick(() => {
         this.$bvModal.hide('modal-approver')
       })
+    },
+    validateForm () {
+      return (
+        this.validateName && this.validateInstitution && this.validateApproveres
+      )
     }
   }
 }

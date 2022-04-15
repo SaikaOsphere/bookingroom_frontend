@@ -1,20 +1,25 @@
 <template>
   <div>
+    <h1>จัดการผู้อนุมัติ</h1>
     <b-row>
         <b-col class="text-right">
           <ApproverForm
             :approver="selectedItem"
-            ref="approverForm"
-            @save="saveApprover"
             :users="users"
             :institutions="institutions"
+            ref="approverForm"
+            @save="saveApprover"
           ></ApproverForm>
         </b-col>
       </b-row>
-    <h1>จัดการผู้อนุมัติ</h1>
     <b-table :items="items" :fields="fields" striped responsive="sm">
       <template #cell(ลำดับ)="data">
         {{ data.index + 1 }}
+      </template>
+      <template #cell(รายการผู้อนุมัติ)="data">
+        <ul>
+          <li v-for="(item,index) in items[data.index].approveres " :key="index">{{item.username}}</li>
+        </ul>
       </template>
       <template #cell(การดำเนินการ)>
         <b-button size="sm" class="mr-2">เเก้ไข</b-button>
@@ -34,10 +39,10 @@ export default {
   data () {
     return {
       fields: [
-        // 'ลำดับ',
-        { key: '_id', label: 'id' },
+        'ลำดับ',
         { key: 'name', label: 'ชื่อลําดับผู้อนุมัติ' },
-        { key: 'approveres', label: 'รายการผู้อนุมัติ' },
+        // { key: 'approveres', label: 'รายการผู้อนุมัติ' },
+        'รายการผู้อนุมัติ',
         { key: 'institution.name', label: 'หน่วยงาน' },
         'การดำเนินการ'
       ],
@@ -59,6 +64,7 @@ export default {
       api.get('http://localhost:3000/institutions').then(
         function (response) {
           this.institutions = response.data
+          console.log(this.institutions)
         }.bind(this)
       )
     },
