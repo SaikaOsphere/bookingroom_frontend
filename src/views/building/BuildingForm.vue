@@ -10,6 +10,27 @@
       @ok="handleOk"
     >
       <b-form @submit.stop.prevent="submit" @reset.prevent="reset">
+        <!-- รหัสตึก -->
+        <b-form-group
+          id="form-group-building-name"
+          label="รหัสตึก"
+          label-for="building-name"
+        >
+          <b-form-input
+            type="text"
+            id="building-name"
+            placeholder="IF,K,Q,AH"
+            v-model="form.code"
+            :state="validateCode"
+          >
+          </b-form-input>
+          <b-form-invalid-feedback :state="validateCode">
+            รหัสต้องมากกว่าหรือเท่ากับ 1 ตัวอักษร
+          </b-form-invalid-feedback>
+        </b-form-group>
+        <!-- จบรหัสตึก -->
+
+        <!-- ชื่อตึก -->
         <b-form-group
           id="form-group-building-name"
           label="ชื่อตึก"
@@ -18,24 +39,36 @@
           <b-form-input
             type="text"
             id="building-name"
-            placeholder="ชื่อตึก Informatics..."
+            placeholder="Faculty of Informatics"
             v-model="form.name"
+            :state="validateCode"
           >
           </b-form-input>
+          <b-form-invalid-feedback :state="validateCode">
+            ชื่อตึกต้องมีตัวอักษรมากกว่าหรือเท่ากับ 5 ตัวอักษร
+          </b-form-invalid-feedback>
         </b-form-group>
+        <!-- จบชื่อตึก -->
+
+        <!-- ชั้นตึก -->
         <b-form-group
-          id="form-group-building-rooms"
-          label="ห้อง"
-          label-for="building-rooms"
+          id="form-group-building-floor"
+          label="ชั้น"
+          label-for="building-floor"
         >
           <b-form-input
-            type="text"
-            id="building-rooms"
-            placeholder="xx"
-            v-model="form.rooms"
+            type="number"
+            id="building-floor"
+            placeholder="10 20 30"
+            v-model="form.floor"
+            :state="validateFloor"
           >
           </b-form-input>
+          <b-form-invalid-feedback :state="validateFloor">
+            ชั้นต้องมีมากกว่า 1 ชั้น
+          </b-form-invalid-feedback>
         </b-form-group>
+        <!-- จบชั้นตึก -->
       </b-form>
       <b-card>
         <pre>
@@ -55,18 +88,22 @@ export default {
     return {
       form: {
         _id: '',
+        code: '',
         name: '',
-        rooms: []
+        floor: ''
       },
       isAddNew: false
     }
   },
   computed: {
-    validateName () {
-      return this.form.name.length >= 3
+    validateCode () {
+      return this.form.code !== '' && this.form.code.length >= 1
     },
-    validateForm () {
-      return this.validateName
+    validateName () {
+      return this.form.name !== '' && this.form.name.length >= 5
+    },
+    validateFloor () {
+      return this.form.floor !== ''
     }
   },
   methods: {
@@ -82,14 +119,16 @@ export default {
     },
     submit () {
       const building = JSON.parse(JSON.stringify(this.form))
+      building.floor = parseFloat(building.floor)
       this.$emit('save', building)
       this.reset()
     },
     reset () {
       this.form = {
         _id: '',
+        code: '',
         name: '',
-        rooms: ''
+        floor: ''
       }
     },
     showModal () {
@@ -98,8 +137,9 @@ export default {
       } else {
         // Edit
         this.form._id = this.building._id
+        this.form.code = this.building.code
         this.form.name = this.building.name
-        this.form.rooms = this.building.rooms
+        this.form.floor = this.building.floor
       }
     },
     resetModal (evt) {
@@ -107,10 +147,16 @@ export default {
     },
     handleOk (evt) {
       evt.preventDefault()
+      if (!this.validateForm()) {
+        return
+      }
       this.submit()
       this.$nextTick(() => {
         this.$bvModal.hide('modal-building')
       })
+    },
+    validateForm () {
+      return this.validateName && this.validateFloor && this.validateCode
     }
   }
 }
