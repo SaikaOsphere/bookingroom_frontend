@@ -18,6 +18,13 @@
       <template #cell(ลำดับ)="data">
         {{ data.index + 1 }}
       </template>
+
+      <template #cell(รายการอุปกรณ์)="data">
+        <ul>
+          <li v-for="(item,index) in items[data.index].equipment " :key="index">{{item.name}}</li>
+        </ul>
+      </template>
+
       <template #cell(ดำเนินการ)>
         <b-button size="sm" class="mr-2" variant="info" @click="edit(data.item)"
           >เเก้ไข</b-button
@@ -45,13 +52,14 @@ export default {
   data () {
     return {
       fields: [
-        { key: '_id', label: 'ลำดับ' },
+        'ลำดับ',
         { key: 'code', label: 'ชื่อห้อง' },
         { key: 'capacity', label: 'จำนวนคนที่รองรับ' },
-        { key: 'building', label: 'ตึก' },
+        { key: 'building.name', label: 'ตึก' },
         { key: 'floor', label: 'ชั้น' },
-        { key: 'equipment', label: 'รายการอุปกรณ์' },
-        { key: 'approveres', label: 'ลำดับผู้พิจารณา' },
+        'รายการอุปกรณ์',
+        { key: 'approveres.name', label: 'ชื่อลำดับผู้พิจารณา' },
+        { key: 'institution.name', label: 'คณะ' },
         'ดำเนินการ'
       ],
       approveres: [],
@@ -65,13 +73,8 @@ export default {
     getRoomManagement () {
       api.get('http://localhost:3000/rooms').then(
         function (response) {
+          console.log(response)
           this.items = response.data
-        }.bind(this)
-      )
-      // ดึงตึก
-      api.get('http://localhost:3000/buildings').then(
-        function (response) {
-          this.buildings = response.data
         }.bind(this)
       )
 
@@ -86,6 +89,22 @@ export default {
       api.get('http://localhost:3000/approveres').then(
         function (response) {
           this.institutions = response.data
+        }.bind(this)
+      )
+
+      // ดึงตึก
+      api.get('http://localhost:3000/buildings').then(
+        function (response) {
+          this.buildings = response.data
+
+          // for (let i = 0; i < this.buildings.lenght; i++) {
+          //   const idInstitution = this.buildings[i].institution
+          //   for (let j = 0; j < this.institutions; j++) {
+          //     if (idInstitution === this.institutions_id) {
+
+          //     }
+          //   }
+          // }
         }.bind(this)
       )
     },
