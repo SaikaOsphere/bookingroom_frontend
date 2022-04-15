@@ -51,7 +51,7 @@ export default {
       )
     },
     saveBuilding (building) {
-      console.log('Submit', building)
+      // console.log('Submit', building)
       if (building._id === '') {
         api.post('http://localhost:3000/buildings', building).then(
           function (response) {
@@ -76,7 +76,7 @@ export default {
     }, /* ----------------------- delete ----------------------- */
 
     deleteItem (item) {
-      console.log(item)
+      // console.log(item)
       if (confirm(`ต้องการลบตึกชื่อ ${item.name} จริงเปล่า ?`)) {
         api.delete('http://localhost:3000/buildings/' + item._id).then(
           function (response) {
