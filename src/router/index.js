@@ -1,17 +1,25 @@
 import Vue from 'vue'
 import VueRouter from 'vue-router'
+
 import HomeView from '../views/HomeView.vue'
 import About from '../views/AboutView.vue'
 import LoginView from '../views/LoginView.vue'
+
 import BookingRoom from '../views/BookingRoom.vue'
-import Instutution from '../views/Instutution/InstututionView.vue'
-import Petition from '../views/PetitionView.vue'
-import RoomManagement from '../views/RoomManagement/RoomView.vue'
-import Building from '../views/building/BuildingView.vue'
 import BookingRoomDetail from '../views/booking/BookingTime.vue'
-import BookingDetail from '../views/booking/recentBookingDetail.vue'
+import BookingHistory from '../views/booking/recentBooking.vue'
 import BookingRoomConfirm from '../views/booking/BookingDetail.vue'
+
+import Institution from '../views/Instutution/InstututionView.vue'
+
+import Petition from '../views/PetitionView.vue'
+
+import RoomManagement from '../views/RoomManagement/RoomView.vue'
+
+import Building from '../views/building/BuildingView.vue'
+
 import Approver from '../views/approver/ApproverView.vue'
+
 import Petitiondetail from '../views/Petition/Petition_detail.vue'
 import PetitionApprov from '../views/Petition/Petition_Approv.vue'
 
@@ -39,9 +47,9 @@ const routes = [
     component: BookingRoom
   },
   {
-    path: '/instutution',
-    name: 'instutution',
-    component: Instutution
+    path: '/institution',
+    name: 'institution',
+    component: Institution
   },
   {
     path: '/petition',
@@ -64,9 +72,9 @@ const routes = [
     component: BookingRoomDetail
   },
   {
-    path: '/bookingDetail',
-    name: 'bookingDetail',
-    component: BookingDetail
+    path: '/bookingHistory',
+    name: 'bookingHistory',
+    component: BookingHistory
   },
   {
     path: '/bookingRoomConfirm',
