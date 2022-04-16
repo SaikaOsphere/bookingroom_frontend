@@ -15,7 +15,7 @@ import Institution from '../views/Instutution/InstututionView.vue'
 import Petition from '../views/Petition/PetitionView.vue'
 
 import RoomManagement from '../views/RoomManagement/RoomView.vue'
-
+import ToolD from '../views/equipment/ToolD.vue'
 import Building from '../views/building/BuildingView.vue'
 
 import Approver from '../views/approver/ApproverView.vue'
@@ -94,6 +94,11 @@ const routes = [
     path: '/users',
     name: 'users',
     component: Users
+  },
+  {
+    path: '/toolD',
+    name: 'toolD',
+    component: ToolD
   }
 ]
 

@@ -28,8 +28,11 @@
           >จัดการห้อง</b-nav-item
         >
         <b-nav-item to="/users" v-if="!roleRestricted"
-          >จัดการผู้ใช้</b-nav-item
-        >
+          >จัดการผู้ใช้</b-nav-item>
+
+        <b-nav-item to="/toolD" v-if="!roleRestricted"
+          >จัดการอุปกรณ์</b-nav-item>
+
         <!-- <b-nav-item @click="showFormInput = !showFormInput"
         >Form input
         <b-icon
