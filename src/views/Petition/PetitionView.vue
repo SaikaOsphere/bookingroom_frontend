@@ -6,7 +6,7 @@
         {{ data.index + 1 }}
       </template>
       <template #cell(การดำเนินการ)="data">
-        <b-button size="sm" class="mr-2" to="/pettitiondetail" @click="checkid(data.item)">ดูรายละเอียด</b-button>
+        <b-button size="sm" class="mr-2"  @click="checkid(data.item)">ดูรายละเอียด</b-button>
       </template>
     </b-table>
   </div>
@@ -43,7 +43,7 @@ export default {
     getapproves () {
       api.get('http://localhost:3000/approves').then(
         function (response) {
-          console.log(response.data)
+          // console.log(response.data)
           this.items = response.data
         }.bind(this)
       )
@@ -51,7 +51,7 @@ export default {
     getuser () {
       api.get('http://localhost:3000/users').then(
         function (response) {
-          console.log(response.data)
+          // console.log(response.data)
           this.users = response.data
         }.bind(this)
       )
@@ -59,13 +59,13 @@ export default {
     getapprovers () {
       api.get('http://localhost:3000/approveres').then(
         function (response) {
-          console.log(response.data)
+          // console.log(response.data)
           this.approvers = response.data
         }.bind(this)
       )
     },
     checkid (item) {
-      console.log(item)
+      console.log('item', item)
       this.$store.dispatch('checkid/sendid', item)
     }
   },
