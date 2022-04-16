@@ -1,13 +1,8 @@
 <template>
   <div class="login">
-    <b-card
-      img-src="https://www.beartai.com/wp-content/uploads/2021/08/23.png"
-      img-alt="Image"
-      img-top
-      style="max-width: 20rem"
-      class="mb-2 center"
-    >
-      <!-- <iframe
+    <div class="bg">
+      <b-card img-alt="Image" class="mb-2 center backgroundformLogin">
+        <!-- <iframe
         width="275"
         height="200"
         src="https://www.youtube.com/embed/dQw4w9WgXcQ?autoplay=1"
@@ -16,49 +11,53 @@
         allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
         allowfullscreen
       > -->
-      <b-card-text>
-        <div style="text-align: justify">
-          <b-form @submit="onSubmit" @reset="onReset" v-if="showForm">
-            <b-form-group
-              id="input-group-1"
-              label="Username"
-              label-for="input-1"
+        <b-card-text>
+          <div style="text-align: justify">
+            <b-form
+              @submit="onSubmit"
+              @reset="onReset"
+              v-if="showForm"
+              class="formLogin"
             >
-              <b-form-input
-                id="input-1"
-                v-model="form.username"
-                type="text"
-                placeholder="Username"
-                required
-              ></b-form-input>
-            </b-form-group>
+              <b-form-group
+                id="input-group-1"
+                label="Username"
+                label-for="input-1"
+              >
+                <b-form-input
+                  class="borderInput"
+                  id="input-1"
+                  v-model="form.username"
+                  type="text"
+                  placeholder="Username"
+                  required
+                ></b-form-input>
+              </b-form-group>
 
-            <b-form-group
-              id="input-group-2"
-              label="Password:"
-              label-for="input-2"
-            >
-              <b-form-input
-                id="input-2"
-                v-model="form.password"
-                placeholder="Password"
-                required
-                type="password"
-              ></b-form-input>
-            </b-form-group>
-
-            <b-button type="reset" variant="danger">Reset</b-button>
-            <b-button type="submit" variant="primary" class="m-2"
-              >Login</b-button
-            >
-            {{ $store.state.auth.userLogin }}
-            {{ $store.getters["auth/isLogin"] }}
-          </b-form>
-        </div>
-      </b-card-text>
-      <!-- </iframe> -->
-
-    </b-card>
+              <b-form-group
+                id="input-group-2"
+                label="Password:"
+                label-for="input-2"
+              >
+                <b-form-input
+                  id="input-2"
+                  class="borderInput"
+                  v-model="form.password"
+                  placeholder="Password"
+                  required
+                  type="password"
+                ></b-form-input>
+              </b-form-group>
+              <b-button type="submit" variant="primary" class="m-2">Login</b-button>
+              <b-button type="reset" variant="danger">Reset</b-button>
+              {{ $store.state.auth.userLogin }}
+              {{ $store.getters['auth/isLogin'] }}
+            </b-form>
+          </div>
+        </b-card-text>
+        <!-- </iframe> -->
+      </b-card>
+    </div>
     <!-- <b-card no-body class="overflow-hidden center" style="max-width: 540px;">
     <b-row no-gutters>
       <b-col md="6">
@@ -112,5 +111,28 @@ export default {
   top: 50%;
   left: 50%;
   transform: translate(-50%, -50%);
+}
+.backgroundformLogin {
+  background: #fff;
+  color: rgb(0, 0, 0);
+  width: 600px;
+  height: 400px;
+  background-repeat: no-repeat;
+  background-origin: content-box;
+  border-radius: 25px;
+  box-shadow: 0px 0px 15px 0px #000;
+}
+.bg {
+  background: url('../assets/wallpaperLogin.jpg') no-repeat;
+}
+
+.borderInput {
+  max-width: 20rem;
+  border-radius: 25px;
+  margin-right: 500px;
+}
+.formLogin {
+  padding-top: 85px;
+  padding-left: 150px;
 }
 </style>
