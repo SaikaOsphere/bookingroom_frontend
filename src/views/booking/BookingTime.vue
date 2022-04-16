@@ -49,6 +49,7 @@
               <b-form-datepicker
                 id="example-datepicker"
                 v-model="detailRoom.date"
+                @input="addEvent()"
                 class="mb-2"
               ></b-form-datepicker
             ></b-col>
@@ -58,6 +59,7 @@
             <b-col>
               <b-form-timepicker
                 v-model="detailRoom.timeStart"
+                @input="addEvent()"
                 locale="en"
               ></b-form-timepicker>
             </b-col>
@@ -67,6 +69,7 @@
             <b-col>
               <b-form-timepicker
                 v-model="detailRoom.timeEnd"
+                @input="addEvent()"
                 locale="en"
               ></b-form-timepicker>
             </b-col>
@@ -95,7 +98,6 @@
         active-view="week"
         :events="events"
         @ready="ready($event)"
-        @view-change="viewChange($event)"
         style="margin: 30px 0px 30px 0px"
       />
     </b-row>
@@ -105,12 +107,13 @@
 import VueCal from 'vue-cal'
 import 'vue-cal/dist/vuecal.css'
 import th from '@/locale/th'
-import getEvents from '@/services/event'
+// import getEvents from '@/services/event'
 import api from '@/services/api'
 
 export default {
   data () {
     return {
+      added: false,
       alerted: false,
       detailRoom: {
         // typeRoom: 'TestType',
@@ -151,11 +154,9 @@ export default {
       class: '',
       events: [
         {
-          start: '2022-03-27 15:00',
-          end: '2022-03-27 16:00',
-          title: 'ทำงาน',
-          content: 'นั่งเฉยๆ',
-          class: 'working'
+          start: '',
+          end: '',
+          title: ''
         }
       ]
     }
@@ -207,59 +208,58 @@ export default {
         }.bind(this)
       )
     },
-    addEvent () {
-      const event = {
-        start: new Date(this.startDate + ' ' + this.startTime),
-        end: new Date(this.endDate + ' ' + this.endTime),
-        title: this.title,
-        content: this.content,
-        class: 'vdo_time'
+    addEvent ($event) {
+      if (
+        this.detailRoom.timeStart !== '' &&
+        this.detailRoom.timeEnd !== '' &&
+        this.detailRoom.date !== ''
+      ) {
+        api.get('http://localhost:3000/users/' + this.getCurrentUser._id).then(
+          function (response) {
+            const event = {
+              start: new Date(
+                this.detailRoom.date + ' ' + this.detailRoom.timeStart
+              ),
+              end: new Date(
+                this.detailRoom.date + ' ' + this.detailRoom.timeEnd
+              ),
+              title: response.data.username + '(กำลังจอง)'
+            }
+            if (!this.added) {
+              this.events.push(event)
+              this.added = true
+            } else {
+              this.events.pop()
+              this.events.push(event)
+            }
+          }.bind(this)
+        )
       }
-      console.log(event)
-      this.events.push(event)
     },
-    async ready (e) {
-      console.log('ready', e)
-      const res = await getEvents(e.startDate, e.endDate)
-      // api.get('/events', { params: { startDate: e.startDate, endDate: e.endDate } })
-      console.log(res)
-      // const newEvents = []
-      // for (let i = 0; i < res.data.length; i++) {
-      //   const event = res.data[i]
-      //   newEvents.push({
-      //     start: new Date(event.startDate),
-      //     end: new Date(event.endDate),
-      //     title: event.title,
-      //     content: event.content,
-      //     class: event.class
-      //   })
-      // }
-      const newEvents = res.data.map(function (event) {
-        return {
-          start: new Date(event.startDate),
-          end: new Date(event.endDate),
-          title: event.title,
-          content: event.content,
-          class: event.class
-        }
-      })
-      this.events = newEvents
-      // this.events = res.data
-    },
-    async viewChange (e) {
-      console.log('view-change', e)
-      const res = await getEvents(e.startDate, e.endDate)
-      console.log(res)
-      const newEvents = res.data.map(function (event) {
-        return {
-          start: new Date(event.startDate),
-          end: new Date(event.endDate),
-          title: event.title,
-          content: event.content,
-          class: event.class
-        }
-      })
-      this.events = newEvents
+    ready (e) {
+      api
+        .get('http://localhost:3000/bookings')
+        .then(
+          function (response) {
+            for (let i = 0; i < response.data.length; i++) {
+              const trackedUser = response.data[i]
+
+              api.get('http://localhost:3000/users/' + trackedUser.user).then(
+                function (response) {
+                  if (trackedUser.room === this.$store.state.idRoom) {
+                    const newEvent = {
+                      start: new Date(trackedUser.datetime_start),
+                      end: new Date(trackedUser.datetime_end),
+                      title: response.data.username
+                    }
+                    this.events.push(newEvent)
+                  }
+                }.bind(this)
+              )
+            }
+          }.bind(this)
+        )
+        .bind(this)
     }
   },
   computed: {
@@ -268,6 +268,9 @@ export default {
     },
     isLogin () {
       return this.$store.getters['auth/isLogin']
+    },
+    getCurrentUser () {
+      return this.$store.state.auth.user
     }
   },
   components: {
@@ -291,9 +294,9 @@ export default {
 .vuecal__now-line {
   color: #06c;
 }
-.vuecal__event.working {
-  background-color: rgba(253, 156, 66, 0.9);
-  border: 1px solid rgb(233, 136, 46);
+.vuecal__event {
+  background-color: rgba(66, 153, 253, 0.9);
+  border: 1px solid rgb(0, 0, 0);
   color: #fff;
 }
 .vuecal__event.a {

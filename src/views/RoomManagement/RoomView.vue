@@ -57,10 +57,10 @@ export default {
     return {
       fields: [
         'ลำดับ',
-        { key: 'code', label: 'ชื่อห้อง' },
         { key: 'capacity', label: 'จำนวนคนที่รองรับ' },
         { key: 'building.name', label: 'ตึก' },
         { key: 'floor', label: 'ชั้น' },
+        { key: 'code', label: 'ชื่อห้อง' },
         'รายการอุปกรณ์',
         { key: 'approveres.name', label: 'ชื่อลำดับผู้พิจารณา' },
         { key: 'institution.name', label: 'คณะ' },
@@ -107,7 +107,7 @@ export default {
         }.bind(this)
       )
     },
-    getequipments () {
+    getEquipments () {
       // ดึงอุปกรณ์
       api.get('http://localhost:3000/equipments').then(
         function (response) {
@@ -159,7 +159,7 @@ export default {
     this.getApprovers()
     this.getInstitutions()
     this.getBuildings()
-    this.getequipments()
+    this.getEquipments()
   }
 }
 </script>

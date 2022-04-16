@@ -21,6 +21,18 @@
         ></b-carousel-slide>
       </b-carousel>
     </div>
+    <footer class="text-center text-white fixed-bottom" style="background-color: rgba(214,181,86, 0.3);">
+  <!-- Grid container -->
+  <div class="container p-4"></div>
+  <!-- Grid container -->
+
+  <!-- Copyright -->
+  <div class="text-center p-3" style="font-size:20px">
+    CADS developer:
+    <a class="text-white" href="https://mdbootstrap.com/" >CADS.com</a>
+  </div>
+  <!-- Copyright -->
+</footer>
   </div>
 </template>
 

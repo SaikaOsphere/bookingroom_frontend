@@ -173,6 +173,7 @@ export default {
   padding: 50px 25px 50px 25px;
   width: 100%;
   background-color: rgba(129, 129, 129, 0.199);
+  border-radius: 25px;
   /* min-height: 100%; */
   height: 100%;
 }

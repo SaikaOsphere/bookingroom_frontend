@@ -12,23 +12,6 @@
       @ok="handleOk"
     >
       <b-form @submit.stop.prevent="submit" @reset.prevent="reset">
-        <b-form-group
-          id="form-group-room-code"
-          label="ชื่อห้อง "
-          label-for="room-code"
-        >
-          <b-form-input
-            type="text"
-            id="room-code"
-            placeholder="IF,K,Q,AH"
-            v-model="form.code"
-            :state="validateName"
-          >
-          </b-form-input>
-          <b-form-invalid-feedback :state="validateName">
-            ชื่อห้องต้องมีตัวอักษรมากกว่าหรือเท่ากับ 5 ตัวอักษร
-          </b-form-invalid-feedback>
-        </b-form-group>
 
         <!-- คณะ -->
         <b-form-group
@@ -63,9 +46,9 @@
             id="room-code"
             placeholder="Faculty of Informatics"
             v-model="form.building"
+            :options="buildings"
             text-field="name"
             value-field="_id"
-            :options="buildings"
             :state="validatebuilding"
           >
           </b-form-select>
@@ -96,6 +79,24 @@
         </b-form-group>
         <!-- จบชั้นตึก -->
 
+        <b-form-group
+          id="form-group-room-code"
+          label="ชื่อห้อง "
+          label-for="room-code"
+        >
+          <b-form-input
+            type="text"
+            id="room-code"
+            placeholder="IF,K,Q,AH"
+            v-model="form.code"
+            :state="validateName"
+          >
+          </b-form-input>
+          <b-form-invalid-feedback :state="validateName">
+            ชื่อห้องต้องมีตัวอักษรมากกว่าหรือเท่ากับ 5 ตัวอักษร
+          </b-form-invalid-feedback>
+        </b-form-group>
+
         <!-- จำนวนคน -->
         <b-form-group
           id="form-group-room-capacity"
@@ -117,36 +118,28 @@
         <!-- จบ -->
 
         <!-- รายการอุปกรณ์ -->
-        <b-form-group label="รายการอุปกรณ์" v-slot="{ ariaDescribedby }">
-          <b-form-checkbox-group
-            id="checkbox-group-1"
+        <b-form-group label="รายการอุปกรณ์">
+          <multiselect
+            type="text"
             v-model="form.equipment"
             :options="equipments"
-            text-field="name"
-            value-field="_id"
-            value="name"
-            :aria-describedby="ariaDescribedby"
-          ></b-form-checkbox-group>
+            :multiple="true"
+            :close-on-select="false"
+            :preserve-search="true"
+            placeholder="Pick some"
+            label="name"
+            track-by="_id"
+            :preselect-first="true"
+          >
+            <template slot="selection" slot-scope="{ values, isOpen }"
+              ><span
+                class="multiselect__single"
+                v-if="values.length &amp;&amp; !isOpen"
+                >{{ values.length }} อุปกรณ์ ถูกเลือกแล้ว</span
+              ></template
+            >
+          </multiselect>
         </b-form-group>
-        <!-- <b-form-group
-          id="form-group-room-equipment"
-          label="รายการอุปกรณ์ "
-          label-for="room-equipment"
-          v-slot="{ ariaDescribedby }"
-        >
-          <b-form-checkbox-group
-            id="room-equipment"
-            placeholder="รายการอุปกรณ์ : "
-            v-model="form.equipment"
-            :options="equipments"
-            :aria-describedby="ariaDescribedby"
-          > -->
-        <!-- <b-form-checkbox value="TV"> TV</b-form-checkbox>
-          <b-form-checkbox value="Projecter"> Projecter</b-form-checkbox>
-          <b-form-checkbox value="Microphone"> Microphone</b-form-checkbox>
-          <b-form-checkbox value="Presentation"> Presentation</b-form-checkbox> -->
-        <!-- </b-form-checkbox-group>
-        </b-form-group> -->
         <!-- จบ -->
 
         <!-- ลำดับผู้พิจารณา -->
@@ -160,7 +153,7 @@
             id="room-approveres"
             placeholder="ลำดับผู้พิจารณา : "
             v-model="form.approveres"
-            :options="approveres"
+            :options="getApproveresByInstitution(form.institution)"
             text-field="name"
             value-field="_id"
             :state="validateApproveres"
@@ -177,8 +170,8 @@
           ชื่อคณะ {{ form.institution }}
           ชื่อตึก {{ form.building }}
           ชั้น {{ form.floor }}
-          อุปกณ์ {{form.equipment}}
-          ผู้พิจารณา {{form.approveres}}
+          อุปกณ์ {{ form.equipment }}
+          ผู้พิจารณา {{ form.approveres }}
           approveres
           {{ approveres }}
           institutions
@@ -189,7 +182,11 @@
   </div>
 </template>
 <script>
+import Multiselect from 'vue-multiselect'
 export default {
+  components: {
+    Multiselect
+  },
   props: {
     room: Object,
     buildings: Array,
@@ -213,14 +210,6 @@ export default {
         equipment: '',
         approveres: ''
       },
-      approver: [
-        { text: 'Select One', value: null },
-        'approvers1',
-        'approvers2',
-        'approvers3',
-        'approvers4'
-      ],
-
       isAddNew: false
     }
   },
@@ -243,6 +232,7 @@ export default {
     validateApproveres () {
       return this.form.approveres !== ''
     }
+
   },
   methods: {
     addNew () {
@@ -252,16 +242,27 @@ export default {
         this.isAddNew = false
       })
     },
-    getFloorByBuildings (buildingId) {
-      if (buildingId !== '') {
-        const building = this.buildings.find((item) => item._id === buildingId)
+    getApproveresByInstitution (institutionId) {
+      if (this.validateInstitution) {
+        // ค้นหา approveres ที่ตรงกันกับ institutionId
+        const approveresMatch = this.approveres.filter((item) => item.institution._id === institutionId)
+        console.log(approveresMatch)
+        return approveresMatch
+      }
+    },
+    getFloorByBuildings () {
+      if (this.validatebuilding) {
+        // หาตึกที่เลือก
+        const building = this.buildings.find((item) => item._id === this.form.building)
+
+        console.log('building', building)
         const floors = []
-        console.log('building', building.floor)
         for (let i = 1; i <= building.floor; i++) {
           floors.push(i)
         }
         return floors
       } else {
+        console.log(this.validatebuilding)
         return []
       }
     },
@@ -292,14 +293,15 @@ export default {
         this.reset()
       } else {
         // Edit
+        console.log('room', this.room)
         this.form._id = this.room._id
         this.form.code = this.room.code
-        this.form.institution = this.room.institution
-        this.form.building = this.room.building
+        this.form.institution = this.room.institution._id
+        this.form.building = this.room.building._id
         this.form.floor = this.room.floor
         this.form.capacity = this.room.capacity
         this.form.equipment = this.room.equipment
-        this.form.approveres = this.room.approveres
+        this.form.approveres = this.room.approveres._id
       }
     },
     resetModal (evt) {
@@ -326,6 +328,7 @@ export default {
       )
     }
   }
+
 }
 </script>
 <style></style>

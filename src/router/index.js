@@ -21,7 +21,6 @@ import Building from '../views/building/BuildingView.vue'
 import Approver from '../views/approver/ApproverView.vue'
 
 import Petitiondetail from '../views/Petition/Petition_detail.vue'
-import PetitionApprov from '../views/Petition/Petition_Approv.vue'
 
 Vue.use(VueRouter)
 
@@ -90,11 +89,6 @@ const routes = [
     path: '/pettitiondetail',
     name: 'petitiondetail',
     component: Petitiondetail
-  },
-  {
-    path: '/pettitionApprov',
-    name: 'petitionApprov',
-    component: PetitionApprov
   }
 ]
 
