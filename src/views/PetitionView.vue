@@ -5,8 +5,8 @@
       <template #cell(หมายเลขการจอง)="data">
         {{ data.index + 1 }}
       </template>
-      <template #cell(การดำเนินการ)>
-        <b-button size="sm" class="mr-2" to="/pettitiondetail" @click="edit(data.item)">ดูรายละเอียด</b-button>
+      <template #cell(การดำเนินการ)="data">
+        <b-button size="sm" class="mr-2" to="/pettitiondetail" @click="checkid(data.item)">ดูรายละเอียด</b-button>
       </template>
     </b-table>
   </div>
@@ -63,13 +63,14 @@ export default {
           this.approvers = response.data
         }.bind(this)
       )
+    },
+    checkid (item) {
+      console.log(item)
+      this.$store.dispatch('checkid/sendid', item)
     }
   },
   mounted () {
     this.getapproves()
-  }//,
-  // checkid (item) {
-  //   this.$refs.Petition_detail.
-  // }
+  }
 }
 </script>

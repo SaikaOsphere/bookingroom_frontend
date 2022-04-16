@@ -52,8 +52,8 @@
     <b-row >
       <b-col
         ><b-button class="button" variant="danger" to="/petition">ย้อนกลับ</b-button>
-        <b-button variant="info" to="/petition">ไม่อนุญาติ</b-button>
-        <b-button class="button1" variant="info" to="/petition">อนุญาติ</b-button>
+        <b-button variant="info" to="/petition" @click="approvno(items.approve_status)">ไม่อนุญาติ</b-button>
+        <b-button class="button1" variant="info" to="/petition" @click="approv(items.approve_status)">อนุญาติ</b-button>
       </b-col>
     </b-row>
   </div>
@@ -63,44 +63,43 @@ import api from '@/services/api'
 export default {
   data () {
     return {
-      Petitiondetail: {
-        _id: '',
-        name: 'AAAAA BBBBB',
-        room: {},
-        date: '',
-        timeStart: '',
-        timeEnd: ''
-      }
+      Petitiondetail: '',
+      // Petitiondetail: {
+      //   _id: {},
+      //   name: '',
+      //   room: {},
+      //   date: '',
+      //   timeStart: '',
+      //   timeEnd: ''
+      // },
+      items: []
     }
   },
-  components: {},
   mounted () {
-    this.getRecentData()
+    this.getcheckid()
     this.getbookings()
+    this.getapprov()
   },
   methods: {
     getbookings () {
       api.get('http://localhost:3000/bookings').then(
         function (response) {
-          console.log(response.data)
-          this.Petitiondetail._id = response.data._id
+          // console.log(response.data)
           this.Petitiondetail.name = response.data.user
           this.Petitiondetail.room = response.data.room
           this.Petitiondetail.date = response.data.datetime_reserve
           this.Petitiondetail.timeStart = response.data.datetime_start
           this.Petitiondetail.timeEnd = response.data.datetime_end
+          this.Petitiondetail.approv = response.data.approves
         }.bind(this)
       )
     },
-    getRecentData () {
-      this.Petitiondetail.date = this.$store.state.datetime.date
-      this.Petitiondetail.timeStart = this.$store.state.datetime.timeStart
-      this.Petitiondetail.timeEnd = this.$store.state.datetime.timeEnd
-    }
-  },
-  computed: {
-    getCurrentUser () {
-      return this.$store.state.auth.user
+    getcheckid () {
+      this.Petitiondetail._id = this.$store.state.idus
+      console.log(this.Petitiondetail)
+    },
+    getapprov () {
+       this.Petitiondetail.approv.find((item)=>item._id===)
     }
   }
 }
