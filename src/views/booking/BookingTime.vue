@@ -98,7 +98,6 @@
         active-view="week"
         :events="events"
         @ready="ready($event)"
-        @view-change="viewChange($event)"
         style="margin: 30px 0px 30px 0px"
       />
     </b-row>
@@ -210,10 +209,6 @@ export default {
       )
     },
     addEvent ($event) {
-      // this.events = [{}]
-      // this.ready()
-
-      console.log(event.target.value)
       if (
         this.detailRoom.timeStart !== '' &&
         this.detailRoom.timeEnd !== '' &&
@@ -231,12 +226,9 @@ export default {
               title: response.data.username + '(กำลังจอง)'
             }
             if (!this.added) {
-              console.log(event)
               this.events.push(event)
               this.added = true
             } else {
-              console.log(event)
-              // this.events.splice(this.events.length - 1, 1)
               this.events.pop()
               this.events.push(event)
             }
@@ -245,8 +237,6 @@ export default {
       }
     },
     ready (e) {
-      // console.log('room')
-      // console.log(this.$store.state.idRoom)
       api
         .get('http://localhost:3000/bookings')
         .then(
@@ -256,9 +246,6 @@ export default {
 
               api.get('http://localhost:3000/users/' + trackedUser.user).then(
                 function (response) {
-                  // console.log(response.data.name)
-                  // this.events[this.events.length - 1].title = response.data.name
-
                   if (trackedUser.room === this.$store.state.idRoom) {
                     const newEvent = {
                       start: new Date(trackedUser.datetime_start),
@@ -271,64 +258,8 @@ export default {
               )
             }
           }.bind(this)
-          // .bind(this)
         )
         .bind(this)
-      // console.log('ready', e)
-      // const res = await getEvents(e.startDate, e.endDate)
-      // api.get('/events', { params: { startDate: e.startDate, endDate: e.endDate } })
-      // console.log(res)
-      // const newEvents = []
-      // for (let i = 0; i < res.data.length; i++) {
-      //   const event = res.data[i]
-      //   newEvents.push({
-      //     start: new Date(event.startDate),
-      //     end: new Date(event.endDate),
-      //     title: event.title,
-      //     content: event.content,
-      //     class: event.class
-      //   })
-      // }
-      // const newEvents = res.data.map(function (event) {
-      //   return {
-      //     start: new Date(event.startDate),
-      //     end: new Date(event.endDate),
-      //     title: event.title
-      //   }
-      // })
-      // this.events = newEvents
-      // this.events = res.data
-    },
-    async viewChange (e) {
-      const testEvent = [{}]
-      api
-        .get('http://localhost:3000/bookings')
-        .then(
-          function (response) {
-            for (let i = 0; i < response.data.length; i++) {
-              const trackedUser = response.data[i]
-
-              api.get('http://localhost:3000/users/' + trackedUser.user).then(
-                function (response) {
-                  // console.log(response.data.name)
-                  // this.events[this.events.length - 1].title = response.data.name
-
-                  if (trackedUser.room === this.$store.state.idRoom) {
-                    const newEvent = {
-                      start: new Date(trackedUser.datetime_start),
-                      end: new Date(trackedUser.datetime_end),
-                      title: response.data.username
-                    }
-                    this.events.push(newEvent)
-                  }
-                }.bind(this)
-              )
-            }
-          }.bind(this)
-          // .bind(this)
-        )
-        .bind(this)
-      this.events = testEvent
     }
   },
   computed: {
@@ -339,7 +270,6 @@ export default {
       return this.$store.getters['auth/isLogin']
     },
     getCurrentUser () {
-      // console.log(this.$store.state.auth.user)
       return this.$store.state.auth.user
     }
   },
@@ -364,9 +294,9 @@ export default {
 .vuecal__now-line {
   color: #06c;
 }
-.vuecal__event.working {
-  background-color: rgba(253, 156, 66, 0.9);
-  border: 1px solid rgb(233, 136, 46);
+.vuecal__event {
+  background-color: rgba(66, 153, 253, 0.9);
+  border: 1px solid rgb(0, 0, 0);
   color: #fff;
 }
 .vuecal__event.a {

@@ -107,7 +107,7 @@ export default {
         }.bind(this)
       )
     },
-    getequipments () {
+    getEquipments () {
       // ดึงอุปกรณ์
       api.get('http://localhost:3000/equipments').then(
         function (response) {
@@ -159,7 +159,7 @@ export default {
     this.getApprovers()
     this.getInstitutions()
     this.getBuildings()
-    this.getequipments()
+    this.getEquipments()
   }
 }
 </script>
