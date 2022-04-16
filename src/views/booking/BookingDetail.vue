@@ -1,9 +1,7 @@
 <template>
   <div>
     <b-row>
-      <h1>
-        รายละเอียดเพิ่มเติม
-      </h1>
+      <h1>รายละเอียดเพิ่มเติม</h1>
     </b-row>
     <b-row>
       <b-col class="data">
@@ -137,8 +135,6 @@ export default {
         this.getRoom()
         this.getUser()
         this.sendToDB()
-        console.log(this.bookingDetail)
-        console.log(this.formSend)
       }
     }
   },
@@ -146,13 +142,9 @@ export default {
     saveBooking (evt) {
       evt.preventDefault()
 
-      console.log(this.formSend)
-
-      api.post('http://localhost:3000/bookings', this.formSend).then(
-        function (response) {
-          console.log(response)
-        }
-      )
+      api
+        .post('http://localhost:3000/bookings', this.formSend)
+        .then(function (response) {})
       this.$router.push({ path: '/home' })
       this.$nextTick(() => {
         this.$bvModal.hide('modal-confirmbooking')
@@ -166,7 +158,6 @@ export default {
       this.formSend.datetime_end = new Date(
         this.bookingDetail.date + ' ' + this.bookingDetail.timeEnd
       )
-      // this.$store.dispatch('bookingRoom/sendForm', this.formSend)
     },
     getUser () {
       api.get('http://localhost:3000/users/' + this.getCurrentUser._id).then(
@@ -174,7 +165,6 @@ export default {
           this.bookingDetail.name =
             response.data.name + ' ' + response.data.surname
           this.formSend.user = response.data
-          // console.log(response.data)
           this.$store.dispatch('bookingRoom/sendDataUser', response.data)
         }.bind(this)
       )
@@ -184,7 +174,6 @@ export default {
         function (response) {
           this.bookingDetail.room = response.data.code
           this.formSend.room = response.data
-          // console.log(response.data)
           this.$store.dispatch('bookingRoom/sendDataRoom', response.data)
         }.bind(this)
       )

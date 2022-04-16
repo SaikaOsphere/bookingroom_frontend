@@ -1,6 +1,5 @@
 <template>
   <div class="booking">
-    <!-- <b-container> -->
     <b-row>
       <b-col>
         <b-row>
@@ -51,14 +50,10 @@
         </b-row>
       </b-col>
       <b-col>
-        <!-- <b-button variant="primary" @click="filter()">ค้นหา</b-button>
-        <b-button variant="danger" @click="resetFilter()">รีเซ็ต</b-button> -->
         <b-button variant="primary" @click="filter()" v-if="!searched"
           >ค้นหา</b-button
         >
-        <b-button variant="danger" @click="filter()" v-else
-          >รีเซ็ต</b-button
-        >
+        <b-button variant="danger" @click="filter()" v-else>รีเซ็ต</b-button>
       </b-col>
       <b-col><b-button variant="primary">ประวัติการจอง</b-button></b-col>
     </b-row>
@@ -68,10 +63,6 @@
         <template #cell(ลำดับ)="data">
           {{ data.index + 1 }}
         </template>
-        <!-- <template #cell(building)="data">
-          {{ test }} //{{ getBuildingsName(data.value) }}
-          55555
-        </template> -->
 
         <template #cell(อุปกรณ์)="data">
           <ul>
@@ -91,7 +82,6 @@
         </template>
       </b-table>
     </b-row>
-    <!-- </b-container> -->
   </div>
 </template>
 <script>
@@ -153,41 +143,6 @@ export default {
     }
   },
   methods: {
-    getEquipment () {
-      api.get('http://localhost:3000/equipments').then(
-        function (response) {
-          this.equip = response.data
-          console.log(response.data)
-
-          for (let i = 0; i < this.rooms.length; i++) {
-            let temp = ''
-            for (let j = 0; j < this.rooms[i].equipment.length; j++) {
-              for (let k = 0; k < this.equip.length; k++) {
-                if (this.rooms[i].equipment[j] === this.equip[k]._id) {
-                  temp += this.equip[k].name
-                  if (k < this.equip.length - 1) {
-                    temp += ', '
-                  }
-                }
-              }
-            }
-            // console.log(temp)
-            this.rooms[i].equipment = temp
-          }
-
-          console.log(this.rooms)
-        }.bind(this)
-      )
-    },
-    getฺBuildingName (id) {
-      api
-        .get('http://localhost:3000/buildings/' + id)
-        .then(function (response) {
-          console.log(response.data.name)
-          this.test = response.data.name
-        })
-        .bind(this)
-    },
     getฺRooms () {
       api.get('http://localhost:3000/rooms').then(
         function (response) {
@@ -197,7 +152,9 @@ export default {
           this.getFloor(response)
           for (let i = 0; i < this.rooms.length; i++) {
             api
-              .get('http://localhost:3000/buildings/' + this.rooms[i].building._id)
+              .get(
+                'http://localhost:3000/buildings/' + this.rooms[i].building._id
+              )
               .then(
                 function (response) {
                   this.rooms[i].building = response.data
@@ -209,34 +166,38 @@ export default {
     },
     getFloor (response) {
       for (let i = 0; i < response.data.length; i++) {
-        let same = false
+        // Get floor list
+        let sameFloor = false
         const floor = {
           text: response.data[i].floor,
           value: response.data[i].floor
         }
         this.filterFloor.forEach((element) => {
           if (element.value === response.data[i].floor) {
-            same = true
+            sameFloor = true
           }
         })
 
-        if (!same) {
+        if (!sameFloor) {
           this.filterFloor.push(floor)
         }
-      }
-    },
-    getBuildings () {
-      api.get('http://localhost:3000/buildings').then(
-        function (response) {
-          for (let i = 0; i < response.data.length; i++) {
-            const building = {
-              text: response.data[i].name,
-              value: response.data[i].name
-            }
-            this.filterBuilding.push(building)
+
+        // Get building list
+        let sameBuilding = false
+        const build = {
+          text: response.data[i].building.name,
+          value: response.data[i].building.name
+        }
+        this.filterBuilding.forEach((element) => {
+          if (element.value === response.data[i].building.name) {
+            sameBuilding = true
           }
-        }.bind(this)
-      )
+        })
+
+        if (!sameBuilding) {
+          this.filterBuilding.push(build)
+        }
+      }
     },
     filter () {
       this.searched = !this.searched
@@ -303,7 +264,6 @@ export default {
     },
     resetFilter () {
       this.getฺRooms()
-      // this.getEquipment()
       this.filtered.building = ''
       this.filtered.floor = ''
       this.filtered.type = ''
@@ -320,14 +280,11 @@ export default {
       this.$router.push({ path: '/' })
     } else {
       this.getฺRooms()
-      this.getBuildings()
-      // this.getEquipment()
     }
   },
   computed: {
     isLogin () {
-      // this.$store.getters['auth/isLogin']
-      return true
+      return this.$store.getters['auth/isLogin']
     }
   }
 }

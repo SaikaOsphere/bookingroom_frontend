@@ -103,7 +103,7 @@ import VueCal from 'vue-cal'
 import 'vue-cal/dist/vuecal.css'
 import th from '@/locale/th'
 import getEvents from '@/services/event'
-import axios from 'axios'
+import api from '@/services/api'
 
 export default {
   data () {
@@ -180,7 +180,7 @@ export default {
       }
     },
     getBuilding () {
-      axios.get('http://localhost:3000/buildings/').then(
+      api.get('http://localhost:3000/buildings/').then(
         function (response) {
           console.log('data')
           console.log(this.detailRoom.building)
@@ -195,7 +195,7 @@ export default {
       )
     },
     getRoom () {
-      axios.get('http://localhost:3000/rooms/' + this.$store.state.idRoom).then(
+      api.get('http://localhost:3000/rooms/' + this.$store.state.idRoom).then(
         function (response) {
           console.log(response)
           this.detailRoom.capacity = response.data.capacity
