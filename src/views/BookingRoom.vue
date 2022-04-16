@@ -1,5 +1,8 @@
 <template>
   <div class="booking">
+    <b-row style="margin-bottom: 30px">
+      <h1>จองห้อง</h1>
+    </b-row>
     <b-row>
       <b-col>
         <b-row>

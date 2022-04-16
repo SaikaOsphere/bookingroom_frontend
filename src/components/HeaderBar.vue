@@ -78,5 +78,6 @@ export default {
   max-width: 100%;
   padding-left: 10%;
   padding-right: 10%;
+  background-color: rgba(214,181,86, 0.3);
 }
 </style>

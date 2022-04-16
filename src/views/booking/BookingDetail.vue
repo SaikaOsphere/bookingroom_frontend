@@ -1,6 +1,6 @@
 <template>
   <div>
-    <b-row>
+    <b-row style="margin-bottom: 30px">
       <h1>รายละเอียดเพิ่มเติม</h1>
     </b-row>
     <b-row>
