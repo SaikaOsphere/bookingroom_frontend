@@ -213,14 +213,6 @@ export default {
         equipment: '',
         approveres: ''
       },
-      approver: [
-        { text: 'Select One', value: null },
-        'approvers1',
-        'approvers2',
-        'approvers3',
-        'approvers4'
-      ],
-
       isAddNew: false
     }
   },
@@ -243,6 +235,7 @@ export default {
     validateApproveres () {
       return this.form.approveres !== ''
     }
+
   },
   methods: {
     addNew () {
@@ -253,7 +246,7 @@ export default {
       })
     },
     getFloorByBuildings (buildingId) {
-      if (buildingId !== '') {
+      if (this.validatebuilding) {
         const building = this.buildings.find((item) => item._id === buildingId)
         const floors = []
         console.log('building', building.floor)
@@ -326,6 +319,7 @@ export default {
       )
     }
   }
+
 }
 </script>
 <style></style>
