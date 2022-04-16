@@ -5,13 +5,13 @@
       <!-- <b-col class="data">
         <b-col cols="5">หมายเลขการจอง</b-col>
         <b-col>
-          <b-form-input v-model="Petitiondetail.id" disabled> </b-form-input>
+          <b-form-input v-model="bookings.id" disabled> </b-form-input>
         </b-col>
       </b-col> -->
       <b-col class="data">
         <b-col cols="5">ชื่อ-นามสกุล</b-col>
         <b-col>
-          <b-form-input v-model="Petitiondetail.name" disabled> </b-form-input>
+          <b-form-input v-model="name" disabled>  </b-form-input>
         </b-col>
       </b-col>
     </b-row>
@@ -19,13 +19,13 @@
       <b-col class="data">
         <b-col cols="4">ห้องที่จอง</b-col>
         <b-col>
-          <b-form-input v-model="Petitiondetail.room" disabled> </b-form-input>
+          <b-form-input v-model="booking.room.code" disabled> </b-form-input>
         </b-col>
       </b-col>
       <b-col class="data">
         <b-col cols="4">วันที่จอง</b-col>
         <b-col>
-          <b-form-input v-model="Petitiondetail.date" disabled>
+          <b-form-input v-model="datetime_reserve" disabled>
           </b-form-input>
         </b-col>
       </b-col>
@@ -34,14 +34,14 @@
       <b-col class="data">
         <b-col cols="4">เวลาเริ่ม</b-col>
         <b-col>
-          <b-form-input v-model="Petitiondetail.timeStart" disabled>
+          <b-form-input v-model="datetime_start" disabled>
           </b-form-input>
         </b-col>
       </b-col>
       <b-col class="data">
         <b-col cols="4">เวลาสิ้นสุด</b-col>
         <b-col>
-          <b-form-input v-model="Petitiondetail.timeEnd" disabled>
+          <b-form-input v-model="datetime_end" disabled>
           </b-form-input>
         </b-col>
       </b-col>
@@ -51,9 +51,9 @@
     </b-row >
     <b-row >
       <b-col
-        ><b-button class="button" variant="danger" to="/petition">ย้อนกลับ</b-button>
-        <b-button variant="info" to="/petition" @click="approvno(items.approve_status)">ไม่อนุญาติ</b-button>
-        <b-button class="button1" variant="info" to="/petition" @click="approv(items.approve_status)">อนุญาติ</b-button>
+        ><b-button class="button" variant="danger"  @click="resetStore() ">ย้อนกลับ</b-button>
+        <b-button variant="info" @click="approvno(items.approve_status)">ไม่อนุญาติ</b-button>
+        <b-button class="button1" variant="info"  @click="approv(items.approve_status)">อนุญาติ</b-button>
       </b-col>
     </b-row>
   </div>
@@ -63,34 +63,36 @@ import api from '@/services/api'
 export default {
   data () {
     return {
-      Petitiondetail: ''
+      booking: '',
+      name: '',
+      datetime_reserve: '',
+      datetime_start: '',
+      datetime_end: ''
     }
   },
   mounted () {
-    this.getcheckid()
-    this.getbookings()
-    this.getapprov()
+    this.getBooking()
   },
   methods: {
-    getbookings () {
-      api.get('http://localhost:3000/bookings').then(
+    getBooking () {
+      api.get('http://localhost:3000/bookings/approve/' + this.getBookingId).then(
         function (response) {
-          // console.log(response.data)
-          this.Petitiondetail.name = response.data.user
-          this.Petitiondetail.room = response.data.room
-          this.Petitiondetail.date = response.data.datetime_reserve
-          this.Petitiondetail.timeStart = response.data.datetime_start
-          this.Petitiondetail.timeEnd = response.data.datetime_end
-          this.Petitiondetail.approv = response.data.approves
+          console.log('bookings:', response.data)
+          this.booking = response.data
+          this.name = this.booking.user.name + ' ' + this.booking.user.surname
+          this.datetime_reserve = new Date(this.booking.datetime_reserve).toLocaleString()
+          this.datetime_start = new Date(this.booking.datetime_start).toLocaleString()
+          this.datetime_end = new Date(this.booking.datetime_end).toLocaleString()
         }.bind(this)
       )
     },
-    getcheckid () {
-      this.Petitiondetail._id = this.$store.state.idus
-      console.log(this.Petitiondetail)
-    },
-    getapprov () {
-      //  this.Petitiondetail.approv.find((item)=>item._id===)
+    resetStore () {
+      this.$store.dispatch('checkid/reset')
+    }
+  },
+  computed: {
+    getBookingId () {
+      return this.$store.getters['checkid/getBookingId']
     }
   }
 }

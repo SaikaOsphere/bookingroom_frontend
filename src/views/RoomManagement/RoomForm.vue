@@ -12,23 +12,31 @@
       @ok="handleOk"
     >
       <b-form @submit.stop.prevent="submit" @reset.prevent="reset">
-
         <!-- คณะ -->
         <b-form-group
           id="form-group-room-institution"
           label="ชื่อคณะ"
           label-for="room-institution"
         >
-          <b-form-select
+        <!-- อันใหม่ -->
+          <b-form-select v-model="form.institution"  :state="validateInstitution">
+            <option v-for="f in institutions" :value="f" :key="f.id" id="room-nameInstitutionInstitution">
+              {{ f.name }}
+            </option>
+          </b-form-select>
+        <!-- อันใหม่ -->
+
+          <!-- อันเดิม -->
+          <!-- <b-form-select
             type="text"
             id="room-nameInstitutionInstitution"
             v-model="form.institution"
             :options="institutions"
-            value-field="_id"
+            value-field="institutions{}"
             text-field="name"
             :state="validateInstitution"
           >
-          </b-form-select>
+          </b-form-select> -->
           <b-form-invalid-feedback :state="validateInstitution">
             ต้องเลือก 1 คณะ
           </b-form-invalid-feedback>
@@ -167,15 +175,13 @@
       </b-form>
       <b-card>
         <pre>
-          ชื่อคณะ {{ form.institution }}
+          จำนวนคนที่รองรับ {{ form.capacity }}
           ชื่อตึก {{ form.building }}
+          ชื่อคณะ {{ form.institution }}
           ชั้น {{ form.floor }}
-          อุปกณ์ {{ form.equipment }}
+          ชื่อห้อง {{ form.code }}
           ผู้พิจารณา {{ form.approveres }}
-          approveres
-          {{ approveres }}
-          institutions
-          {{ institutions }}
+          อุปกรณ์ {{ form.equipment }}
         </pre>
       </b-card>
     </b-modal>
@@ -232,7 +238,6 @@ export default {
     validateApproveres () {
       return this.form.approveres !== ''
     }
-
   },
   methods: {
     addNew () {
@@ -245,7 +250,9 @@ export default {
     getApproveresByInstitution (institutionId) {
       if (this.validateInstitution) {
         // ค้นหา approveres ที่ตรงกันกับ institutionId
-        const approveresMatch = this.approveres.filter((item) => item.institution._id === institutionId)
+        const approveresMatch = this.approveres.filter(
+          (item) => item.institution._id === institutionId
+        )
         console.log(approveresMatch)
         return approveresMatch
       }
@@ -253,7 +260,9 @@ export default {
     getFloorByBuildings () {
       if (this.validatebuilding) {
         // หาตึกที่เลือก
-        const building = this.buildings.find((item) => item._id === this.form.building)
+        const building = this.buildings.find(
+          (item) => item._id === this.form.building
+        )
 
         console.log('building', building)
         const floors = []
@@ -271,6 +280,7 @@ export default {
     },
     submit () {
       const room = JSON.parse(JSON.stringify(this.form))
+      console.log(room)
       room.floor = parseFloat(room.floor)
       room.capacity = parseFloat(room.capacity)
       this.$emit('save', room)
@@ -328,7 +338,6 @@ export default {
       )
     }
   }
-
 }
 </script>
 <style></style>
