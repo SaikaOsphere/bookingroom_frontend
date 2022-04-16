@@ -12,23 +12,6 @@
       @ok="handleOk"
     >
       <b-form @submit.stop.prevent="submit" @reset.prevent="reset">
-        <b-form-group
-          id="form-group-room-code"
-          label="ชื่อห้อง "
-          label-for="room-code"
-        >
-          <b-form-input
-            type="text"
-            id="room-code"
-            placeholder="IF,K,Q,AH"
-            v-model="form.code"
-            :state="validateName"
-          >
-          </b-form-input>
-          <b-form-invalid-feedback :state="validateName">
-            ชื่อห้องต้องมีตัวอักษรมากกว่าหรือเท่ากับ 5 ตัวอักษร
-          </b-form-invalid-feedback>
-        </b-form-group>
 
         <!-- คณะ -->
         <b-form-group
@@ -95,6 +78,24 @@
           </b-form-invalid-feedback>
         </b-form-group>
         <!-- จบชั้นตึก -->
+
+        <b-form-group
+          id="form-group-room-code"
+          label="ชื่อห้อง "
+          label-for="room-code"
+        >
+          <b-form-input
+            type="text"
+            id="room-code"
+            placeholder="IF,K,Q,AH"
+            v-model="form.code"
+            :state="validateName"
+          >
+          </b-form-input>
+          <b-form-invalid-feedback :state="validateName">
+            ชื่อห้องต้องมีตัวอักษรมากกว่าหรือเท่ากับ 5 ตัวอักษร
+          </b-form-invalid-feedback>
+        </b-form-group>
 
         <!-- จำนวนคน -->
         <b-form-group
