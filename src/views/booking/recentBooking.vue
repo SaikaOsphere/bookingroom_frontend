@@ -1,5 +1,8 @@
 <template>
   <div>
+    <b-row>
+      ประวัติการจอง
+    </b-row>
     <b-row align-v="stretch">
       <b-table :items="lists" :fields="fields">
         <template #cell(ลำดับ)="data">
@@ -162,7 +165,7 @@ export default {
       )
     },
     showDetail (data) {
-      console.log(data)
+      // console.log(data)
       let statusc
       if (data.status === 0) {
         statusc = 'Disapprove'
@@ -201,11 +204,6 @@ export default {
   computed: {
     isLogin () {
       return this.$store.getters['auth/isLogin']
-    },
-    timeFormat (time) {
-      const times = new Date(time).toISOString().slice(0, 10)
-      console.log(times)
-      return times
     },
     getCurrentUser () {
       // console.log(this.$store.state.auth.user)
