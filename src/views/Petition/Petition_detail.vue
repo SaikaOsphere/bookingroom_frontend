@@ -52,7 +52,7 @@
     <b-row >
       <b-col
         ><b-button class="button" variant="danger" to="/petition">ย้อนกลับ</b-button>
-        <b-button variant="danger" to="/petition">ไม่อนุญาติ</b-button>
+        <b-button variant="info" to="/petition">ไม่อนุญาติ</b-button>
         <b-button class="button1" variant="info" to="/petition">อนุญาติ</b-button>
       </b-col>
     </b-row>
