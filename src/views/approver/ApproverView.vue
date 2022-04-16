@@ -56,7 +56,7 @@ export default {
     getApprovers () {
       api.get('http://localhost:3000/approveres').then(
         function (response) {
-          console.log(response.data)
+          // console.log(response.data)
           this.items = response.data
         }.bind(this)
       )
@@ -113,6 +113,8 @@ export default {
   },
   mounted () {
     this.getApprovers()
+    this.getUsers()
+    this.getInstitutions()
   }
 }
 </script>

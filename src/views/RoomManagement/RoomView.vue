@@ -51,6 +51,7 @@ import RoomForm from './RoomForm.vue'
 export default {
   components: {
     RoomForm
+
   },
   data () {
     return {

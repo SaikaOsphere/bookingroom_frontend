@@ -12,7 +12,7 @@
       <b-form @submit.stop.prevent="submit" @reset.prevent="reset">
         <b-form-group
           id="form-group-approver-name"
-          label="ลำดับผู้อนุมัติ"
+          label="ชื่อลำดับผู้อนุมัติ"
           label-for="approver-name"
         >
           <b-form-input
@@ -36,11 +36,12 @@
           <b-form-select
             type="text"
             id="institution-name"
-            placeholder="InstitutionTest"
+            :options="institutions"
+            text-field="name"
+            value-field="_id"
             v-model="form.institution"
             :state="validateInstitution"
           >
-          <option value=""></option>
           </b-form-select>
           <b-form-invalid-feedback :state="validateInstitution">
             Test Institution
@@ -59,7 +60,7 @@
             placeholder="approveresTest"
             :state="validateApproveres"
           >
-          <option value=""></option>
+            <option value=""></option>
           </b-form-select>
           <b-form-invalid-feedback :state="validateApproveres">
             Test Approver
@@ -68,7 +69,7 @@
       </b-form>
       <b-card>
         <pre>
-        {{ form }}
+        institutions {{ institutions }}
       </pre
         >
       </b-card>
@@ -77,19 +78,18 @@
 </template>
 <script>
 export default {
-  props: [
+  props:
     {
       approver: Object,
-      users: [Object],
-      institutions: [Object]
-    }
-  ],
+      users: Array,
+      institutions: Array
+    },
   data () {
     return {
       form: {
         _id: '',
         name: '',
-        institutions: '',
+        institution: '',
         approveres: ''
       },
       isAddNew: false
