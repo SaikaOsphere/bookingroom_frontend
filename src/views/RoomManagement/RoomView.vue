@@ -82,27 +82,32 @@ export default {
           this.items = response.data
         }.bind(this)
       )
-
+    },
+    getApprovers () {
       // ดึงผู้พิจารณา
       api.get('http://localhost:3000/approveres').then(
         function (response) {
           this.approveres = response.data
         }.bind(this)
       )
-
+    },
+    getInstitutions () {
       // ดึงคณะ
       api.get('http://localhost:3000/institutions').then(
         function (response) {
           this.institutions = response.data
         }.bind(this)
       )
-
+    },
+    getBuildings () {
       // ดึงตึก
       api.get('http://localhost:3000/buildings').then(
         function (response) {
           this.buildings = response.data
         }.bind(this)
       )
+    },
+    getequipments () {
       // ดึงอุปกรณ์
       api.get('http://localhost:3000/equipments').then(
         function (response) {
@@ -151,6 +156,10 @@ export default {
   },
   mounted () {
     this.getRoomManagement()
+    this.getApprovers()
+    this.getInstitutions()
+    this.getBuildings()
+    this.getequipments()
   }
 }
 </script>
