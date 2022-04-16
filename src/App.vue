@@ -6,11 +6,24 @@
     <div class=""></div>
     <b-container fluid style="height: 100%; padding: 0px 0px 100px 0px">
       <b-row>
-        <div
-          style="padding: 0px 0px 0px 0px; position: fixed; z-index: 1000"
-          v-if="showSidetab"
-        >
-          <div v-if="showSidetab"><MenuSideBar v-if="isLogin" /></div>
+        <div v-if="isLogin">
+          <div
+            style="padding: 0px 0px 0px 0px; position: fixed; z-index: 1000"
+            v-if="showSidetab"
+          >
+            <b-button @click="toggleSidetab()" variant="warning"
+              >ซ่อนแถบ</b-button
+            >
+            <div v-if="showSidetab"><MenuSideBar v-if="isLogin" /></div>
+          </div>
+          <div
+            style="padding: 0px 0px 0px 80px; position: fixed; z-index: 1000"
+            v-else
+          >
+            <b-button @click="toggleSidetab()" variant="warning"
+              >แสดงแถบ</b-button
+            >
+          </div>
         </div>
         <!-- <router-view style="padding: 0px 10% 0px 10%" /> -->
         <b-col style="padding: 50px 0px 0px 0px">
@@ -37,7 +50,9 @@
     </div>
     <div v-else>
       <a href="#"
-        ><div @click="toggleRouter()" class="bottom-hidden"  v-if="dev">Show</div></a
+        ><div @click="toggleRouter()" class="bottom-hidden" v-if="dev">
+          Show
+        </div></a
       >
     </div>
   </div>
