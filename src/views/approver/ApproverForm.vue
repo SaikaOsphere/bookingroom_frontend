@@ -33,11 +33,22 @@
           label="ชื่อหน่วยงาน"
           label-for="institution-name"
         >
-          <b-form-select v-model="form.institution"  :state="validateInstitution">
-            <option v-for="f in institutions" :value="f" :key="f.id" id="room-nameInstitutionInstitution">
+          <b-form-select v-model="form.institution" :state="validateInstitution">
+            <option v-for="f in institutions" :value="f" :key="f.id" id="institution-name">
               {{ f.name }}
             </option>
           </b-form-select>
+          <!-- <b-form-select
+            type="text"
+            id="institution-name"
+            :options="institutions"
+            text-field="name"
+            label="name"
+            value-field="_id"
+            v-model="form.institution"
+            :state="validateInstitution"
+          >
+          </b-form-select> -->
           <b-form-invalid-feedback :state="validateInstitution">
             Choose Institution
           </b-form-invalid-feedback>
@@ -114,7 +125,7 @@ export default {
       return this.form.name !== '' && this.form.name.length >= 5
     },
     validateInstitution () {
-      return this.form.institution !== '' && this.form.institution.length >= 5
+      return this.form.institution !== ''
     },
     validateApproveres () {
       return this.form.approveres !== '' && this.form.approveres.length >= 5
