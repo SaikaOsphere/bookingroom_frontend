@@ -21,7 +21,7 @@ import Building from '../views/building/BuildingView.vue'
 import Approver from '../views/approver/ApproverView.vue'
 
 import Petitiondetail from '../views/Petition/Petition_detail.vue'
-
+import Users from '../views/users/UsersView.vue'
 Vue.use(VueRouter)
 
 const routes = [
@@ -89,6 +89,11 @@ const routes = [
     path: '/pettitiondetail',
     name: 'petitiondetail',
     component: Petitiondetail
+  },
+  {
+    path: '/users',
+    name: 'users',
+    component: Users
   }
 ]
 
