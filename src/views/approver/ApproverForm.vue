@@ -66,10 +66,27 @@
             Test Approver
           </b-form-invalid-feedback>
         </b-form-group>
+
+        <multiselect
+          v-model="form.appproveres"
+          :options="users"
+          :multiple="true"
+          :close-on-select="false"
+          :clear-on-select="false"
+          :preserve-search="true"
+          placeholder="Pick some"
+          label="name"
+          track-by="_id"
+          :preselect-first="true"
+        >
+          >
+        </multiselect>
       </b-form>
       <b-card>
         <pre>
         institutions {{ institutions }}
+        ชื่อ User {{ form.approveres }}
+
       </pre
         >
       </b-card>
@@ -77,13 +94,16 @@
   </div>
 </template>
 <script>
+import Multiselect from 'vue-multiselect'
 export default {
-  props:
-    {
-      approver: Object,
-      users: Array,
-      institutions: Array
-    },
+  components: {
+    Multiselect
+  },
+  props: {
+    approver: Object,
+    users: Array,
+    institutions: Array
+  },
   data () {
     return {
       form: {
