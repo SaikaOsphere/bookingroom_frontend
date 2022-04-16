@@ -63,9 +63,9 @@
             id="room-code"
             placeholder="Faculty of Informatics"
             v-model="form.building"
+            :options="buildings"
             text-field="name"
             value-field="_id"
-            :options="buildings"
             :state="validatebuilding"
           >
           </b-form-select>
@@ -130,7 +130,13 @@
             track-by="_id"
             :preselect-first="true"
           >
-          <template slot="selection" slot-scope="{ values, isOpen }"><span class="multiselect__single" v-if="values.length &amp;&amp; !isOpen">{{ values.length }} อุปกรณ์ ถูกเลือกแล้ว</span></template>
+            <template slot="selection" slot-scope="{ values, isOpen }"
+              ><span
+                class="multiselect__single"
+                v-if="values.length &amp;&amp; !isOpen"
+                >{{ values.length }} อุปกรณ์ ถูกเลือกแล้ว</span
+              ></template
+            >
           </multiselect>
         </b-form-group>
         <!-- จบ -->
@@ -163,8 +169,8 @@
           ชื่อคณะ {{ form.institution }}
           ชื่อตึก {{ form.building }}
           ชั้น {{ form.floor }}
-          อุปกณ์ {{form.equipment}}
-          ผู้พิจารณา {{form.approveres}}
+          อุปกณ์ {{ form.equipment }}
+          ผู้พิจารณา {{ form.approveres }}
           approveres
           {{ approveres }}
           institutions
@@ -243,16 +249,19 @@ export default {
         return approveresMatch
       }
     },
-    getFloorByBuildings (buildingId) {
+    getFloorByBuildings () {
       if (this.validatebuilding) {
-        const building = this.buildings.find((item) => item._id === buildingId)
-        const floors = []
+        // หาตึกที่เลือก
+        const building = this.buildings.find((item) => item._id === this.form.building)
 
+        console.log('building', building)
+        const floors = []
         for (let i = 1; i <= building.floor; i++) {
           floors.push(i)
         }
         return floors
       } else {
+        console.log(this.validatebuilding)
         return []
       }
     },
@@ -283,14 +292,15 @@ export default {
         this.reset()
       } else {
         // Edit
+        console.log('room', this.room)
         this.form._id = this.room._id
         this.form.code = this.room.code
-        this.form.institution = this.room.institution
-        this.form.building = this.room.building
+        this.form.institution = this.room.institution._id
+        this.form.building = this.room.building._id
         this.form.floor = this.room.floor
         this.form.capacity = this.room.capacity
         this.form.equipment = this.room.equipment
-        this.form.approveres = this.room.approveres
+        this.form.approveres = this.room.approveres._id
       }
     },
     resetModal (evt) {
