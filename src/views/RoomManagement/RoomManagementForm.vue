@@ -41,7 +41,7 @@
             id="room-nameInstitutionInstitution"
             placeholder="Faculty of Informatics"
             v-model="form.nameInstitution"
-            :options="nameInstitutions"
+            :options="institutionName"
             :state="validateInstitution"
           >
           </b-form-select>
@@ -135,11 +135,11 @@
             :options="equipments"
             :aria-describedby="ariaDescribedby"
           > -->
-          <!-- <b-form-checkbox value="TV"> TV</b-form-checkbox>
+        <!-- <b-form-checkbox value="TV"> TV</b-form-checkbox>
           <b-form-checkbox value="Projecter"> Projecter</b-form-checkbox>
           <b-form-checkbox value="Microphone"> Microphone</b-form-checkbox>
           <b-form-checkbox value="Presentation"> Presentation</b-form-checkbox> -->
-          <!-- </b-form-checkbox-group>
+        <!-- </b-form-checkbox-group>
         </b-form-group> -->
         <!-- จบ -->
 
@@ -166,10 +166,6 @@
       </b-form>
       <b-card>
         <pre>
-        {{ form }}
-        {{ buildings }}
-        {{ approveres }}
-        {{ institutions }}
       </pre
         >
       </b-card>
@@ -180,9 +176,9 @@
 export default {
   props: {
     room: Object,
-    buildings: Object,
-    approveres: Object,
-    institutions: Object
+    buildings: Array,
+    approveres: Array,
+    institutions: Array
   },
   data () {
     return {
@@ -196,13 +192,7 @@ export default {
         equipment: [],
         approveres: ''
       },
-      nameInstitutions: [
-        { text: 'Select One', value: null },
-        'Faculty of Informatics',
-        'Faculty of Business Administration',
-        'Faculty of Science',
-        'Faculty of Health Sciences'
-      ],
+      institutionName: [],
       buildingnames: [
         { text: 'Select One', value: null },
         'Faculty of Informatics',
@@ -268,7 +258,19 @@ export default {
         this.isAddNew = false
       })
     },
+    fliterNameInstitutions () {
+      for (let i = 0; i < this.institutions.length; i++) {
+        const institution = {
+          text: this.institutions[i].name,
+          value: this.institutions[i].name
+        }
+        console.log(institution)
+        this.institutionName.push(institution)
+      }
+    },
     show () {
+      this.fliterNameInstitutions()
+
       this.$refs.modalRoom.show()
     },
     submit () {
