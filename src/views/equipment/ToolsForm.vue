@@ -69,7 +69,7 @@ export default {
       })
     },
     show () {
-      this.$refs.modalBuilding.show()
+      this.$refs.modalEquipment.show()
     },
     submit () {
       const equipment = JSON.parse(JSON.stringify(this.form))

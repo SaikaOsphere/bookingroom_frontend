@@ -19,15 +19,15 @@
           label-for="room-institution"
         >
         <!-- อันใหม่ -->
-          <b-form-select v-model="form.institution"  :state="validateInstitution">
+          <!-- <b-form-select v-model="form.institution"  :state="validateInstitution">
             <option v-for="f in institutions" :value="f" :key="f.id" id="room-nameInstitutionInstitution">
               {{ f.name }}
             </option>
-          </b-form-select>
+          </b-form-select> -->
         <!-- อันใหม่ -->
 
           <!-- อันเดิม -->
-          <!-- <b-form-select
+          <b-form-select
             type="text"
             id="room-nameInstitutionInstitution"
             v-model="form.institution"
@@ -36,7 +36,7 @@
             text-field="name"
             :state="validateInstitution"
           >
-          </b-form-select> -->
+          </b-form-select>
           <b-form-invalid-feedback :state="validateInstitution">
             ต้องเลือก 1 คณะ
           </b-form-invalid-feedback>
