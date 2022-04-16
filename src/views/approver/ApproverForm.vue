@@ -38,6 +38,7 @@
             id="institution-name"
             :options="institutions"
             text-field="name"
+            label="name"
             value-field="_id"
             v-model="form.institution"
             :state="validateInstitution"
@@ -84,8 +85,8 @@
       </b-form>
       <b-card>
         <pre>
-        <!-- institutions {{ institutions }} -->
-        <!-- ชื่อ User {{ approveres }} -->
+        institutions {{ form.institution }}
+        <!-- test {{form.approveres}} -->
         {{ form }}
       </pre>
       </b-card>
