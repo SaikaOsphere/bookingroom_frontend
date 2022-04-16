@@ -1,6 +1,6 @@
 <template>
   <div>
-     <h1>จัดการหน่วยงาน</h1>
+     <h1 style="color: black;">จัดการหน่วยงาน</h1>
      <b-row>
         <b-col class="text-right">
           <InstitutionForm
@@ -15,7 +15,7 @@
         {{ data.index + 1 }}
       </template>
       <template #cell(การดำเนินการ)="data">
-        <b-button size="sm" class="mr-2" variant="info"   @click = "edit(data.item)">เเก้ไข</b-button>
+        <b-button size="sm" class="mr-2" variant="warning"   @click = "edit(data.item)">เเก้ไข</b-button>
         <b-button size="sm" class="mr-2" variant="danger" @click = "deleteItem(data.item)" >ลบ</b-button>
       </template>
 

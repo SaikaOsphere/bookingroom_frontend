@@ -1,6 +1,6 @@
 <template>
   <div>
-    <h1>รายการคำร้อง</h1>
+    <h1 style="color: black;">รายการคำร้อง</h1>
     <b-table :items="items" :fields="fields" striped responsive="sm">
       <template #cell(ลำดับการอนุมัติ)="data">
         {{ data.index + 1 }}

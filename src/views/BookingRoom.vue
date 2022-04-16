@@ -1,7 +1,7 @@
 <template>
   <div class="booking">
     <b-row style="margin-bottom: 30px">
-      <h1>จองห้อง</h1>
+      <h1 style="color: black">จองห้อง</h1>
     </b-row>
     <b-row>
       <b-col>
@@ -79,7 +79,7 @@
         </template>
 
         <template #cell(การดำเนินการ)="{ item }">
-          <b-button size="sm" class="mr-2" @click="sending(item)"
+          <b-button size="sm" class="mr-2" variant="light" @click="sending(item)"
             >รายละเอียด</b-button
           >
         </template>

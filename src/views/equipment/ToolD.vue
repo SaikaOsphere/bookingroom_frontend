@@ -1,11 +1,11 @@
 <template>
   <div>
-    <h1>การจัดการอุปกรณ์</h1>
+    <h1 style="color: black;">การจัดการอุปกรณ์</h1>
 
     <b-row>
       <b-col class="text-right">
         <ToolForm
-          :building="selectedItem"
+          :equipment="selectedItem"
           ref="toolForm"
           @save="saveTool"
         ></ToolForm>
@@ -17,7 +17,7 @@
         {{ data.index + 1 }}
       </template>
       <template #cell(การดำเนินการ)="data">
-        <b-button size="sm" class="mr-2" variant="info" @click="edit(data.item)"
+        <b-button size="sm" class="mr-2" variant="warning" @click="edit(data.item)"
           >เเก้ไข</b-button
         >
         <b-button
@@ -43,7 +43,6 @@ export default {
     return {
       fields: [
         'ลำดับ',
-        { key: 'code', label: 'รหัส' },
         { key: 'name', label: 'ชื่อ' },
         'การดำเนินการ'
       ],
@@ -53,16 +52,16 @@ export default {
   },
   methods: {
     getTools () {
-      api.get('http://localhost:3000/tools').then(
+      api.get('http://localhost:3000/equipment').then(
         function (response) {
           this.items = response.data
         }.bind(this)
       )
     },
-    saveTool (tool) {
-      if (tool._id === '') {
+    saveTool (equipment) {
+      if (equipment._id === '') {
         api
-          .post('http://localhost:3000/tools', tool)
+          .post('http://localhost:3000/equipment', equipment)
           .then(
             function (response) {
               this.getTools()
@@ -71,7 +70,7 @@ export default {
           .catch(() => {})
       } else {
         api
-          .put('http://localhost:3000/tools/' + tool._id, tool)
+          .put('http://localhost:3000/equipment/' + equipment._id, equipment)
           .then(
             function (response) {
               this.getTools()
@@ -91,7 +90,7 @@ export default {
     deleteItem (item) {
       // console.log(item)
       if (confirm(`ต้องการลบตึกชื่อ ${item.name} จริงหรือเปล่า ?`)) {
-        api.delete('http://localhost:3000/tools/' + item._id).then(
+        api.delete('http://localhost:3000/equipment/' + item._id).then(
           function (response) {
             this.getTools()
           }.bind(this)

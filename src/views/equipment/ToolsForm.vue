@@ -10,25 +10,6 @@
       @ok="handleOk"
     >
       <b-form @submit.stop.prevent="submit" @reset.prevent="reset">
-        <!-- รหัสอุปกรณ์ -->
-        <b-form-group
-          id="form-group-equipment-name"
-          label="รหัสอุปกรณ์"
-          label-for="equipment-code"
-        >
-          <b-form-input
-            type="text"
-            id="equipment-code"
-            placeholder="Code : "
-            v-model="form.code"
-            :state="validateCode"
-          >
-          </b-form-input>
-          <b-form-invalid-feedback :state="validateCode">
-            รหัสต้องมากกว่าหรือเท่ากับ 4 ตัวอักษร
-          </b-form-invalid-feedback>
-        </b-form-group>
-        <!-- จบรหัสอุปกรณ์ -->
 
         <!-- ชื่ออุปกรณ์ -->
         <b-form-group
@@ -63,22 +44,18 @@
 <script>
 export default {
   props: {
-    building: Object
+    equipment: Object
   },
   data () {
     return {
       form: {
         _id: '',
-        code: '',
         name: ''
       },
       isAddNew: false
     }
   },
   computed: {
-    validateCode () {
-      return this.form.code !== '' && this.form.code.length >= 4
-    },
     validateName () {
       return this.form.name !== '' && this.form.name.length >= 5
     }
@@ -95,9 +72,8 @@ export default {
       this.$refs.modalBuilding.show()
     },
     submit () {
-      const building = JSON.parse(JSON.stringify(this.form))
-      building.floor = parseFloat(building.floor)
-      this.$emit('save', building)
+      const equipment = JSON.parse(JSON.stringify(this.form))
+      this.$emit('save', equipment)
       this.reset()
     },
     reset () {
@@ -112,9 +88,8 @@ export default {
         this.reset()
       } else {
         // Edit
-        this.form._id = this.building._id
-        this.form.code = this.building.code
-        this.form.name = this.building.name
+        this.form._id = this.equipment._id
+        this.form.name = this.equipment.name
       }
     },
     resetModal (evt) {
@@ -131,7 +106,7 @@ export default {
       })
     },
     validateForm () {
-      return this.validateName && this.validateCode
+      return this.validateName
     }
   }
 }

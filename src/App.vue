@@ -1,14 +1,14 @@
 <template>
+<body class="bg">
   <div id="app">
-    <b-container fluid style="padding: 0px 0px 0px 0px">
+    <b-container fluid style="padding: 0px 0px 0px 0px;background-color: white">
       <NavBar v-if="showHeader"
     /></b-container>
-    <div class=""></div>
-    <b-container fluid style="height: 100%; padding: 0px 0px 100px 0px">
+    <b-container fluid style="height: 100%; padding: 0px 0px 100px 0px;">
       <b-row>
         <div v-if="isLogin">
           <div
-            style="padding: 0px 0px 0px 0px; position: fixed; z-index: 1000"
+            style="padding-top: 1.5%;margin-left: 1.5% ; position: fixed; z-index: 1000"
             v-if="showSidetab"
           >
             <b-button @click="toggleSidetab()" variant="warning"
@@ -17,7 +17,7 @@
             <div v-if="showSidetab"><MenuSideBar v-if="isLogin" /></div>
           </div>
           <div
-            style="padding: 0px 0px 0px 80px; position: fixed; z-index: 1000"
+            style="padding-top: 1.5%;margin-left: 5.2% ; position: fixed; z-index: 1000"
             v-else
           >
             <b-button @click="toggleSidetab()" variant="warning"
@@ -56,6 +56,7 @@
       >
     </div>
   </div>
+</body>
 </template>
 
 <script>
@@ -142,5 +143,53 @@ nav a {
 
 nav a.router-link-exact-active {
   color: #42b983;
+}
+/* .bg {
+  background: rgb(28,55,150);
+  background: linear-gradient(299deg, rgba(28,55,150,1) 0%, rgba(152,129,158,1) 0%, rgba(214,179,218,1) 16%, rgba(237,183,183,1) 28%, rgba(232,202,202,1) 41%, rgba(210,191,174,0.5438550420168067) 57%, rgba(221,221,186,1) 82%, rgba(0,255,248,1) 100%);
+  width: 100%;
+  min-height: 100vh;
+  position: relative;
+  float: right;
+} */
+
+body {
+  background: #1a1e23;
+  margin: 0;
+}
+
+.bg {
+    background: linear-gradient(299deg, rgba(28,55,150,1) 0%, rgba(152,129,158,1) 0%, rgba(214,179,218,1) 16%, rgba(237,183,183,1) 28%, rgba(232,202,202,1) 41%, rgba(221,221,186,1) 82%, rgba(0,255,248,1) 100%);
+    background-size: 400% 400%;
+    width: 100%;
+    min-height: 100vh;
+    position: relative;
+    float: right;
+    -webkit-animation: gradient 15s ease infinite;
+            animation: gradient 15s ease infinite;
+}
+
+@-webkit-keyframes gradient {
+    0% {
+        background-position: 0% 50%;
+    }
+    50% {
+        background-position: 100% 50%;
+    }
+    100% {
+        background-position: 0% 50%;
+    }
+}
+
+@keyframes gradient {
+    0% {
+        background-position: 0% 50%;
+    }
+    50% {
+        background-position: 100% 50%;
+    }
+    100% {
+        background-position: 0% 50%;
+    }
 }
 </style>

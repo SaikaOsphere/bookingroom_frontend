@@ -1,6 +1,6 @@
 <template>
   <div>
-    <h1>การจัดการห้อง</h1>
+    <h1 style="color: black;">การจัดการห้อง</h1>
 
     <b-row>
       <b-col class="text-right">
@@ -29,7 +29,7 @@
       </template>
 
       <template #cell(ดำเนินการ)="data">
-        <b-button size="sm" class="mr-2" variant="info" @click="edit(data.item)"
+        <b-button size="sm" class="mr-2" variant="warning" @click="edit(data.item)"
           >เเก้ไข</b-button
         >
         <b-button

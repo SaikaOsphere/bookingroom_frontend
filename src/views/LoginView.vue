@@ -1,6 +1,6 @@
 <template>
-  <div class="login">
-    <div class="bg">
+<body>
+    <div class="login">
       <b-card img-alt="Image" class="mb-2 center backgroundformLogin">
         <!-- <iframe
         width="275"
@@ -50,8 +50,8 @@
               </b-form-group>
               <b-button type="submit" variant="primary" class="m-2">Login</b-button>
               <b-button type="reset" variant="danger">Reset</b-button>
-              {{ $store.state.auth.userLogin }}
-              {{ $store.getters['auth/isLogin'] }}
+              <!-- {{ $store.state.auth.userLogin }}
+              {{ $store.getters['auth/isLogin'] }} -->
             </b-form>
           </div>
         </b-card-text>
@@ -73,7 +73,9 @@
       </b-col>
     </b-row>
   </b-card> -->
-  </div>
+
+</body>
+
 </template>
 <script>
 export default {
@@ -116,7 +118,7 @@ export default {
   background: #fff;
   color: rgb(0, 0, 0);
   width: 600px;
-  height: 400px;
+  height: 350px;
   background-repeat: no-repeat;
   background-origin: content-box;
   border-radius: 25px;
@@ -124,6 +126,8 @@ export default {
 }
 .bg {
   background: url('../assets/wallpaperLogin.jpg') no-repeat;
+  width: 750px;
+  height: 750px;
 }
 
 .borderInput {
@@ -132,7 +136,7 @@ export default {
   margin-right: 500px;
 }
 .formLogin {
-  padding-top: 85px;
+  padding-top: 55px;
   padding-left: 150px;
 }
 </style>
