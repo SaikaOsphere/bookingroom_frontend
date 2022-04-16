@@ -117,36 +117,22 @@
         <!-- จบ -->
 
         <!-- รายการอุปกรณ์ -->
-        <b-form-group label="รายการอุปกรณ์" v-slot="{ ariaDescribedby }">
-          <b-form-checkbox-group
-            id="checkbox-group-1"
+        <b-form-group label="รายการอุปกรณ์">
+          <multiselect
+            type="text"
             v-model="form.equipment"
             :options="equipments"
-            text-field="name"
-            value-field="_id"
-            value="name"
-            :aria-describedby="ariaDescribedby"
-          ></b-form-checkbox-group>
+            :multiple="true"
+            :close-on-select="false"
+            :preserve-search="true"
+            placeholder="Pick some"
+            label="name"
+            track-by="_id"
+            :preselect-first="true"
+          >
+          <template slot="selection" slot-scope="{ values, isOpen }"><span class="multiselect__single" v-if="values.length &amp;&amp; !isOpen">{{ values.length }} options selected</span></template>
+          </multiselect>
         </b-form-group>
-        <!-- <b-form-group
-          id="form-group-room-equipment"
-          label="รายการอุปกรณ์ "
-          label-for="room-equipment"
-          v-slot="{ ariaDescribedby }"
-        >
-          <b-form-checkbox-group
-            id="room-equipment"
-            placeholder="รายการอุปกรณ์ : "
-            v-model="form.equipment"
-            :options="equipments"
-            :aria-describedby="ariaDescribedby"
-          > -->
-        <!-- <b-form-checkbox value="TV"> TV</b-form-checkbox>
-          <b-form-checkbox value="Projecter"> Projecter</b-form-checkbox>
-          <b-form-checkbox value="Microphone"> Microphone</b-form-checkbox>
-          <b-form-checkbox value="Presentation"> Presentation</b-form-checkbox> -->
-        <!-- </b-form-checkbox-group>
-        </b-form-group> -->
         <!-- จบ -->
 
         <!-- ลำดับผู้พิจารณา -->
@@ -189,7 +175,11 @@
   </div>
 </template>
 <script>
+import Multiselect from 'vue-multiselect'
 export default {
+  components: {
+    Multiselect
+  },
   props: {
     room: Object,
     buildings: Array,
