@@ -50,9 +50,17 @@
           </b-col>
         </b-row>
       </b-col>
-      <b-col
-        ><b-button variant="primary" @click="filter()">ค้นหา</b-button></b-col
-      >
+      <b-col>
+        <!-- <b-button variant="primary" @click="filter()">ค้นหา</b-button>
+        <b-button variant="danger" @click="resetFilter()">รีเซ็ต</b-button> -->
+        <b-button variant="primary" @click="filter()" v-if="!searched"
+          >ค้นหา</b-button
+        >
+        <b-button variant="danger" @click="filter()" v-else
+          >รีเซ็ต</b-button
+        >
+      </b-col>
+      <b-col><b-button variant="primary">ประวัติการจอง</b-button></b-col>
     </b-row>
 
     <b-row align-v="stretch">
@@ -140,7 +148,8 @@ export default {
         size: '',
         coderoom: ''
       },
-      equip: []
+      equip: [],
+      searched: false
     }
   },
   methods: {
@@ -188,10 +197,10 @@ export default {
           this.getFloor(response)
           for (let i = 0; i < this.rooms.length; i++) {
             api
-              .get('http://localhost:3000/buildings/' + this.rooms[i].building)
+              .get('http://localhost:3000/buildings/' + this.rooms[i].building._id)
               .then(
                 function (response) {
-                  this.rooms[i].building = response.data.name
+                  this.rooms[i].building = response.data
                 }.bind(this)
               )
           }
@@ -230,6 +239,7 @@ export default {
       )
     },
     filter () {
+      this.searched = !this.searched
       if (
         this.filtered.building === '' &&
         this.filtered.floor === '' &&
@@ -238,16 +248,16 @@ export default {
         this.filtered.coderoom === ''
       ) {
         this.getฺRooms()
-        this.getEquipment()
+        // this.getEquipment()
       } else {
         console.log(this.filtered.size)
         if (this.rooms.length < this.allRooms) {
           this.getฺRooms()
-          this.getEquipment()
+          // this.getEquipment()
         }
         if (this.filtered.building !== '') {
           for (let i = 0; i < this.rooms.length; i++) {
-            if (this.filtered.building !== this.rooms[i].building) {
+            if (this.filtered.building !== this.rooms[i].building.name) {
               this.rooms.splice(i, 1)
               i--
             }
@@ -291,6 +301,15 @@ export default {
         }
       }
     },
+    resetFilter () {
+      this.getฺRooms()
+      // this.getEquipment()
+      this.filtered.building = ''
+      this.filtered.floor = ''
+      this.filtered.type = ''
+      this.filtered.size = ''
+      this.filtered.coderoom = ''
+    },
     sending (item) {
       this.$store.dispatch('bookingRoom/sendRoom', item._id)
       this.$router.push({ path: '/bookingRoomDetail' })
@@ -307,7 +326,8 @@ export default {
   },
   computed: {
     isLogin () {
-      return this.$store.getters['auth/isLogin']
+      // this.$store.getters['auth/isLogin']
+      return true
     }
   }
 }
