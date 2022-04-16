@@ -63,16 +63,7 @@ import api from '@/services/api'
 export default {
   data () {
     return {
-      Petitiondetail: '',
-      // Petitiondetail: {
-      //   _id: {},
-      //   name: '',
-      //   room: {},
-      //   date: '',
-      //   timeStart: '',
-      //   timeEnd: ''
-      // },
-      items: []
+      Petitiondetail: ''
     }
   },
   mounted () {
@@ -99,7 +90,7 @@ export default {
       console.log(this.Petitiondetail)
     },
     getapprov () {
-       this.Petitiondetail.approv.find((item)=>item._id===)
+      //  this.Petitiondetail.approv.find((item)=>item._id===)
     }
   }
 }
