@@ -1,5 +1,6 @@
 <template>
   <div>
+     <h1>จัดการหน่วยงาน</h1>
      <b-row>
         <b-col class="text-right">
           <InstitutionForm
@@ -9,7 +10,6 @@
           ></InstitutionForm>
         </b-col>
       </b-row>
-    <h1>จัดการหน่วยงาน</h1>
     <b-table :items="items" :fields="fields" striped responsive="sm">
        <template #cell(ลำดับ)="data">
         {{ data.index + 1 }}
