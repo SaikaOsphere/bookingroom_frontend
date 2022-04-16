@@ -130,7 +130,7 @@
             track-by="_id"
             :preselect-first="true"
           >
-          <template slot="selection" slot-scope="{ values, isOpen }"><span class="multiselect__single" v-if="values.length &amp;&amp; !isOpen">{{ values.length }} options selected</span></template>
+          <template slot="selection" slot-scope="{ values, isOpen }"><span class="multiselect__single" v-if="values.length &amp;&amp; !isOpen">{{ values.length }} อุปกรณ์ ถูกเลือกแล้ว</span></template>
           </multiselect>
         </b-form-group>
         <!-- จบ -->
