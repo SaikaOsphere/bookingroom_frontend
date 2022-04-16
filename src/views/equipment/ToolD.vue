@@ -52,7 +52,7 @@ export default {
   },
   methods: {
     getTools () {
-      api.get('http://localhost:3000/equipment').then(
+      api.get('http://localhost:3000/equipments').then(
         function (response) {
           this.items = response.data
         }.bind(this)
@@ -61,7 +61,7 @@ export default {
     saveTool (equipment) {
       if (equipment._id === '') {
         api
-          .post('http://localhost:3000/equipment', equipment)
+          .post('http://localhost:3000/equipments', equipment)
           .then(
             function (response) {
               this.getTools()
@@ -70,7 +70,7 @@ export default {
           .catch(() => {})
       } else {
         api
-          .put('http://localhost:3000/equipment/' + equipment._id, equipment)
+          .put('http://localhost:3000/equipments/' + equipment._id, equipment)
           .then(
             function (response) {
               this.getTools()
@@ -90,7 +90,7 @@ export default {
     deleteItem (item) {
       // console.log(item)
       if (confirm(`ต้องการลบตึกชื่อ ${item.name} จริงหรือเปล่า ?`)) {
-        api.delete('http://localhost:3000/equipment/' + item._id).then(
+        api.delete('http://localhost:3000/equipments/' + item._id).then(
           function (response) {
             this.getTools()
           }.bind(this)
