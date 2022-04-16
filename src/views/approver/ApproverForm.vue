@@ -53,42 +53,42 @@
           label="รายการผู้อนุมัติ"
           label-for="approver-name"
         >
-          <b-form-select
-            v-model="form.institutions"
+          <!-- <b-form-select
+            v-model="form.appproveres"
             type="text"
+            :options="users"
             id="approver-approveres"
             placeholder="approveresTest"
             :state="validateApproveres"
+            :multiple="true"
           >
             <option value=""></option>
-          </b-form-select>
-          <b-form-invalid-feedback :state="validateApproveres">
-            Test Approver
-          </b-form-invalid-feedback>
-        </b-form-group>
-
-        <multiselect
-          v-model="form.appproveres"
+          </b-form-select> -->
+          <multiselect
+          v-model="form.approveres"
           :options="users"
           :multiple="true"
           :close-on-select="false"
-          :clear-on-select="false"
           :preserve-search="true"
           placeholder="Pick some"
           label="name"
           track-by="_id"
           :preselect-first="true"
         >
-          >
+        <template slot="selection" slot-scope="{ values, isOpen }"><span class="multiselect__single" v-if="values.length &amp;&amp; !isOpen">{{ values.length }} options selected</span></template>
         </multiselect>
+          <b-form-invalid-feedback :state="validateApproveres">
+            Test Approver
+          </b-form-invalid-feedback>
+        </b-form-group>
+
       </b-form>
       <b-card>
         <pre>
-        institutions {{ institutions }}
-        ชื่อ User {{ form.approveres }}
-
-      </pre
-        >
+        <!-- institutions {{ institutions }} -->
+        ชื่อ User {{ approveres }}
+        {{ form }}
+      </pre>
       </b-card>
     </b-modal>
   </div>
