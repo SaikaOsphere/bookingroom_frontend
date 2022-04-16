@@ -10,9 +10,9 @@
           style="padding: 0px 0px 0px 0px; position: fixed; z-index: 1000"
           v-if="showSidetab"
         >
-          <div><MenuSideBar v-if="isLogin" /></div>
+          <div v-if="showSidetab"><MenuSideBar v-if="isLogin" /></div>
         </div>
-          <!-- <router-view style="padding: 0px 10% 0px 10%" /> -->
+        <!-- <router-view style="padding: 0px 10% 0px 10%" /> -->
         <b-col style="padding: 0px 0px 0px 0px">
           <b-container>
             <b-row class="text-justify">

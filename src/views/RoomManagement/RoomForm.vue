@@ -13,15 +13,15 @@
     >
       <b-form @submit.stop.prevent="submit" @reset.prevent="reset">
         <b-form-group
-          id="form-group-room-name"
+          id="form-group-room-code"
           label="ชื่อห้อง "
-          label-for="room-name"
+          label-for="room-code"
         >
           <b-form-input
             type="text"
-            id="room-name"
+            id="room-code"
             placeholder="IF,K,Q,AH"
-            v-model="form.name"
+            v-model="form.code"
             :state="validateName"
           >
           </b-form-input>
@@ -32,9 +32,9 @@
 
         <!-- ชื่อตึก -->
         <b-form-group
-          id="form-group-room-nameInstitution"
+          id="form-group-room-institution"
           label="ชื่อคณะ"
-          label-for="room-nameInstitution"
+          label-for="room-institution"
         >
           <b-form-select
             type="text"
@@ -53,13 +53,13 @@
 
         <!-- ชื่อตึก -->
         <b-form-group
-          id="form-group-room-name"
+          id="form-group-room-code"
           label="ชื่อตึก"
-          label-for="room-name"
+          label-for="room-code"
         >
           <b-form-select
             type="text"
-            id="room-name"
+            id="room-code"
             placeholder="Faculty of Informatics"
             v-model="form.buildingname"
             :options="buildingnames"
@@ -165,9 +165,7 @@
         <!-- จบ -->
       </b-form>
       <b-card>
-        <pre>
-      </pre
-        >
+        <pre></pre>
       </b-card>
     </b-modal>
   </div>
@@ -180,12 +178,16 @@ export default {
     approveres: Array,
     institutions: Array
   },
+  // { room: Object },
+  // { buildings: Object },
+  // { approveres: Object },
+  // { institutions: Object }
   data () {
     return {
       form: {
         _id: '',
-        name: '',
-        nameInstitution: '',
+        code: '',
+        institution: '',
         buildingname: '',
         floor: '',
         capacity: '',
@@ -232,10 +234,10 @@ export default {
   },
   computed: {
     validateName () {
-      return this.form.name !== ''
+      return this.form.code !== ''
     },
     validateInstitution () {
-      return this.form.nameInstitution !== ''
+      return this.form.institution !== ''
     },
     validatebuilding () {
       return this.form.buildingname !== ''
@@ -283,8 +285,8 @@ export default {
     reset () {
       this.form = {
         _id: '',
-        name: '',
-        nameInstitution: '',
+        code: '',
+        institution: '',
         buildingname: '',
         floor: '',
         capacity: '',
@@ -298,8 +300,8 @@ export default {
       } else {
         // Edit
         this.form._id = this.room._id
-        this.form.name = this.room.name
-        this.form.nameInstitution = this.room.nameInstitution
+        this.form.code = this.room.code
+        this.form.institution = this.room.institution
         this.form.buildingname = this.room.buildingname
         this.form.floor = this.room.floor
         this.form.capacity = this.room.capacity

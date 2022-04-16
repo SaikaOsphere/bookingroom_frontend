@@ -49,7 +49,7 @@
           >DeleteRoomManagementSuccess</router-link
         >
       </div>
-      <router-link to="/instutution">Instutution</router-link> |
+      <router-link to="/institution">Institution</router-link> |
       <router-link to="/petition">Petition</router-link> |
 
       <router-link to="/approver">Approver</router-link> |
