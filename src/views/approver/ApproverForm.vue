@@ -62,25 +62,12 @@
           >
             <option value=""></option>
           </b-form-select>
+
+          <multiselect v-model="value" :options="options"></multiselect>
           <b-form-invalid-feedback :state="validateApproveres">
             Test Approver
           </b-form-invalid-feedback>
         </b-form-group>
-
-        <multiselect
-          v-model="form.appproveres"
-          :options="users"
-          :multiple="true"
-          :close-on-select="false"
-          :clear-on-select="false"
-          :preserve-search="true"
-          placeholder="Pick some"
-          label="name"
-          track-by="_id"
-          :preselect-first="true"
-        >
-          >
-        </multiselect>
       </b-form>
       <b-card>
         <pre>
