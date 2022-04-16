@@ -77,8 +77,6 @@ export default {
   mounted () {
     this.getRecentData()
     this.getbookings()
-    this.getRoom()
-    this.getUser()
   },
   methods: {
     getbookings () {
@@ -93,12 +91,12 @@ export default {
           this.Petitiondetail.timeEnd = response.data.datetime_end
         }.bind(this)
       )
-    }//,
-    // getRecentData () {
-    //   this.Petitiondetail.date = this.$store.state.datetime.date
-    //   this.Petitiondetail.timeStart = this.$store.state.datetime.timeStart
-    //   this.Petitiondetail.timeEnd = this.$store.state.datetime.timeEnd
-    // }
+    },
+    getRecentData () {
+      this.Petitiondetail.date = this.$store.state.datetime.date
+      this.Petitiondetail.timeStart = this.$store.state.datetime.timeStart
+      this.Petitiondetail.timeEnd = this.$store.state.datetime.timeEnd
+    }
   },
   computed: {
     getCurrentUser () {
