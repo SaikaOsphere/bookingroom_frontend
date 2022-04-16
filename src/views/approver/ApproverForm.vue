@@ -44,7 +44,7 @@
           >
           </b-form-select>
           <b-form-invalid-feedback :state="validateInstitution">
-            Test Institution
+            Choose Institution
           </b-form-invalid-feedback>
         </b-form-group>
 
@@ -78,7 +78,7 @@
         <template slot="selection" slot-scope="{ values, isOpen }"><span class="multiselect__single" v-if="values.length &amp;&amp; !isOpen">{{ values.length }} options selected</span></template>
         </multiselect>
           <b-form-invalid-feedback :state="validateApproveres">
-            Test Approver
+            Choose Approver
           </b-form-invalid-feedback>
         </b-form-group>
 
@@ -86,7 +86,7 @@
       <b-card>
         <pre>
         <!-- institutions {{ institutions }} -->
-        ชื่อ User {{ approveres }}
+        <!-- ชื่อ User {{ approveres }} -->
         {{ form }}
       </pre>
       </b-card>
@@ -120,10 +120,10 @@ export default {
       return this.form.name !== '' && this.form.name.length >= 5
     },
     validateInstitution () {
-      return this.form.institution !== ''
+      return this.form.institution !== '' && this.form.institution.length >= 5
     },
     validateApproveres () {
-      return this.form.approveres !== ''
+      return this.form.approveres !== '' && this.form.approveres.length >= 5
     }
   },
   methods: {
