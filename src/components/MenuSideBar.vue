@@ -14,11 +14,19 @@
         <!-- <b-nav-item class="sub-menu" v-if="showGroupBooking" to="/booking">
         Booking
       </b-nav-item> -->
-        <b-nav-item to="/building">จัดการตึก</b-nav-item>
-        <b-nav-item to="/instutution">จัดการหน่วยงาน</b-nav-item>
-        <b-nav-item to="/approver">จัดการลำดับผู้อนุมัติ</b-nav-item>
-        <b-nav-item to="/petition">จัดการคำร้อง</b-nav-item>
-        <b-nav-item to="/manageRoom">จัดการห้อง</b-nav-item>
+        <b-nav-item to="/building" v-if="!roleRestricted">จัดการตึก</b-nav-item>
+        <b-nav-item to="/institution" v-if="!roleRestricted"
+          >จัดการหน่วยงาน</b-nav-item
+        >
+        <b-nav-item to="/approver" v-if="!roleRestricted"
+          >จัดการลำดับผู้อนุมัติ</b-nav-item
+        >
+        <b-nav-item to="/petition" v-if="!roleRestricted"
+          >จัดการคำร้อง</b-nav-item
+        >
+        <b-nav-item to="/manageRoom" v-if="!roleRestricted"
+          >จัดการห้อง</b-nav-item
+        >
         <!-- <b-nav-item @click="showFormInput = !showFormInput"
         >Form input
         <b-icon
@@ -94,16 +102,39 @@
   </div>
 </template>
 <script>
+import api from '@/services/api'
+
 export default {
   data () {
     return {
       showGroupBooking: false,
       showFormInput: false,
       showForm: false,
-      showCRUDExample: false
+      showCRUDExample: false,
+      roleRestricted: true
+      // roleRestricted - true = user / false = admin
     }
   },
   methods: {
+    roleCheck () {
+      // console.log(this.$store.state.auth.user)
+      api
+        .get('http://localhost:3000/users/' + this.$store.state.auth.user._id)
+        .then(
+          function (response) {
+            for (let i = 0; i < response.data.roles.length; i++) {
+              if (
+                response.data.roles[i] === 'LOCAL_ADMIN' ||
+                response.data.roles[i] === 'ADMIN'
+              ) {
+                this.roleRestricted = false
+              } else {
+                this.roleRestricted = true
+              }
+            }
+          }.bind(this)
+        )
+    },
     booking () {
       this.$store.dispatch('bookingRoom/reset')
       if (this.$route.name !== 'booking') {
@@ -115,6 +146,9 @@ export default {
     isLogin () {
       return this.$store.getters['auth/isLogin']
     }
+  },
+  mounted () {
+    this.roleCheck()
   }
 }
 </script>
@@ -139,6 +173,7 @@ export default {
   padding: 50px 25px 50px 25px;
   width: 100%;
   background-color: rgba(129, 129, 129, 0.199);
+  border-radius: 25px;
   /* min-height: 100%; */
   height: 100%;
 }

@@ -1,5 +1,8 @@
 <template>
   <div>
+    <b-row style="margin-bottom: 30px">
+      <h1>เลือกเวลา</h1>
+    </b-row>
     <b-row>
       <!-- <b-col>
         <b-row>
@@ -46,6 +49,7 @@
               <b-form-datepicker
                 id="example-datepicker"
                 v-model="detailRoom.date"
+                @input="addEvent()"
                 class="mb-2"
               ></b-form-datepicker
             ></b-col>
@@ -55,6 +59,7 @@
             <b-col>
               <b-form-timepicker
                 v-model="detailRoom.timeStart"
+                @input="addEvent()"
                 locale="en"
               ></b-form-timepicker>
             </b-col>
@@ -64,6 +69,7 @@
             <b-col>
               <b-form-timepicker
                 v-model="detailRoom.timeEnd"
+                @input="addEvent()"
                 locale="en"
               ></b-form-timepicker>
             </b-col>
@@ -102,12 +108,13 @@
 import VueCal from 'vue-cal'
 import 'vue-cal/dist/vuecal.css'
 import th from '@/locale/th'
-import getEvents from '@/services/event'
-import axios from 'axios'
+// import getEvents from '@/services/event'
+import api from '@/services/api'
 
 export default {
   data () {
     return {
+      added: false,
       alerted: false,
       detailRoom: {
         // typeRoom: 'TestType',
@@ -148,11 +155,9 @@ export default {
       class: '',
       events: [
         {
-          start: '2022-03-27 15:00',
-          end: '2022-03-27 16:00',
-          title: 'ทำงาน',
-          content: 'นั่งเฉยๆ',
-          class: 'working'
+          start: '',
+          end: '',
+          title: ''
         }
       ]
     }
@@ -180,7 +185,7 @@ export default {
       }
     },
     getBuilding () {
-      axios.get('http://localhost:3000/buildings/').then(
+      api.get('http://localhost:3000/buildings/').then(
         function (response) {
           console.log('data')
           console.log(this.detailRoom.building)
@@ -195,7 +200,7 @@ export default {
       )
     },
     getRoom () {
-      axios.get('http://localhost:3000/rooms/' + this.$store.state.idRoom).then(
+      api.get('http://localhost:3000/rooms/' + this.$store.state.idRoom).then(
         function (response) {
           console.log(response)
           this.detailRoom.capacity = response.data.capacity
@@ -204,22 +209,75 @@ export default {
         }.bind(this)
       )
     },
-    addEvent () {
-      const event = {
-        start: new Date(this.startDate + ' ' + this.startTime),
-        end: new Date(this.endDate + ' ' + this.endTime),
-        title: this.title,
-        content: this.content,
-        class: 'vdo_time'
+    addEvent ($event) {
+      // this.events = [{}]
+      // this.ready()
+
+      console.log(event.target.value)
+      if (
+        this.detailRoom.timeStart !== '' &&
+        this.detailRoom.timeEnd !== '' &&
+        this.detailRoom.date !== ''
+      ) {
+        api.get('http://localhost:3000/users/' + this.getCurrentUser._id).then(
+          function (response) {
+            const event = {
+              start: new Date(
+                this.detailRoom.date + ' ' + this.detailRoom.timeStart
+              ),
+              end: new Date(
+                this.detailRoom.date + ' ' + this.detailRoom.timeEnd
+              ),
+              title: response.data.username + '(กำลังจอง)'
+            }
+            if (!this.added) {
+              console.log(event)
+              this.events.push(event)
+              this.added = true
+            } else {
+              console.log(event)
+              // this.events.splice(this.events.length - 1, 1)
+              this.events.pop()
+              this.events.push(event)
+            }
+          }.bind(this)
+        )
       }
-      console.log(event)
-      this.events.push(event)
     },
-    async ready (e) {
-      console.log('ready', e)
-      const res = await getEvents(e.startDate, e.endDate)
+    ready (e) {
+      // console.log('room')
+      // console.log(this.$store.state.idRoom)
+      api
+        .get('http://localhost:3000/bookings')
+        .then(
+          function (response) {
+            for (let i = 0; i < response.data.length; i++) {
+              const trackedUser = response.data[i]
+
+              api.get('http://localhost:3000/users/' + trackedUser.user).then(
+                function (response) {
+                  // console.log(response.data.name)
+                  // this.events[this.events.length - 1].title = response.data.name
+
+                  if (trackedUser.room === this.$store.state.idRoom) {
+                    const newEvent = {
+                      start: new Date(trackedUser.datetime_start),
+                      end: new Date(trackedUser.datetime_end),
+                      title: response.data.username
+                    }
+                    this.events.push(newEvent)
+                  }
+                }.bind(this)
+              )
+            }
+          }.bind(this)
+          // .bind(this)
+        )
+        .bind(this)
+      // console.log('ready', e)
+      // const res = await getEvents(e.startDate, e.endDate)
       // api.get('/events', { params: { startDate: e.startDate, endDate: e.endDate } })
-      console.log(res)
+      // console.log(res)
       // const newEvents = []
       // for (let i = 0; i < res.data.length; i++) {
       //   const event = res.data[i]
@@ -231,32 +289,46 @@ export default {
       //     class: event.class
       //   })
       // }
-      const newEvents = res.data.map(function (event) {
-        return {
-          start: new Date(event.startDate),
-          end: new Date(event.endDate),
-          title: event.title,
-          content: event.content,
-          class: event.class
-        }
-      })
-      this.events = newEvents
+      // const newEvents = res.data.map(function (event) {
+      //   return {
+      //     start: new Date(event.startDate),
+      //     end: new Date(event.endDate),
+      //     title: event.title
+      //   }
+      // })
+      // this.events = newEvents
       // this.events = res.data
     },
     async viewChange (e) {
-      console.log('view-change', e)
-      const res = await getEvents(e.startDate, e.endDate)
-      console.log(res)
-      const newEvents = res.data.map(function (event) {
-        return {
-          start: new Date(event.startDate),
-          end: new Date(event.endDate),
-          title: event.title,
-          content: event.content,
-          class: event.class
-        }
-      })
-      this.events = newEvents
+      const testEvent = [{}]
+      api
+        .get('http://localhost:3000/bookings')
+        .then(
+          function (response) {
+            for (let i = 0; i < response.data.length; i++) {
+              const trackedUser = response.data[i]
+
+              api.get('http://localhost:3000/users/' + trackedUser.user).then(
+                function (response) {
+                  // console.log(response.data.name)
+                  // this.events[this.events.length - 1].title = response.data.name
+
+                  if (trackedUser.room === this.$store.state.idRoom) {
+                    const newEvent = {
+                      start: new Date(trackedUser.datetime_start),
+                      end: new Date(trackedUser.datetime_end),
+                      title: response.data.username
+                    }
+                    this.events.push(newEvent)
+                  }
+                }.bind(this)
+              )
+            }
+          }.bind(this)
+          // .bind(this)
+        )
+        .bind(this)
+      this.events = testEvent
     }
   },
   computed: {
@@ -265,6 +337,10 @@ export default {
     },
     isLogin () {
       return this.$store.getters['auth/isLogin']
+    },
+    getCurrentUser () {
+      // console.log(this.$store.state.auth.user)
+      return this.$store.state.auth.user
     }
   },
   components: {

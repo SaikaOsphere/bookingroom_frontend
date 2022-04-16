@@ -1,26 +1,15 @@
 <template>
   <div>
+    <b-row style="margin-bottom: 30px">
+      <h1>รายละเอียดเพิ่มเติม</h1>
+    </b-row>
     <b-row>
-      <!-- <b-col class="data">
-        <b-col cols="4">รหัสผู้จอง</b-col>
-        <b-col>
-          <b-form-input v-model="bookingDetail.idPerson" disabled>
-          </b-form-input>
-        </b-col>
-      </b-col> -->
       <b-col class="data">
         <b-col cols="5">ชื่อ-นามสกุล</b-col>
         <b-col>
           <b-form-input v-model="bookingDetail.name" disabled> </b-form-input>
         </b-col>
       </b-col>
-      <!-- <b-col class="data">
-        <b-col cols="4">เบอร์โทร</b-col>
-        <b-col>
-          <b-form-input v-model="bookingDetail.phoneNumber" disabled>
-          </b-form-input>
-        </b-col>
-      </b-col> -->
     </b-row>
     <b-row>
       <b-col class="data">
@@ -52,22 +41,8 @@
         </b-col>
       </b-col>
     </b-row>
-    <!-- <b-row>
-      <b-col class="data">
-        <b-col cols="4">จุดประสงค์</b-col>
-        <b-col>
-          <b-form-input v-model="bookingDetail.usefor"> </b-form-input>
-        </b-col>
-      </b-col>
-      <b-col class="data">
-        <b-col cols="4">อุปกรณ์</b-col>
-        <b-col>
-          <b-form-input v-model="bookingDetail.accessory"> </b-form-input>
-        </b-col>
-      </b-col>
-    </b-row> -->
     <b-row class="data">
-      <b-col col="12"
+      <b-col
         ><b-button variant="danger" to="/bookingRoomDetail">ยกเลิก</b-button>
 
         <b-button
@@ -131,8 +106,8 @@ export default {
   data () {
     return {
       bookingDetail: {
-        name: 'AAAAA BBBBB',
-        room: {},
+        name: '',
+        room: '',
         date: '',
         timeStart: '',
         timeEnd: ''
@@ -146,7 +121,6 @@ export default {
       }
     }
   },
-  components: {},
   mounted () {
     if (!this.isLogin) {
       this.$router.push({ path: '/' })
@@ -160,17 +134,6 @@ export default {
         this.getRecentData()
         this.getRoom()
         this.getUser()
-        // console.log(this.bookingDetail)
-        // console.log(this.formSend)
-        // this.test22()
-
-        // const currentDateWithFormat = new Date('2010-03-20' + ' ' + this.formSend.datetime_start)
-        // .toJSON()
-        // .slice(0, 10)
-        // .replace(/-/g, '/')
-        // console.log('test time')
-        // console.log(this.formSend.datetime_start)
-        // console.log(currentDateWithFormat)
         this.sendToDB()
       }
     }
@@ -179,13 +142,9 @@ export default {
     saveBooking (evt) {
       evt.preventDefault()
 
-      console.log(this.formSend)
-
-      api.post('http://localhost:3000/bookings', this.formSend).then(
-        function (response) {
-          console.log(response)
-        }
-      )
+      api
+        .post('http://localhost:3000/bookings', this.formSend)
+        .then(function (response) {})
       this.$router.push({ path: '/home' })
       this.$nextTick(() => {
         this.$bvModal.hide('modal-confirmbooking')
@@ -199,7 +158,6 @@ export default {
       this.formSend.datetime_end = new Date(
         this.bookingDetail.date + ' ' + this.bookingDetail.timeEnd
       )
-      this.$store.dispatch('bookingRoom/sendForm', this.formSend)
     },
     getUser () {
       api.get('http://localhost:3000/users/' + this.getCurrentUser._id).then(
@@ -207,7 +165,6 @@ export default {
           this.bookingDetail.name =
             response.data.name + ' ' + response.data.surname
           this.formSend.user = response.data
-          // console.log(response.data)
           this.$store.dispatch('bookingRoom/sendDataUser', response.data)
         }.bind(this)
       )
@@ -217,7 +174,6 @@ export default {
         function (response) {
           this.bookingDetail.room = response.data.code
           this.formSend.room = response.data
-          // console.log(response.data)
           this.$store.dispatch('bookingRoom/sendDataRoom', response.data)
         }.bind(this)
       )

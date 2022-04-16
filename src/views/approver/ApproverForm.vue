@@ -12,7 +12,7 @@
       <b-form @submit.stop.prevent="submit" @reset.prevent="reset">
         <b-form-group
           id="form-group-approver-name"
-          label="ลำดับผู้อนุมัติ"
+          label="ชื่อลำดับผู้อนุมัติ"
           label-for="approver-name"
         >
           <b-form-input
@@ -33,14 +33,16 @@
           label="ชื่อหน่วยงาน"
           label-for="institution-name"
         >
-          <b-form-input
+          <b-form-select
             type="text"
-            id="approver-institution"
-            placeholder="InstitutionTest"
+            id="institution-name"
+            :options="institutions"
+            text-field="name"
+            value-field="_id"
             v-model="form.institution"
             :state="validateInstitution"
           >
-          </b-form-input>
+          </b-form-select>
           <b-form-invalid-feedback :state="validateInstitution">
             Test Institution
           </b-form-invalid-feedback>
@@ -51,14 +53,30 @@
           label="รายการผู้อนุมัติ"
           label-for="approver-name"
         >
-          <b-form-input
+          <!-- <b-form-select
+            v-model="form.appproveres"
             type="text"
+            :options="users"
             id="approver-approveres"
             placeholder="approveresTest"
-            v-model="form.approveres"
             :state="validateApproveres"
+            :multiple="true"
           >
-          </b-form-input>
+            <option value=""></option>
+          </b-form-select> -->
+          <multiselect
+          v-model="form.approveres"
+          :options="users"
+          :multiple="true"
+          :close-on-select="false"
+          :preserve-search="true"
+          placeholder="Pick some"
+          label="name"
+          track-by="_id"
+          :preselect-first="true"
+        >
+        <template slot="selection" slot-scope="{ values, isOpen }"><span class="multiselect__single" v-if="values.length &amp;&amp; !isOpen">{{ values.length }} options selected</span></template>
+        </multiselect>
           <b-form-invalid-feedback :state="validateApproveres">
             Test Approver
           </b-form-invalid-feedback>
@@ -66,26 +84,31 @@
       </b-form>
       <b-card>
         <pre>
+        <!-- institutions {{ institutions }} -->
+        ชื่อ User {{ approveres }}
         {{ form }}
-      </pre
-        >
+      </pre>
       </b-card>
     </b-modal>
   </div>
 </template>
 <script>
+import Multiselect from 'vue-multiselect'
 export default {
+  components: {
+    Multiselect
+  },
   props: {
     approver: Object,
-    users: [Object],
-    institutions: [Object]
+    users: Array,
+    institutions: Array
   },
   data () {
     return {
       form: {
         _id: '',
         name: '',
-        institutions: '',
+        institution: '',
         approveres: ''
       },
       isAddNew: false
@@ -96,15 +119,10 @@ export default {
       return this.form.name !== '' && this.form.name.length >= 5
     },
     validateInstitution () {
-      return this.form.institution !== '' && this.form.institution.length >= 1
+      return this.form.institution !== ''
     },
     validateApproveres () {
-      return this.form.approveres !== '' && this.form.approveres.length >= 1
-    },
-    validateForm () {
-      return (
-        this.validateName && this.validateInstitution && this.validateApproveres
-      )
+      return this.form.approveres !== ''
     }
   },
   methods: {
@@ -154,6 +172,11 @@ export default {
       this.$nextTick(() => {
         this.$bvModal.hide('modal-approver')
       })
+    },
+    validateForm () {
+      return (
+        this.validateName && this.validateInstitution && this.validateApproveres
+      )
     }
   }
 }
