@@ -55,7 +55,7 @@
         >
         <b-button variant="danger" @click="filter()" v-else>รีเซ็ต</b-button>
       </b-col>
-      <b-col><b-button variant="primary">ประวัติการจอง</b-button></b-col>
+      <b-col><b-button variant="primary" to="/bookingHistory">ประวัติการจอง</b-button></b-col>
     </b-row>
 
     <b-row align-v="stretch">
