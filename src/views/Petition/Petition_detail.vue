@@ -52,8 +52,8 @@
     <b-row >
       <b-col
         ><b-button class="button" variant="danger"  @click="resetStore() ">ย้อนกลับ</b-button>
-        <b-button variant="info" @click="approvno(items.approve_status)">ไม่อนุญาติ</b-button>
-        <b-button class="button1" variant="info"  @click="approv(items.approve_status)">อนุญาติ</b-button>
+        <b-button variant="info" @click="approveNo()">ไม่อนุญาติ</b-button>
+        <b-button class="button1" variant="info"  @click="approveYes()">อนุญาติ</b-button>
       </b-col>
     </b-row>
   </div>
@@ -88,11 +88,36 @@ export default {
     },
     resetStore () {
       this.$store.dispatch('checkid/reset')
+    },
+    approveYes () {
+      api.put('http://localhost:3000/approves/' + this.getBookingId, {
+        approver: this.getCurrentUser,
+        approve_date: new Date(),
+        approve_status: true
+      }).then(
+        function (response) {
+        }
+      )
+      this.resetStore()
+    },
+    approveNo () {
+      api.put('http://localhost:3000/approves/' + this.getBookingId, {
+        approver: this.getCurrentUser,
+        approve_date: new Date(),
+        approve_status: false
+      }).then(
+        function (response) {
+        }
+      )
+      this.resetStore()
     }
   },
   computed: {
     getBookingId () {
       return this.$store.getters['checkid/getBookingId']
+    },
+    getCurrentUser () {
+      return this.$store.state.auth.user._id
     }
   }
 }

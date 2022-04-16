@@ -2,10 +2,7 @@
   <div>
     <h1>รายการคำร้อง</h1>
     <b-table :items="items" :fields="fields" striped responsive="sm">
-      <template #cell(ลำดับ)="data">
-        {{ data.index + 1 }}
-      </template>
-      <template #cell(วันที่จอง)>
+      <template #cell(ลำดับการอนุมัติ)="data">
         {{ data.index + 1 }}
       </template>
 
@@ -22,18 +19,10 @@ export default {
   data () {
     return {
       fields: [
-        'หมายเลขการจอง',
-        {
-          key: 'approver.name',
-          label: 'ชื่อผู้อนุมัติ'
-        },
-        {
-          key: 'approve_date',
-          label: 'วันที่จอง'
-        },
+        'ลำดับการอนุมัติ',
         {
           key: 'approve_status',
-          label: 'สถาณะ'
+          label: 'สถานะ'
         },
         'การดำเนินการ'
       ],
@@ -42,11 +31,13 @@ export default {
     }
   },
   methods: {
-    getapproves () {
+    getApproves () {
       api.get('http://localhost:3000/approves').then(
         function (response) {
-          // console.log(response.data)
           this.items = response.data
+          console.log(this.items)
+          console.log(this.getCurrentUser)
+          this.items = this.items.filter((item) => item.approver._id === this.getCurrentUser && item.approve_status === null)
         }.bind(this)
       )
     },
@@ -57,7 +48,12 @@ export default {
     }
   },
   mounted () {
-    this.getapproves()
+    this.getApproves()
+  },
+  computed: {
+    getCurrentUser () {
+      return this.$store.state.auth.user._id
+    }
   }
 }
 </script>
