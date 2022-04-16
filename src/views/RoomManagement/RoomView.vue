@@ -9,6 +9,7 @@
           :approveres="approveres"
           :buildings="buildings"
           :institutions="institutions"
+          :equipments="equipments"
           ref="roomForm"
           @save="saveRoomManagement"
         ></RoomForm>
@@ -21,7 +22,9 @@
 
       <template #cell(รายการอุปกรณ์)="data">
         <ul>
-          <li v-for="(item,index) in items[data.index].equipment " :key="index">{{item.name}}</li>
+          <li v-for="(item, index) in items[data.index].equipment" :key="index">
+            {{ item.name }}
+          </li>
         </ul>
       </template>
 
@@ -66,7 +69,8 @@ export default {
       institutions: [],
       buildings: [],
       items: [],
-      selectedItem: null
+      selectedItem: null,
+      equipments: []
     }
   },
   methods: {
@@ -96,14 +100,12 @@ export default {
       api.get('http://localhost:3000/buildings').then(
         function (response) {
           this.buildings = response.data
-          // for (let i = 0; i < this.buildings.lenght; i++) {
-          //   const idInstitution = this.buildings[i].institution
-          //   for (let j = 0; j < this.institutions; j++) {
-          //     if (idInstitution === this.institutions_id) {
-
-          //     }
-          //   }
-          // }
+        }.bind(this)
+      )
+      // ดึงอุปกรณ์
+      api.get('http://localhost:3000/equipments').then(
+        function (response) {
+          this.equipments = response.data
         }.bind(this)
       )
     },

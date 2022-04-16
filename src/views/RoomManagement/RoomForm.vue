@@ -30,7 +30,7 @@
           </b-form-invalid-feedback>
         </b-form-group>
 
-        <!-- ชื่อตึก -->
+        <!-- คณะ -->
         <b-form-group
           id="form-group-room-institution"
           label="ชื่อคณะ"
@@ -39,9 +39,10 @@
           <b-form-select
             type="text"
             id="room-nameInstitutionInstitution"
-            placeholder="Faculty of Informatics"
-            v-model="form.nameInstitution"
-            :options="institutionName"
+            v-model="form.institution"
+            :options="institutions"
+            value-field="_id"
+            text-field="name"
             :state="validateInstitution"
           >
           </b-form-select>
@@ -49,7 +50,7 @@
             ต้องเลือก 1 คณะ
           </b-form-invalid-feedback>
         </b-form-group>
-        <!-- จบชื่อตึก -->
+        <!-- คณะ -->
 
         <!-- ชื่อตึก -->
         <b-form-group
@@ -61,8 +62,10 @@
             type="text"
             id="room-code"
             placeholder="Faculty of Informatics"
-            v-model="form.buildingname"
-            :options="buildingnames"
+            v-model="form.building"
+            text-field="name"
+            value-field="_id"
+            :options="buildings"
             :state="validatebuilding"
           >
           </b-form-select>
@@ -83,7 +86,7 @@
             id="room-floor"
             placeholder="10 20 30"
             v-model="form.floor"
-            :options="floors"
+            :options="getFloorByBuildings(form.building)"
             :state="validateFloor"
           >
           </b-form-select>
@@ -119,6 +122,9 @@
             id="checkbox-group-1"
             v-model="form.equipment"
             :options="equipments"
+            text-field="name"
+            value-field="_id"
+            value="name"
             :aria-describedby="ariaDescribedby"
           ></b-form-checkbox-group>
         </b-form-group>
@@ -154,7 +160,9 @@
             id="room-approveres"
             placeholder="ลำดับผู้พิจารณา : "
             v-model="form.approveres"
-            :options="approver"
+            :options="approveres"
+            text-field="name"
+            value-field="_id"
             :state="validateApproveres"
           >
           </b-form-select>
@@ -165,7 +173,17 @@
         <!-- จบ -->
       </b-form>
       <b-card>
-        <pre></pre>
+        <pre>
+          ชื่อคณะ {{ form.institution }}
+          ชื่อตึก {{ form.building }}
+          ชั้น {{ form.floor }}
+          อุปกณ์ {{form.equipment}}
+          ผู้พิจารณา {{form.approveres}}
+          approveres
+          {{ approveres }}
+          institutions
+          {{ institutions }}
+        </pre>
       </b-card>
     </b-modal>
   </div>
@@ -176,7 +194,8 @@ export default {
     room: Object,
     buildings: Array,
     approveres: Array,
-    institutions: Array
+    institutions: Array,
+    equipments: Array
   },
   // { room: Object },
   // { buildings: Object },
@@ -188,34 +207,12 @@ export default {
         _id: '',
         code: '',
         institution: '',
-        buildingname: '',
+        building: '',
         floor: '',
         capacity: '',
         equipment: [],
         approveres: ''
       },
-      institutionName: [],
-      buildingnames: [
-        { text: 'Select One', value: null },
-        'Faculty of Informatics',
-        'Faculty of Business Administration',
-        'Faculty of Science',
-        'Faculty of Health Sciences',
-        'Tamrong Buasri Building'
-      ],
-      floors: [
-        { text: 'Select One', value: null },
-        '1',
-        '2',
-        '3',
-        '4',
-        '5',
-        '6',
-        '7',
-        '8',
-        '9',
-        '10'
-      ],
       approver: [
         { text: 'Select One', value: null },
         'approvers1',
@@ -223,12 +220,7 @@ export default {
         'approvers3',
         'approvers4'
       ],
-      equipments: [
-        { text: 'Television', value: 'television' },
-        { text: 'Projecter', value: 'projecter' },
-        { text: 'Microphone', value: 'microphone' },
-        { text: 'Presentation', value: 'presentation' }
-      ],
+
       isAddNew: false
     }
   },
@@ -240,7 +232,7 @@ export default {
       return this.form.institution !== ''
     },
     validatebuilding () {
-      return this.form.buildingname !== ''
+      return this.form.building !== ''
     },
     validateFloor () {
       return this.form.floor !== ''
@@ -260,19 +252,42 @@ export default {
         this.isAddNew = false
       })
     },
-    fliterNameInstitutions () {
-      for (let i = 0; i < this.institutions.length; i++) {
-        const institution = {
-          text: this.institutions[i].name,
-          value: this.institutions[i].name
+    getFloorByBuildings (buildingId) {
+      if (buildingId !== '') {
+        const building = this.buildings.find((item) => item._id === buildingId)
+        const floors = []
+        console.log('building', building.floor)
+        for (let i = 1; i <= building.floor; i++) {
+          floors.push(i)
         }
-        console.log(institution)
-        this.institutionName.push(institution)
+        return floors
+      } else {
+        return []
       }
     },
+    // fliterNameInstitutions () {
+    //   for (let i = 0; i < this.institutions.length; i++) {
+    //     const institution = {
+    //       text: this.institutions[i].name,
+    //       value: this.institutions[i].name
+    //     }
+    //     console.log(institution)
+    //     this.institutionsName.push(institution)
+    //   }
+    // },
+    // fliterNameBuildings () {
+    //   for (let i = 0; i < this.buildings.length; i++) {
+    //     const building = {
+    //       text: this.buildings[i].name,
+    //       value: this.buildings[i].name
+    //     }
+    //     // console.log(buildings)
+    //     this.buildingsName.push(building)
+    //   }
+    // },
     show () {
-      this.fliterNameInstitutions()
-
+      // this.fliterNameInstitutions()
+      // this.fliterNameBuildings()
       this.$refs.modalRoom.show()
     },
     submit () {
@@ -287,7 +302,7 @@ export default {
         _id: '',
         code: '',
         institution: '',
-        buildingname: '',
+        building: '',
         floor: '',
         capacity: '',
         equipment: [],
@@ -302,7 +317,7 @@ export default {
         this.form._id = this.room._id
         this.form.code = this.room.code
         this.form.institution = this.room.institution
-        this.form.buildingname = this.room.buildingname
+        this.form.building = this.room.building
         this.form.floor = this.room.floor
         this.form.capacity = this.room.capacity
         this.form.equipment = this.room.equipment
