@@ -27,6 +27,9 @@
         <b-nav-item to="/manageRoom" v-if="!roleRestricted"
           >จัดการห้อง</b-nav-item
         >
+        <b-nav-item to="/users" v-if="!roleRestricted"
+          >จัดการผู้ใช้</b-nav-item
+        >
         <!-- <b-nav-item @click="showFormInput = !showFormInput"
         >Form input
         <b-icon
