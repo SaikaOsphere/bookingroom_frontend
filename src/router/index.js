@@ -12,7 +12,7 @@ import BookingRoomConfirm from '../views/booking/BookingDetail.vue'
 
 import Institution from '../views/Instutution/InstututionView.vue'
 
-import Petition from '../views/PetitionView.vue'
+import Petition from '../views/Petition/PetitionView.vue'
 
 import RoomManagement from '../views/RoomManagement/RoomView.vue'
 
