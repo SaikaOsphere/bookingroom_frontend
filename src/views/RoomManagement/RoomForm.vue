@@ -146,7 +146,7 @@
             id="room-approveres"
             placeholder="ลำดับผู้พิจารณา : "
             v-model="form.approveres"
-            :options="approveres"
+            :options="getApproveresByInstitution(form.institution)"
             text-field="name"
             value-field="_id"
             :state="validateApproveres"
@@ -235,11 +235,19 @@ export default {
         this.isAddNew = false
       })
     },
+    getApproveresByInstitution (institutionId) {
+      if (this.validateInstitution) {
+        // ค้นหา approveres ที่ตรงกันกับ institutionId
+        const approveresMatch = this.approveres.filter((item) => item.institution._id === institutionId)
+        console.log(approveresMatch)
+        return approveresMatch
+      }
+    },
     getFloorByBuildings (buildingId) {
       if (this.validatebuilding) {
         const building = this.buildings.find((item) => item._id === buildingId)
         const floors = []
-        console.log('building', building.floor)
+
         for (let i = 1; i <= building.floor; i++) {
           floors.push(i)
         }
