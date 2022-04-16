@@ -40,8 +40,8 @@
             type="text"
             id="room-nameInstitutionInstitution"
             placeholder="Faculty of Informatics"
-            v-model="form.institution"
-            :options="nameInstitutions"
+            v-model="form.nameInstitution"
+            :options="institutionName"
             :state="validateInstitution"
           >
           </b-form-select>
@@ -122,6 +122,25 @@
             :aria-describedby="ariaDescribedby"
           ></b-form-checkbox-group>
         </b-form-group>
+        <!-- <b-form-group
+          id="form-group-room-equipment"
+          label="รายการอุปกรณ์ "
+          label-for="room-equipment"
+          v-slot="{ ariaDescribedby }"
+        >
+          <b-form-checkbox-group
+            id="room-equipment"
+            placeholder="รายการอุปกรณ์ : "
+            v-model="form.equipment"
+            :options="equipments"
+            :aria-describedby="ariaDescribedby"
+          > -->
+        <!-- <b-form-checkbox value="TV"> TV</b-form-checkbox>
+          <b-form-checkbox value="Projecter"> Projecter</b-form-checkbox>
+          <b-form-checkbox value="Microphone"> Microphone</b-form-checkbox>
+          <b-form-checkbox value="Presentation"> Presentation</b-form-checkbox> -->
+        <!-- </b-form-checkbox-group>
+        </b-form-group> -->
         <!-- จบ -->
 
         <!-- ลำดับผู้พิจารณา -->
@@ -146,13 +165,7 @@
         <!-- จบ -->
       </b-form>
       <b-card>
-        <pre>
-        {{ form }}
-        <!-- {{ buildings }}
-        {{ approveres }}
-        {{ institutions }} -->
-      </pre
-        >
+        <pre></pre>
       </b-card>
     </b-modal>
   </div>
@@ -161,9 +174,9 @@
 export default {
   props: {
     room: Object,
-    buildings: [],
-    approveres: [],
-    institutions: []
+    buildings: Array,
+    approveres: Array,
+    institutions: Array
   },
   // { room: Object },
   // { buildings: Object },
@@ -181,13 +194,7 @@ export default {
         equipment: [],
         approveres: ''
       },
-      nameInstitutions: [
-        { text: 'Select One', value: null },
-        'Faculty of Informatics',
-        'Faculty of Business Administration',
-        'Faculty of Science',
-        'Faculty of Health Sciences'
-      ],
+      institutionName: [],
       buildingnames: [
         { text: 'Select One', value: null },
         'Faculty of Informatics',
@@ -253,7 +260,19 @@ export default {
         this.isAddNew = false
       })
     },
+    fliterNameInstitutions () {
+      for (let i = 0; i < this.institutions.length; i++) {
+        const institution = {
+          text: this.institutions[i].name,
+          value: this.institutions[i].name
+        }
+        console.log(institution)
+        this.institutionName.push(institution)
+      }
+    },
     show () {
+      this.fliterNameInstitutions()
+
       this.$refs.modalRoom.show()
     },
     submit () {
