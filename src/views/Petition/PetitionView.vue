@@ -2,9 +2,13 @@
   <div>
     <h1>รายการคำร้อง</h1>
     <b-table :items="items" :fields="fields" striped responsive="sm">
-      <template #cell(หมายเลขการจอง)="data">
+      <template #cell(ลำดับ)="data">
         {{ data.index + 1 }}
       </template>
+      <template #cell(วันที่จอง)>
+        {{ data.index + 1 }}
+      </template>
+
       <template #cell(การดำเนินการ)="data">
         <b-button size="sm" class="mr-2"  @click="checkid(data.item)">ดูรายละเอียด</b-button>
       </template>
@@ -34,8 +38,6 @@ export default {
         'การดำเนินการ'
       ],
       items: [],
-      users: [],
-      approvers: [],
       selectedItem: null
     }
   },
@@ -48,22 +50,7 @@ export default {
         }.bind(this)
       )
     },
-    getuser () {
-      api.get('http://localhost:3000/users').then(
-        function (response) {
-          // console.log(response.data)
-          this.users = response.data
-        }.bind(this)
-      )
-    },
-    getapprovers () {
-      api.get('http://localhost:3000/approveres').then(
-        function (response) {
-          // console.log(response.data)
-          this.approvers = response.data
-        }.bind(this)
-      )
-    },
+
     checkid (item) {
       console.log('item', item)
       this.$store.dispatch('checkid/sendid', item)
