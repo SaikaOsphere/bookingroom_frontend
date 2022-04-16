@@ -1,7 +1,7 @@
 <template>
   <div>
-    <b-row>
-      ประวัติการจอง
+    <b-row style="margin-bottom: 30px">
+      <h1>ประวัติการจอง</h1>
     </b-row>
     <b-row align-v="stretch">
       <b-table :items="lists" :fields="fields">
@@ -9,9 +9,9 @@
           {{ data.index + 1 }}
         </template>
 
-        <template #cell(วันที่ทำการจอง)="data">
-          12{{ data.datetime_reserve.slice(0, 10) }}
-        </template>
+        <!-- <template #cell(วันที่ทำการจอง)="{ item }">
+          {{ item.datetime_reserve.replace('T', ' ') }}
+        </template> -->
 
         <!-- <template #cell(อุปกรณ์)="data">
           <ul>

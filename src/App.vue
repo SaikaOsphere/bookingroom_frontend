@@ -13,7 +13,7 @@
           <div v-if="showSidetab"><MenuSideBar v-if="isLogin" /></div>
         </div>
         <!-- <router-view style="padding: 0px 10% 0px 10%" /> -->
-        <b-col style="padding: 0px 0px 0px 0px">
+        <b-col style="padding: 50px 0px 0px 0px">
           <b-container>
             <b-row class="text-justify">
               <b-col><router-view /></b-col>
@@ -37,7 +37,7 @@
     </div>
     <div v-else>
       <a href="#"
-        ><div @click="toggleRouter()" class="bottom-hidden">Show</div></a
+        ><div @click="toggleRouter()" class="bottom-hidden"  v-if="dev">Show</div></a
       >
     </div>
   </div>
@@ -52,7 +52,7 @@ export default {
   data () {
     return {
       showRouter: false,
-      dev: true,
+      dev: false,
       showHeader: true,
       showSidetab: true
     }
