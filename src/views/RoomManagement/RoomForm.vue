@@ -210,7 +210,7 @@ export default {
         building: '',
         floor: '',
         capacity: '',
-        equipment: [],
+        equipment: '',
         approveres: ''
       },
       approver: [
@@ -265,29 +265,7 @@ export default {
         return []
       }
     },
-    // fliterNameInstitutions () {
-    //   for (let i = 0; i < this.institutions.length; i++) {
-    //     const institution = {
-    //       text: this.institutions[i].name,
-    //       value: this.institutions[i].name
-    //     }
-    //     console.log(institution)
-    //     this.institutionsName.push(institution)
-    //   }
-    // },
-    // fliterNameBuildings () {
-    //   for (let i = 0; i < this.buildings.length; i++) {
-    //     const building = {
-    //       text: this.buildings[i].name,
-    //       value: this.buildings[i].name
-    //     }
-    //     // console.log(buildings)
-    //     this.buildingsName.push(building)
-    //   }
-    // },
     show () {
-      // this.fliterNameInstitutions()
-      // this.fliterNameBuildings()
       this.$refs.modalRoom.show()
     },
     submit () {
@@ -305,7 +283,7 @@ export default {
         building: '',
         floor: '',
         capacity: '',
-        equipment: [],
+        equipment: '',
         approveres: ''
       }
     },
