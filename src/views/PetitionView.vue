@@ -2,54 +2,74 @@
   <div>
     <h1>รายการคำร้อง</h1>
     <b-table :items="items" :fields="fields" striped responsive="sm">
+      <template #cell(หมายเลขการจอง)="data">
+        {{ data.index + 1 }}
+      </template>
       <template #cell(การดำเนินการ)>
-        <b-button size="sm" class="mr-2" to="/pettitiondetail">ดูรายละเอียด</b-button>
+        <b-button size="sm" class="mr-2" to="/pettitiondetail" @click="edit(data.item)">ดูรายละเอียด</b-button>
       </template>
     </b-table>
   </div>
 </template>
 
 <script>
+import api from '@/services/api'
 export default {
   data () {
     return {
-      fields: ['หมายเลขการจอง', 'ชื่อผู้จอง', 'วันที่จอง', 'เวลา', 'การดำเนินการ'],
-      items: [
+      fields: [
+        'หมายเลขการจอง',
         {
-          isActive: false,
-          หมายเลขการจอง: 1,
-          ชื่อผู้จอง: 'นายศรันย์ ยิ่งยง',
-          วันที่จอง: '11-03-2565',
-          เวลา: '14:00 - 16:00',
-          การดำเนินการ: ''
+          key: 'approver.name',
+          label: 'ชื่อผู้อนุมัติ'
         },
         {
-          isActive: false,
-          หมายเลขการจอง: 1,
-          ชื่อผู้จอง: 'นายศรันย์ ยิ่งยง',
-          วันที่จอง: '11-03-2565',
-          เวลา: '14:00 - 16:00',
-          การดำเนินการ: ''
+          key: 'approve_date',
+          label: 'วันที่จอง'
         },
         {
-          isActive: false,
-          หมายเลขการจอง: 1,
-          ชื่อผู้จอง: 'นายศรันย์ ยิ่งยง',
-          วันที่จอง: '11-03-2565',
-          เวลา: '14:00 - 16:00',
-          การดำเนินการ: ''
+          key: 'approve_status',
+          label: 'สถาณะ'
         },
-        {
-          isActive: false,
-          หมายเลขการจอง: 1,
-          ชื่อผู้จอง: 'นายศรันย์ ยิ่งยง',
-          วันที่จอง: '11-03-2565',
-          เวลา: '14:00 - 16:00',
-          การดำเนินการ: ''
-        }
-      ]
+        'การดำเนินการ'
+      ],
+      items: [],
+      users: [],
+      approvers: [],
+      selectedItem: null
     }
-  }
+  },
+  methods: {
+    getapproves () {
+      api.get('http://localhost:3000/approves').then(
+        function (response) {
+          console.log(response.data)
+          this.items = response.data
+        }.bind(this)
+      )
+    },
+    getuser () {
+      api.get('http://localhost:3000/users').then(
+        function (response) {
+          console.log(response.data)
+          this.users = response.data
+        }.bind(this)
+      )
+    },
+    getapprovers () {
+      api.get('http://localhost:3000/approveres').then(
+        function (response) {
+          console.log(response.data)
+          this.approvers = response.data
+        }.bind(this)
+      )
+    }
+  },
+  mounted () {
+    this.getapproves()
+  }//,
+  // checkid (item) {
+  //   this.$refs.Petition_detail.
+  // }
 }
-//
 </script>
