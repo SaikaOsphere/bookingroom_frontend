@@ -5,7 +5,7 @@ import HomeView from '../views/HomeView.vue'
 import About from '../views/AboutView.vue'
 import LoginView from '../views/LoginView.vue'
 
-import BookingRoom from '../views/BookingRoom.vue'
+import BookingRoom from '../views/booking/BookingRoom.vue'
 import BookingRoomDetail from '../views/booking/BookingTime.vue'
 import BookingHistory from '../views/booking/recentBooking.vue'
 import BookingRoomConfirm from '../views/booking/BookingDetail.vue'

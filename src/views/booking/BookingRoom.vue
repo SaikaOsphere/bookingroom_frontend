@@ -58,7 +58,11 @@
         >
         <b-button variant="danger" @click="filter()" v-else>รีเซ็ต</b-button>
       </b-col>
-      <b-col><b-button variant="primary" to="/bookingHistory">ประวัติการจอง</b-button></b-col>
+      <b-col
+        ><b-button variant="primary" to="/bookingHistory"
+          >ประวัติการจอง</b-button
+        ></b-col
+      >
     </b-row>
 
     <b-row align-v="stretch">
@@ -79,7 +83,11 @@
         </template>
 
         <template #cell(การดำเนินการ)="{ item }">
-          <b-button size="sm" class="mr-2" variant="light" @click="sending(item)"
+          <b-button
+            size="sm"
+            class="mr-2"
+            variant="info"
+            @click="sending(item)"
             >รายละเอียด</b-button
           >
         </template>
@@ -295,6 +303,12 @@ export default {
 <style>
 .booking {
   padding: 0px 0px 0px 0px;
+}
+
+.b-table {
+  margin-top: 20px;
+  border-radius: 25px;
+  background-color: white;
 }
 
 b-col,
