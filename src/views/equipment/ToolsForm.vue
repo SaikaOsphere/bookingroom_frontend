@@ -79,7 +79,6 @@ export default {
     reset () {
       this.form = {
         _id: '',
-        code: '',
         name: ''
       }
     },
