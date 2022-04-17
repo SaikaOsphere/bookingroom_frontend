@@ -91,14 +91,19 @@
           label="หน่วยงาน"
           label-for="user-institution"
         >
-          <b-form-input
+          <!-- <b-form-input
             type="text"
             id="user-institution"
             placeholder="Facalty of ..."
             v-model="form.institution"
             :state="validateInstitution"
           >
-          </b-form-input>
+          </b-form-input> -->
+          <b-form-select v-model="form.institution" :state="validateInstitution">
+            <option v-for="f in institutions" :value="f" :key="f.id" id="user-institution">
+              {{ f.name }}
+            </option>
+          </b-form-select>
           <b-form-invalid-feedback :state="validateInstitution">
           </b-form-invalid-feedback>
         </b-form-group>
@@ -118,7 +123,8 @@
 export default {
 
   props: {
-    user: Object
+    user: Object,
+    institutions: Array
   },
   data () {
     return {
@@ -140,10 +146,10 @@ export default {
       return this.form.password !== '' && this.form.password.length >= 8 && this.form.password.length <= 30
     },
     validateName () {
-      return this.form.name !== ''
+      return this.form.name !== '' && this.form.name.length >= 5
     },
     validateSurname () {
-      return this.form.surname !== ''
+      return this.form.surname !== '' && this.form.surname.length >= 8
     },
     validateInstitution () {
       return this.form.institution !== ''

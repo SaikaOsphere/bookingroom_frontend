@@ -6,6 +6,7 @@
         <b-col class="text-right">
           <userForm
             :user="selectedItem"
+            :institutions="institutions"
             ref="userForm"
             @save="saveUser"
           ></userForm>
@@ -40,10 +41,11 @@ export default {
         { key: 'name', label: 'ชื่อจริง' },
         { key: 'surname', label: 'นามสกุล' },
         { key: 'roles', label: 'ตำแหน่ง' },
-        { key: 'institution', label: 'หน่วยงานที่รับผิดชอบ' },
+        { key: 'institution.name', label: 'หน่วยงานที่รับผิดชอบ' },
         'การดำเนินการ'
       ],
       items: [],
+      institutions: [],
       selectedItem: null
     }
   },
@@ -52,6 +54,14 @@ export default {
       api.get('http://localhost:3000/users').then(
         function (response) {
           this.items = response.data
+        }.bind(this)
+      )
+    },
+    getInstitutions () {
+      api.get('http://localhost:3000/institutions').then(
+        function (response) {
+          this.institutions = response.data
+          console.log(this.institutions)
         }.bind(this)
       )
     },
@@ -90,6 +100,7 @@ export default {
   },
   mounted () {
     this.getUsers()
+    this.getInstitutions()
   }
 }
 </script>
