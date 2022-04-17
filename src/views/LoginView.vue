@@ -103,6 +103,19 @@ export default {
         this.showForm = true
       })
     }
+  },
+  mounted () {
+    if (!this.isLogin) {
+      this.$store.dispatch('auth/logout')
+      this.$router.push({ path: '/' })
+    } else {
+      this.$router.push({ paht: '/home' })
+    }
+  },
+  computed: {
+    isLogin () {
+      return this.$store.getters['auth/isLogin']
+    }
   }
 }
 </script>

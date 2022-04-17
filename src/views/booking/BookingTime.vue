@@ -291,6 +291,11 @@ export default {
 }
 </script>
 <style>
+
+.vuecal {
+  background-color: white;
+  border-radius: 25px;
+}
 .vuecal__now-line {
   color: #06c;
 }

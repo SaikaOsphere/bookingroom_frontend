@@ -7,15 +7,9 @@ import checkid from './modules/petitionstore'
 Vue.use(Vuex)
 
 export default new Vuex.Store({
-  state: {
-    // item: ''
-  },
+  state: {},
   getters: {},
-  mutations: {
-    // setItem (state, item) {
-    //   state.item = item
-    // }
-  },
+  mutations: {},
   actions: {},
   modules: {
     auth,
