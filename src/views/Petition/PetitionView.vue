@@ -20,10 +20,6 @@ export default {
     return {
       fields: [
         'ลำดับการอนุมัติ',
-        {
-          key: 'approve_status',
-          label: 'สถานะ'
-        },
         'การดำเนินการ'
       ],
       items: [],
