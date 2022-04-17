@@ -85,20 +85,27 @@
           </b-form-invalid-feedback>
         </b-form-group>
         <!-- จบนามสกุล -->
+        <!-- ตำเเหน่ง -->
+        <b-form-group
+          id="form-group-user-roles"
+          label="ตำเเหน่ง"
+          label-for="user-roles"
+        >
+          <b-form-select v-model="form.role" >
+            <option v-for="f in user.roles" :value="f" :key="f.id" id="user-roles">
+              {{ f.roles }}
+            </option>
+          </b-form-select>
+          <b-form-invalid-feedback :state="validateInstitution">
+          </b-form-invalid-feedback>
+        </b-form-group>
+        <!-- ตำเเหน่ง -->
         <!-- หน่วยงาน -->
         <b-form-group
           id="form-group-user-institution"
           label="หน่วยงาน"
           label-for="user-institution"
         >
-          <!-- <b-form-input
-            type="text"
-            id="user-institution"
-            placeholder="Facalty of ..."
-            v-model="form.institution"
-            :state="validateInstitution"
-          >
-          </b-form-input> -->
           <b-form-select v-model="form.institution" :state="validateInstitution">
             <option v-for="f in institutions" :value="f" :key="f.id" id="user-institution">
               {{ f.name }}
@@ -133,7 +140,9 @@ export default {
         username: '',
         password: '',
         name: '',
-        surname: ''
+        surname: '',
+        roles: '',
+        institution: ''
       },
       isAddNew: false
     }
@@ -178,6 +187,7 @@ export default {
         password: '',
         name: '',
         surname: '',
+        role: '',
         institution: ''
       }
     },
@@ -190,6 +200,7 @@ export default {
         this.form.name = this.user.name
         this.form.username = this.user.username
         this.form.surname = this.user.surname
+        this.form.role = this.user.roles
         this.form.institution = this.user.institution
       }
     },
