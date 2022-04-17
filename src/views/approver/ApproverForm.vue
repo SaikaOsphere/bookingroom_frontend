@@ -33,22 +33,20 @@
           label="ชื่อหน่วยงาน"
           label-for="institution-name"
         >
-          <b-form-select v-model="form.institution" :state="validateInstitution">
-            <option v-for="f in institutions" :value="f" :key="f.id" id="institution-name">
-              {{ f.name }}
-            </option>
-          </b-form-select>
-          <!-- <b-form-select
-            type="text"
-            id="institution-name"
-            :options="institutions"
-            text-field="name"
-            label="name"
-            value-field="_id"
+          <b-form-select
             v-model="form.institution"
             :state="validateInstitution"
           >
-          </b-form-select> -->
+            <option
+              v-for="f in institutions"
+              :value="f"
+              :key="f.id"
+              id="institution-name"
+            >
+              {{ f.name }}
+            </option>
+          </b-form-select>
+
           <b-form-invalid-feedback :state="validateInstitution">
             Choose Institution
           </b-form-invalid-feedback>
@@ -59,30 +57,25 @@
           label="รายการผู้อนุมัติ"
           label-for="approver-name"
         >
-          <!-- <b-form-select
-            v-model="form.appproveres"
-            type="text"
-            :options="users"
-            id="approver-approveres"
-            placeholder="approveresTest"
-            :state="validateApproveres"
-            :multiple="true"
-          >
-            <option value=""></option>
-          </b-form-select> -->
           <multiselect
-          v-model="form.approveres"
-          :options="users"
-          :multiple="true"
-          :close-on-select="false"
-          :preserve-search="true"
-          placeholder="Pick some"
-          label="name"
-          track-by="_id"
-          :preselect-first="true"
-        >
-        <template slot="selection" slot-scope="{ values, isOpen }"><span class="multiselect__single" v-if="values.length &amp;&amp; !isOpen">{{ values.length }} options selected</span></template>
-        </multiselect>
+            v-model="form.approveres"
+            :options="usersOptions"
+            :multiple="true"
+            :close-on-select="false"
+            :preserve-search="true"
+            placeholder="Pick some"
+            label="name"
+            track-by="_id"
+            :preselect-first="true"
+          >
+            <template slot="selection" slot-scope="{ values, isOpen }"
+              ><span
+                class="multiselect__single"
+                v-if="values.length &amp;&amp; !isOpen"
+                >{{ values.length }} options selected</span
+              ></template
+            >
+          </multiselect>
           <b-form-invalid-feedback :state="validateApproveres">
             Choose Approver
           </b-form-invalid-feedback>
@@ -94,6 +87,9 @@
 <script>
 import Multiselect from 'vue-multiselect'
 export default {
+  mounted () {
+    this.filterUser()
+  },
   components: {
     Multiselect
   },
@@ -110,7 +106,8 @@ export default {
         institution: '',
         approveres: ''
       },
-      isAddNew: false
+      isAddNew: false,
+      usersOptions: []
     }
   },
   computed: {
@@ -125,6 +122,9 @@ export default {
     }
   },
   methods: {
+    filterUser () {
+      this.usersOptions = this.users.filter((item) => (item.roles.indexOf('ADMIN') >= 0 || item.roles.indexOf('LOCAL_ADMIN') >= 0))
+    },
     addNew () {
       this.isAddNew = true
       this.$nextTick(() => {
