@@ -175,13 +175,6 @@
       </b-form>
       <b-card>
         <pre>
-          จำนวนคนที่รองรับ {{ form.capacity }}
-          ชื่อตึก {{ form.building }}
-          ชื่อคณะ {{ form.institution }}
-          ชั้น {{ form.floor }}
-          ชื่อห้อง {{ form.code }}
-          ผู้พิจารณา {{ form.approveres }}
-          อุปกรณ์ {{ form.equipment }}
         </pre>
       </b-card>
     </b-modal>
@@ -200,10 +193,6 @@ export default {
     institutions: Array,
     equipments: Array
   },
-  // { room: Object },
-  // { buildings: Object },
-  // { approveres: Object },
-  // { institutions: Object }
   data () {
     return {
       form: {
