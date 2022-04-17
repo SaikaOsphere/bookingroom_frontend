@@ -85,21 +85,30 @@
           </b-form-invalid-feedback>
         </b-form-group>
         <!-- จบนามสกุล -->
-        <!-- ตำเเหน่ง -->
-        <b-form-group
-          id="form-group-user-roles"
-          label="ตำเเหน่ง"
-          label-for="user-roles"
-        >
-          <b-form-select v-model="form.role" >
-            <option v-for="f in user.roles" :value="f" :key="f.id" id="user-roles">
-              {{ f.roles }}
-            </option>
-          </b-form-select>
-          <b-form-invalid-feedback :state="validateInstitution">
-          </b-form-invalid-feedback>
+
+        <!-- ROlE -->
+         <b-form-group label="Roles">
+          <multiselect
+            type="text"
+            v-model="form.roles"
+            :options="roles"
+            :multiple="true"
+            :close-on-select="false"
+            :preserve-search="true"
+            placeholder="Pick some"
+            :preselect-first="true"
+          >
+            <template slot="selection" slot-scope="{ values, isOpen }"
+              ><span
+                class="multiselect__single"
+                v-if="values.length &amp;&amp; !isOpen"
+                >{{ values.length }} ตำแหน่ง ถูกเลือกแล้ว</span
+              ></template
+            >
+          </multiselect>
         </b-form-group>
-        <!-- ตำเเหน่ง -->
+        <!-- Finish ROLE -->
+
         <!-- หน่วยงาน -->
         <b-form-group
           id="form-group-user-institution"
@@ -119,6 +128,7 @@
       <b-card>
         <pre>
         {{ form }}
+        {{ form.roles }}
       </pre
         >
       </b-card>
@@ -126,9 +136,11 @@
   </div>
 </template>
 <script>
-
+import Multiselect from 'vue-multiselect'
 export default {
-
+  components: {
+    Multiselect
+  },
   props: {
     user: Object,
     institutions: Array
@@ -141,10 +153,10 @@ export default {
         password: '',
         name: '',
         surname: '',
-        roles: '',
-        institution: ''
+        roles: ''
       },
-      isAddNew: false
+      isAddNew: false,
+      roles: ['USER', 'ADMIN', 'LOCAL_ADMIN']
     }
   },
   computed: {
@@ -187,8 +199,8 @@ export default {
         password: '',
         name: '',
         surname: '',
-        role: '',
-        institution: ''
+        institution: '',
+        roles: ''
       }
     },
     showModal () {
@@ -202,6 +214,7 @@ export default {
         this.form.surname = this.user.surname
         this.form.role = this.user.roles
         this.form.institution = this.user.institution
+        this.form.roles = this.user.roles
       }
     },
     resetModal (evt) {

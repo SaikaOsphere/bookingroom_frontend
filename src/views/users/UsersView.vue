@@ -18,7 +18,7 @@
       </template>
       <template #cell(การดำเนินการ)="data">
         <b-button size="sm" class="mr-2" variant="warning"   @click = "edit(data.item)">เเก้ไข</b-button>
-        <b-button size="sm" class="mr-2" variant="danger" @click = "deleteItem(data.item)" >ลบ</b-button>
+        <b-button size="sm" class="mr-2" variant="danger" @click = "deleteItem(data.item)">ลบ</b-button>
       </template>
 
     </b-table>
@@ -88,8 +88,7 @@ export default {
       })
     },
     deleteItem (item) {
-      // console.log(item)
-      if (confirm(`ต้องการลบคณะชื่อ ${item.name} จริงเปล่า ?`)) {
+      if (confirm(`ต้องการลบผู้ใช้ ${item.name} จริงเปล่า ?`)) {
         api.delete('http://localhost:3000/users/' + item._id).then(
           function (response) {
             this.getUsers()
