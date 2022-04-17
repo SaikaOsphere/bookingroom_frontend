@@ -8,7 +8,9 @@
         <NavBar v-if="showHeader"
       /></b-container>
       <b-container fluid style="height: 100%; padding: 0px 0px 100px 0px">
-        <b-row>
+
+        <b-row style="margin: 0px">
+          <div v-if="isLogin">
             <div
               style="
                 padding-top: 1.5%;
@@ -37,6 +39,7 @@
                 >แสดงแถบ</b-button
               >
             </div>
+          </div>
           <b-col style="padding: 50px 0px 0px 0px">
             <b-container>
               <b-row class="text-justify">
