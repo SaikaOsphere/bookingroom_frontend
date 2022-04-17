@@ -8,7 +8,7 @@
         <NavBar v-if="showHeader"
       /></b-container>
       <b-container fluid style="height: 100%; padding: 0px 0px 100px 0px">
-        <b-row style="margin: 0px">
+        <b-row>
           <div v-if="isLogin">
             <div
               style="
