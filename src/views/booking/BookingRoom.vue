@@ -83,13 +83,16 @@
         </template>
 
         <template #cell(การดำเนินการ)="{ item }">
+
           <b-button
             size="sm"
             class="mr-2"
             variant="info"
             @click="sending(item)"
+
             >รายละเอียด</b-button
           >
+
         </template>
       </b-table>
     </b-row>
@@ -99,6 +102,7 @@
 import api from '@/services/api'
 
 export default {
+
   data () {
     return {
       filterBuilding: [{ text: 'กรุณาเลือก', value: '' }],
@@ -282,16 +286,16 @@ export default {
       this.filtered.coderoom = ''
     },
     sending (item) {
+      if (!this.isLogin) {
+        this.$router.push({ path: '/' })
+        return
+      }
       this.$store.dispatch('bookingRoom/sendRoom', item._id)
       this.$router.push({ path: '/bookingRoomDetail' })
     }
   },
   mounted () {
-    if (!this.isLogin) {
-      this.$router.push({ path: '/' })
-    } else {
-      this.getฺRooms()
-    }
+    this.getฺRooms()
   },
   computed: {
     isLogin () {

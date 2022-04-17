@@ -1,19 +1,11 @@
-<template>
+  <template>
   <div>
     <div class="navsidebar">
       <b-nav vertical>
         <b-nav-item to="/" v-if="!isLogin">เข้าสู่ระบบ</b-nav-item>
         <b-nav-item to="/home">หนัาหลัก</b-nav-item>
-        <!-- <b-nav-item to="/about">About</b-nav-item> -->
         <b-nav-item @click="booking()"> จองห้อง</b-nav-item>
-        <!-- <b-icon
-          :icon="showGroupBooking ? 'caret-down-fill' : 'caret-right-fill'"
-        >
-        </b-icon> -->
 
-        <!-- <b-nav-item class="sub-menu" v-if="showGroupBooking" to="/booking">
-        Booking
-      </b-nav-item> -->
         <b-nav-item to="/building" v-if="!roleRestricted">จัดการตึก</b-nav-item>
         <b-nav-item to="/institution" v-if="!roleRestricted"
           >จัดการหน่วยงาน</b-nav-item
