@@ -173,10 +173,6 @@
         </b-form-group>
         <!-- จบ -->
       </b-form>
-      <b-card>
-        <pre>
-        </pre>
-      </b-card>
     </b-modal>
   </div>
 </template>
