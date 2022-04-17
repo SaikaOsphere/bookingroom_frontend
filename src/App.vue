@@ -8,37 +8,34 @@
         <NavBar v-if="showHeader"
       /></b-container>
       <b-container fluid style="height: 100%; padding: 0px 0px 100px 0px">
-
         <b-row style="margin: 0px">
-          <div v-if="isLogin">
-            <div
-              style="
-                padding-top: 1.5%;
-                margin-left: 1.5%;
-                position: fixed;
-                z-index: 1000;
-              "
-              v-if="showSidetab"
+          <div
+            style="
+              padding-top: 1.5%;
+              margin-left: 1.5%;
+              position: fixed;
+              z-index: 1000;
+            "
+            v-if="showSidetab"
+          >
+            <b-button @click="toggleSidetab()" variant="warning"
+              >ซ่อนแถบ</b-button
             >
-              <b-button @click="toggleSidetab()" variant="warning"
-                >ซ่อนแถบ</b-button
-              >
-              <!-- <div v-if="showSidetab"><MenuSideBar v-if="isLogin" /></div> -->
-              <div v-if="showSidetab"><MenuSideBar /></div>
-            </div>
-            <div
-              style="
-                padding-top: 1.5%;
-                margin-left: 5.2%;
-                position: fixed;
-                z-index: 1000;
-              "
-              v-else
+            <!-- <div v-if="showSidetab"><MenuSideBar v-if="isLogin" /></div> -->
+            <div v-if="showSidetab"><MenuSideBar /></div>
+          </div>
+          <div
+            style="
+              padding-top: 1.5%;
+              margin-left: 5.2%;
+              position: fixed;
+              z-index: 1000;
+            "
+            v-else
+          >
+            <b-button @click="toggleSidetab()" variant="warning"
+              >แสดงแถบ</b-button
             >
-              <b-button @click="toggleSidetab()" variant="warning"
-                >แสดงแถบ</b-button
-              >
-            </div>
           </div>
           <b-col style="padding: 50px 0px 0px 0px">
             <b-container>
