@@ -210,7 +210,7 @@ export default {
   },
   computed: {
     validateName () {
-      return this.form.code !== '' && this.form.code.length >= 5
+      return this.form.code !== ''
     },
     validateInstitution () {
       return this.form.institution !== ''
@@ -222,7 +222,7 @@ export default {
       return this.form.floor !== ''
     },
     validatePerson () {
-      return this.form.capacity !== '' && this.form.capacity >= 2
+      return this.form.capacity !== ''
     },
     validateApproveres () {
       return this.form.approveres !== ''
