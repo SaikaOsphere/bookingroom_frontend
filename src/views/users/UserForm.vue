@@ -85,6 +85,30 @@
           </b-form-invalid-feedback>
         </b-form-group>
         <!-- จบนามสกุล -->
+
+        <!-- ROlE -->
+         <b-form-group label="Roles">
+          <multiselect
+            type="text"
+            v-model="form.roles"
+            :options="roles"
+            :multiple="true"
+            :close-on-select="false"
+            :preserve-search="true"
+            placeholder="Pick some"
+            :preselect-first="true"
+          >
+            <template slot="selection" slot-scope="{ values, isOpen }"
+              ><span
+                class="multiselect__single"
+                v-if="values.length &amp;&amp; !isOpen"
+                >{{ values.length }} ตำแหน่ง ถูกเลือกแล้ว</span
+              ></template
+            >
+          </multiselect>
+        </b-form-group>
+        <!-- Finish ROLE -->
+
         <!-- หน่วยงาน -->
         <b-form-group
           id="form-group-user-institution"
@@ -112,6 +136,7 @@
       <b-card>
         <pre>
         {{ form }}
+        {{ form.roles }}
       </pre
         >
       </b-card>
@@ -119,9 +144,11 @@
   </div>
 </template>
 <script>
-
+import Multiselect from 'vue-multiselect'
 export default {
-
+  components: {
+    Multiselect
+  },
   props: {
     user: Object,
     institutions: Array
@@ -133,9 +160,11 @@ export default {
         username: '',
         password: '',
         name: '',
-        surname: ''
+        surname: '',
+        roles: ''
       },
-      isAddNew: false
+      isAddNew: false,
+      roles: ['USER', 'ADMIN', 'LOCAL_ADMIN']
     }
   },
   computed: {
@@ -178,7 +207,8 @@ export default {
         password: '',
         name: '',
         surname: '',
-        institution: ''
+        institution: '',
+        roles: ''
       }
     },
     showModal () {
@@ -191,6 +221,7 @@ export default {
         this.form.username = this.user.username
         this.form.surname = this.user.surname
         this.form.institution = this.user.institution
+        this.form.roles = this.user.roles
       }
     },
     resetModal (evt) {
