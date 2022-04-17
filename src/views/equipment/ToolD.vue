@@ -89,7 +89,7 @@ export default {
 
     deleteItem (item) {
       // console.log(item)
-      if (confirm(`ต้องการลบตึกชื่อ ${item.name} จริงหรือเปล่า ?`)) {
+      if (confirm(`ต้องการลบอุปกรณ์ชื่อ ${item.name} จริงหรือเปล่า ?`)) {
         api.delete('http://localhost:3000/equipments/' + item._id).then(
           function (response) {
             this.getTools()
