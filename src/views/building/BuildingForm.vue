@@ -71,12 +71,7 @@
         </b-form-group>
         <!-- จบชั้นตึก -->
       </b-form>
-      <b-card>
-        <pre>
-        {{ form }}
-      </pre
-        >
-      </b-card>
+
     </b-modal>
   </div>
 </template>

@@ -222,7 +222,7 @@ export default {
       return this.form.floor !== ''
     },
     validatePerson () {
-      return this.form.capacity !== '' && this.form.surname >= 2
+      return this.form.capacity !== '' && this.form.capacity >= 2
     },
     validateApproveres () {
       return this.form.approveres !== ''

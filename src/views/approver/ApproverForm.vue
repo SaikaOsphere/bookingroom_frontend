@@ -88,13 +88,6 @@
           </b-form-invalid-feedback>
         </b-form-group>
       </b-form>
-      <b-card>
-        <pre>
-        institutions {{ form.institution }}
-        <!-- test {{form.approveres}} -->
-        {{ form }}
-      </pre>
-      </b-card>
     </b-modal>
   </div>
 </template>

@@ -125,13 +125,7 @@
         </b-form-group>
         <!-- หน่วยงาน -->
       </b-form>
-      <b-card>
-        <pre>
-        {{ form }}
-        {{ form.roles }}
-      </pre
-        >
-      </b-card>
+
     </b-modal>
   </div>
 </template>

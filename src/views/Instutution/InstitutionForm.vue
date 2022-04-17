@@ -28,12 +28,6 @@
           </b-form-invalid-feedback>
         </b-form-group>
       </b-form>
-      <b-card>
-        <pre>
-        {{ form }}
-      </pre
-        >
-      </b-card>
     </b-modal>
   </div>
 </template>
