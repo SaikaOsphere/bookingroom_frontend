@@ -1,5 +1,5 @@
 <template>
-<body>
+  <body>
     <div class="login">
       <b-card img-alt="Image" class="mb-2 center backgroundformLogin">
         <!-- <iframe
@@ -48,8 +48,18 @@
                   type="password"
                 ></b-form-input>
               </b-form-group>
-              <b-button type="submit" variant="primary" class="m-2">Login</b-button>
+              <b-button type="submit" variant="primary" class="m-2"
+                >Login</b-button
+              >
               <b-button type="reset" variant="danger">Reset</b-button>
+              <b-alert
+                variant="danger"
+                dismissible
+                fade
+                :show="loginTrue"
+                @dismissed="loginTrue = false"
+                >กรุณากรอกข้อมูลผู้ใช้ให้ถูกต้อง</b-alert
+              >
               <!-- {{ $store.state.auth.userLogin }}
               {{ $store.getters['auth/isLogin'] }} -->
             </b-form>
@@ -73,9 +83,7 @@
       </b-col>
     </b-row>
   </b-card> -->
-
-</body>
-
+  </body>
 </template>
 <script>
 export default {
@@ -85,7 +93,8 @@ export default {
         username: '',
         password: ''
       },
-      showForm: true
+      showForm: true,
+      loginTrue: false
     }
   },
   methods: {
@@ -93,6 +102,9 @@ export default {
       event.preventDefault()
       // ยิงไป action
       this.$store.dispatch('auth/login', this.form)
+      if (!this.isLogin) {
+        this.loginTrue = true
+      }
     },
     onReset (event) {
       event.preventDefault()
