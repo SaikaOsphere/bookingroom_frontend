@@ -6,6 +6,7 @@ export default {
   namespaced: true,
   state: () => ({
     user: JSON.parse(localStorage.getItem('user'))
+
   }),
   mutations: {
     [AUTH_LOGIN] (state, payload) {
@@ -43,6 +44,28 @@ export default {
   getters: {
     isLogin (state, getters) {
       return state.user != null
+    },
+    isAdmin (state) {
+      const roles = ['ADMIN', 'USER', 'LOCAL_ADMIN']
+      if (state.user != null) {
+        for (let i = 0; i < state.user.roles.length; i++) {
+          if (state.user.roles[i] === roles[0]) {
+            return true
+          }
+        }
+      }
+      return false
+    },
+    isLocalAdmin (state) {
+      const roles = ['ADMIN', 'USER', 'LOCAL_ADMIN']
+      if (state.user != null) {
+        for (let i = 0; i < state.user.roles.length; i++) {
+          if (state.user.roles[i] === roles[2]) {
+            return true
+          }
+        }
+      }
+      return false
     }
 
   }
