@@ -45,6 +45,7 @@
             </b-container>
           </b-col>
         </b-row>
+
       </b-container>
       <div v-if="showRouter">
         <div class="bottom" v-if="dev">
@@ -83,6 +84,7 @@ export default {
       showHeader: true,
       showSidetab: true
     }
+    /* ------------------------------------------------------ */
   },
   components: {
     NavBar,
