@@ -32,7 +32,7 @@
             id="room-nameInstitutionInstitution"
             v-model="form.institution"
             :options="institutions"
-            value-field="institutions{}"
+            value-field="_id"
             text-field="name"
             :state="validateInstitution"
           >
