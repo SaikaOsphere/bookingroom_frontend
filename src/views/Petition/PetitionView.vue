@@ -20,9 +20,6 @@ export default {
     return {
       fields: [
         'ลำดับการอนุมัติ',
-        { key: 'booking.datetime_reserve', label: 'วันที่จองเข้ามา' },
-        { key: 'booking.datetime_start', label: 'วัน-เวลา ที่เริ่มต้องการใช้' },
-        { key: 'booking.datetime_end', label: 'วัน-เวลา ที่สิ้นสุด' },
         'การดำเนินการ'
       ],
       items: [],
@@ -35,7 +32,7 @@ export default {
         function (response) {
           this.items = response.data
           console.log(this.items)
-          // console.log(this.getCurrentUser)
+          console.log(this.getCurrentUser)
           this.items = this.items.filter((item) => item.approver._id === this.getCurrentUser && item.approve_status === null)
         }.bind(this)
       )
