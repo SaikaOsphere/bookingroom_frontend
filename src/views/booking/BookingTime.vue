@@ -36,13 +36,26 @@
       </b-col>
       <b-col>
         <b-row>
-          <b-col cols="4">ตึก</b-col>
           <b-col>
-            <b-form-input v-model="detailRoom.building" disabled>
-            </b-form-input>
+            <b-row>
+              <b-col cols="2">ตึก</b-col>
+              <b-col>
+                <b-form-input v-model="detailRoom.building" disabled>
+                </b-form-input>
+              </b-col>
+            </b-row>
+          </b-col>
+          <b-col>
+            <b-row>
+              <b-col cols="2">ห้อง</b-col>
+              <b-col>
+                <b-form-input v-model="detailRoom.code" disabled>
+                </b-form-input>
+              </b-col>
+            </b-row>
           </b-col>
         </b-row>
-        <b-row>
+        <b-row style="margin-top: 10px">
           <b-col>
             <b-col>เวลาเริ่ม</b-col
             ><b-col>
@@ -88,7 +101,9 @@
           >กรุณากรอกข้อมูลให้ครบ</b-alert
         > </b-col
       ><b-col
-        ><b-button variant="danger" to="/booking">ยกเลิก</b-button>
+        ><b-button variant="danger" to="/booking" style="margin-right: 20px"
+          >ยกเลิก</b-button
+        >
         <b-button variant="primary" @click="sendToFormDetail()">ตกลง</b-button>
       </b-col></b-row
     >
@@ -121,6 +136,7 @@ export default {
         capacity: 0,
         floor: 0,
         building: '',
+        code: '',
         date: '',
         timeStart: '',
         timeEnd: ''
@@ -205,6 +221,7 @@ export default {
           this.detailRoom.capacity = response.data.capacity
           this.detailRoom.floor = response.data.floor
           this.detailRoom.building = response.data.building
+          this.detailRoom.code = response.data.code
         }.bind(this)
       )
     },
@@ -291,7 +308,6 @@ export default {
 }
 </script>
 <style>
-
 .vuecal {
   background-color: white;
   border-radius: 25px;

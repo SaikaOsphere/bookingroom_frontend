@@ -128,16 +128,21 @@ export default {
         .get('http://localhost:3000/users/' + this.$store.state.auth.user._id)
         .then(
           function (response) {
-            for (let i = 0; i < response.data.roles.length; i++) {
-              if (
-                response.data.roles[i] === 'LOCAL_ADMIN' ||
-                response.data.roles[i] === 'ADMIN'
-              ) {
-                this.roleRestricted = false
-              } else {
-                this.roleRestricted = true
-              }
+            if (response.data.roles.length === 1 && response.data.roles[0] === 'USER') {
+              this.roleRestricted = true
+            } else {
+              this.roleRestricted = false
             }
+            // for (let i = 0; i < response.data.roles.length; i++) {
+            //   if (
+            //     response.data.roles[i] === 'LOCAL_ADMIN' ||
+            //     response.data.roles[i] === 'ADMIN'
+            //   ) {
+            //     this.roleRestricted = false
+            //   } else {
+            //     this.roleRestricted = true
+            //   }
+            // }
           }.bind(this)
         )
     },
