@@ -91,6 +91,7 @@ export default {
       if (confirm(`ต้องการลบผู้ใช้ ${item.name} จริงเปล่า ?`)) {
         api.delete('http://localhost:3000/users/' + item._id).then(
           function (response) {
+            console.log(response)
             this.getUsers()
           }.bind(this)
         )
