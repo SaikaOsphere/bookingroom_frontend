@@ -12,8 +12,20 @@ The developer must have Vuejs ESlint installed.
 
 #Edited by Sarawut Prakobkij [@sarawut_ulknows]
 ```
-
+```
+Project team
+62160071 ศราวุธ ประกอบกิจ
+62160139 พิสิษฐ์ กิจเชี่ยวกุล
+62160140 ภควัต เจริญยิ่ง
+62160254 ฐณะวัฒน์ วีระเสถียร
+62160270 ธนากร กะโห้เหม
+62160291 พิสิฐพงศ์ ทองคำ
+```
 ### การติดตั้งและการเริ่มการทำงานโปรแกรม
+```
+Full guide (thai language)
+https://docs.google.com/document/d/1wt60uY7tCbwjLoz4gKbPJB7by8rCAmC__8ilt_5v96Y/edit?usp=sharing
+```
 
 #### Project setup 
 #### การติดตั้งโปรเจค
