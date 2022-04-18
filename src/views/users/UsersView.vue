@@ -16,6 +16,13 @@
        <template #cell(ลำดับ)="data">
         {{ data.index + 1 }}
       </template>
+       <template #cell(ตำแหน่ง)="data">
+         <ul>
+          <li v-for="(item, index) in items[data.index].roles" :key="index">
+            {{ item }}
+          </li>
+        </ul>
+      </template>
       <template #cell(การดำเนินการ)="data">
         <b-button size="sm" class="mr-2" variant="warning"   @click = "edit(data.item)">เเก้ไข</b-button>
         <b-button size="sm" class="mr-2" variant="danger" @click = "deleteItem(data.item)">ลบ</b-button>
@@ -40,7 +47,7 @@ export default {
         // { key: 'password', label: 'รหัสผ่าน' },
         { key: 'name', label: 'ชื่อจริง' },
         { key: 'surname', label: 'นามสกุล' },
-        { key: 'roles', label: 'ตำแหน่ง' },
+        'ตำแหน่ง',
         { key: 'institution.name', label: 'หน่วยงานที่รับผิดชอบ' },
         'การดำเนินการ'
       ],
