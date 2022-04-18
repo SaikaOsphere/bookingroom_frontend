@@ -146,12 +146,14 @@ export default {
         .post('http://localhost:3000/bookings', this.formSend)
         .then(function (response) {
           console.log('booking', response)
-          alert('จองสำเร็จ')
-          this.$router.push({ path: '/home' })
-          this.$nextTick(() => {
-            this.$bvModal.hide('modal-confirmbooking')
-          })
-        })
+          if (response.status === 201) {
+            alert('จองสำเร็จ')
+            this.$router.push({ path: '/home' })
+            this.$nextTick(() => {
+              this.$bvModal.hide('modal-confirmbooking')
+            })
+          }
+        }.bind(this))
         .catch((e) => {
           alert('จองไม่สำเร็จ')
         })
