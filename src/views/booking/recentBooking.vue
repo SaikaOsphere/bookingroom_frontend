@@ -32,7 +32,7 @@
               $bvModal.show('modal-detailbooking')
               showDetail(item)
             "
-            >ยืนยัน</b-button
+            >รายละเอียด</b-button
           >
         </template>
       </b-table>
