@@ -144,11 +144,17 @@ export default {
 
       api
         .post('http://localhost:3000/bookings', this.formSend)
-        .then(function (response) {})
-      this.$router.push({ path: '/home' })
-      this.$nextTick(() => {
-        this.$bvModal.hide('modal-confirmbooking')
-      })
+        .then(function (response) {
+          console.log('booking', response)
+          alert('จองสำเร็จ')
+          this.$router.push({ path: '/home' })
+          this.$nextTick(() => {
+            this.$bvModal.hide('modal-confirmbooking')
+          })
+        })
+        .catch((e) => {
+          alert('จองไม่สำเร็จ')
+        })
     },
     sendToDB () {
       this.formSend.datetime_reserve = new Date(Date.now())
