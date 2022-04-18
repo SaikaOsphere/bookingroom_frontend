@@ -59,7 +59,7 @@
         >
           <multiselect
             v-model="form.approveres"
-            :options="usersOptions"
+            :options="filterUser"
             :multiple="true"
             :close-on-select="false"
             :preserve-search="true"
@@ -88,7 +88,6 @@
 import Multiselect from 'vue-multiselect'
 export default {
   mounted () {
-    this.filterUser()
   },
   components: {
     Multiselect
@@ -106,8 +105,7 @@ export default {
         institution: '',
         approveres: ''
       },
-      isAddNew: false,
-      usersOptions: []
+      isAddNew: false
     }
   },
   computed: {
@@ -119,12 +117,13 @@ export default {
     },
     validateApproveres () {
       return this.form.approveres !== '' && this.form.approveres.length >= 5
+    },
+    filterUser () {
+      return this.users.filter((item) => (item.roles.indexOf('ADMIN') >= 0 || item.roles.indexOf('LOCAL_ADMIN') >= 0))
     }
   },
   methods: {
-    filterUser () {
-      this.usersOptions = this.users.filter((item) => (item.roles.indexOf('ADMIN') >= 0 || item.roles.indexOf('LOCAL_ADMIN') >= 0))
-    },
+
     addNew () {
       this.isAddNew = true
       this.$nextTick(() => {
