@@ -66,6 +66,9 @@ export default {
         }
       }
       return false
+    },
+    getIdCurrentUser (state) {
+      return state.user._id
     }
 
   }

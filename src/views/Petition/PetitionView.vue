@@ -1,7 +1,7 @@
 <template>
   <div>
     <h1 style="color: black;">รายการคำร้อง</h1>
-    <b-table :items="items" :fields="fields" striped responsive="sm">
+    <b-table :items="getFliterApprove" :fields="fields" striped responsive="sm">
       <template #cell(ลำดับการอนุมัติ)="data">
         {{ data.index + 1 }}
       </template>
@@ -31,9 +31,6 @@ export default {
       api.get('http://localhost:3000/approves').then(
         function (response) {
           this.items = response.data
-          console.log(this.items)
-          console.log(this.getCurrentUser)
-          this.items = this.items.filter((item) => item.approver._id === this.getCurrentUser && item.approve_status === null)
         }.bind(this)
       )
     },
@@ -47,8 +44,11 @@ export default {
     this.getApproves()
   },
   computed: {
-    getCurrentUser () {
-      return this.$store.state.auth.user._id
+    getCurrentUserId () {
+      return this.$store.getters['auth/getIdCurrentUser']
+    },
+    getFliterApprove () {
+      return this.items.filter((item) => item.approver._id === this.getCurrentUserId && item.approve_status === null)
     }
   }
 }

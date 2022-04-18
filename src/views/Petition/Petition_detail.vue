@@ -11,7 +11,7 @@
       <b-col class="data">
         <b-col cols="5">ชื่อ-นามสกุล</b-col>
         <b-col>
-          <b-form-input v-model="name" disabled>  </b-form-input>
+          <b-form-input v-model="name" disabled> </b-form-input>
         </b-col>
       </b-col>
     </b-row>
@@ -25,8 +25,7 @@
       <b-col class="data">
         <b-col cols="4">วันที่จอง</b-col>
         <b-col>
-          <b-form-input v-model="datetime_reserve" disabled>
-          </b-form-input>
+          <b-form-input v-model="datetime_reserve" disabled> </b-form-input>
         </b-col>
       </b-col>
     </b-row>
@@ -34,26 +33,28 @@
       <b-col class="data">
         <b-col cols="4">เวลาเริ่ม</b-col>
         <b-col>
-          <b-form-input v-model="datetime_start" disabled>
-          </b-form-input>
+          <b-form-input v-model="datetime_start" disabled> </b-form-input>
         </b-col>
       </b-col>
       <b-col class="data">
         <b-col cols="4">เวลาสิ้นสุด</b-col>
         <b-col>
-          <b-form-input v-model="datetime_end" disabled>
-          </b-form-input>
+          <b-form-input v-model="datetime_end" disabled> </b-form-input>
         </b-col>
       </b-col>
     </b-row>
-    <b-row >
-       <p> </p>
-    </b-row >
-    <b-row >
+    <b-row>
+      <p></p>
+    </b-row>
+    <b-row>
       <b-col
-        ><b-button class="button" variant="danger"  @click="resetStore() ">ย้อนกลับ</b-button>
+        ><b-button class="button" variant="danger" @click="resetStore()"
+          >ย้อนกลับ</b-button
+        >
         <b-button variant="info" @click="approveNo()">ไม่อนุญาติ</b-button>
-        <b-button class="button1" variant="info"  @click="approveYes()">อนุญาติ</b-button>
+        <b-button class="button1" variant="info" @click="approveYes()"
+          >อนุญาติ</b-button
+        >
       </b-col>
     </b-row>
   </div>
