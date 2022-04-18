@@ -4,7 +4,7 @@
       <h1>ประวัติการจอง</h1>
     </b-row>
     <b-row align-v="stretch">
-      <b-table :items="lists" :fields="fields">
+      <b-table :items="filteringUser" :fields="fields">
         <template #cell(ลำดับ)="data">
           {{ data.index + 1 }}
         </template>
@@ -159,7 +159,7 @@ export default {
               }.bind(this)
             )
           }
-          // this.filtering()
+          // this.items = this.filteringUser
           // console.log(this.lists)
         }.bind(this)
       )
@@ -182,15 +182,6 @@ export default {
         date_end: new Date(data.datetime_end).toLocaleString(),
         status: statusc
       }
-    },
-    filtering () {
-      const curuser = this.getCurrentUser
-      for (let i = 0; i < this.lists.length; i++) {
-        if (this.lists[i].user._id !== curuser._id) {
-          this.lists.splice(i, 1)
-          i--
-        }
-      }
     }
   },
   mounted () {
@@ -201,12 +192,16 @@ export default {
     }
   },
   computed: {
+    filteringUser () {
+      return this.lists.filter((item) => item.user._id === this.getCurrentUserId)
+    },
+
     isLogin () {
       return this.$store.getters['auth/isLogin']
     },
-    getCurrentUser () {
+    getCurrentUserId () {
       // console.log(this.$store.state.auth.user)
-      return this.$store.state.auth.user
+      return this.$store.getters['auth/getIdCurrentUser']
     }
   }
 }
