@@ -168,12 +168,11 @@ export default {
       // console.log(data)
       let statusc
       if (data.status === 0) {
-        statusc = 'Disapprove'
+        statusc = 'Pending'
       } else if (data.status === 1) {
         statusc = 'Approve'
-      }
-      if (data.status === -1) {
-        statusc = 'Pending'
+      } else {
+        statusc = 'Disapprove'
       }
       this.bookingDetail = {
         username: data.user.name + ' ' + data.user.surname,
